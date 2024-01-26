@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:36:00 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/26 17:31:23 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:50:38 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/pipex.h"
 
 int	pipex_main(int ac, char **av, char **env)
 {

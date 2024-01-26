@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2023/12/13 16:47:54 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:50:26 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/pipex.h"
 
 void	get_adresses(t_pipex *pipex)
 {

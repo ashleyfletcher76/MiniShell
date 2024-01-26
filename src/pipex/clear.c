@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2023/12/13 16:15:17 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:50:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/pipex.h"
 
 void	free_struct(t_pipex *pipex)
 {

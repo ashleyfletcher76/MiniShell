@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/26 17:37:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:51:18 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include <sys/wait.h>
+# include "../libft/libft.h"
 
 # define READ_END 0
 # define WRITE_END 1

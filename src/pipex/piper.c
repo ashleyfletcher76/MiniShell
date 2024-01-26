@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/18 19:21:59 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:50:34 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/pipex.h"
 
 void	pipe_all(t_pipex *pipex)
 {
