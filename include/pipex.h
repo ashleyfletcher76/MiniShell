@@ -6,14 +6,13 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/26 17:31:42 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:37:38 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "libft/libft.h"
 # include <sys/wait.h>
 
 # define READ_END 0

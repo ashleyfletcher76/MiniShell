@@ -6,12 +6,14 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/26 17:11:44 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:35:40 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../include/minishell.h"
 
 int main()
 {
 
-    return (0);
+    return (EXIT_SUCCESS);
 }
