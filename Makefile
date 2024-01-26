@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/01/26 17:13:41 by muhakose         ###   ########.fr        #
+#    Updated: 2024/01/26 17:32:22 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
 
-OBJ = src/main.c 
+OBJ = src/main.c
 OBJ_MINISHELL = $(OBJ:.c=.o)
 
 NAME = minishell
