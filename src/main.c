@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/29 12:08:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:52:35 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,26 @@
 
 
 int	array_size(char **s);
+char *get_me_directory(void);
 
-int	main(void)
+
+char *get_me_directory(void)
 {
-	int		i;
-	int		x;
 	char	cwd[PATH_MAX];
-	char	**s;
-	char *prompt;
-
-
-	i = 0;
+	char	**directories;
+	char	*temp;
+	int		x;
+	
 	getcwd(cwd, sizeof(cwd));
-	while (1)
+	directories = ft_split(cwd, '/');
+	if (!directories)
 	{
-		s = ft_split(cwd, '/');
-		x = array_size(s);
-		printf("%s ", s[x - 3]);
-		prompt = readline("minishell % ");
-
-		for (int j = 0; j < x; j++)
-		{
-			free(s[j]);
-		}
-		free(s);
+		
+		return (NULL);
 	}
-	return (EXIT_SUCCESS);
+	x = array_size(directories);
+	temp = ft_strjoin(directories[x - 1], " %");
+	return (ft_strjoin("minishell ", temp));
 }
 
 int	array_size(char **s)
@@ -51,3 +45,21 @@ int	array_size(char **s)
 		i++;
 	return (i);
 }
+
+int	main(void)
+{
+	int		i;
+	char	*prompt;
+
+	i = 0;
+	while (1)
+	{
+		prompt = readline(get_me_directory());
+		if (!prompt)
+			add_history(prompt);
+
+		free(prompt);
+	}
+	return (EXIT_SUCCESS);
+}
+
