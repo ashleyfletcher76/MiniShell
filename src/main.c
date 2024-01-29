@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/29 14:52:35 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:08:26 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char *get_me_directory(void)
 	directories = ft_split(cwd, '/');
 	if (!directories)
 	{
-		
+		//
 		return (NULL);
 	}
 	x = array_size(directories);
