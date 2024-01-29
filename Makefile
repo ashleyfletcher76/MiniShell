@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/01/26 17:50:02 by muhakose         ###   ########.fr        #
+#    Updated: 2024/01/29 11:57:38 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ COLOUR_END = \033[0m
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 
 OBJ = src/main.c $(wildcard src/pipex/*.c)
@@ -35,7 +35,7 @@ LIBFT = $(LIBFTDIR)/libft.a
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ_MINISHELL) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) -o $(NAME) -lreadline -lhistory
 	echo "$(COLOUR_GREEN)Minishell compiled successfully!$(COLOUR_END)"
 
 $(LIBFT):
