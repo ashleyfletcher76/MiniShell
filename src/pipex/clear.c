@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/26 17:50:22 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:02:05 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ void	waiter(t_pipex *pipex)
 	if (WIFEXITED(status))
 	{
 		free_struct(pipex);
-		exit(WEXITSTATUS(status));
 	}
 }

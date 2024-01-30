@@ -19,12 +19,17 @@ typedef struct s_mini
 {
 	t_commands	*commands;
 	char		*prompt_msg;
+	char		*prompt;
+	char		*cwd;
+	char		**env;
 }	t_mini;
 
 
 void	freearr(char **arr);
 char	*get_me_directory(t_mini *mini);
 int		array_size(char **s);
+
+void	parse_init(t_mini *mini);
 
 
 #endif

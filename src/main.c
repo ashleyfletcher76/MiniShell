@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 12:04:04 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:37:53 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char *get_me_directory(t_mini *mini)
 	int		x;
 
 	getcwd(cwd, sizeof(cwd));
+	mini->cwd = cwd;
 	directories = ft_split(cwd, '/');
 	if (!directories)
 	{
@@ -34,12 +35,13 @@ char *get_me_directory(t_mini *mini)
 	return (mini->prompt_msg);
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	int		i;
 	char	*prompt;
 	t_mini	mini;
 
+	mini.env = env;
 	i = 0;
 	while (1)
 	{
@@ -47,9 +49,12 @@ int	main(void)
 		if (!prompt)
 			exit(EXIT_FAILURE);
 		add_history(prompt);
-
+		mini.prompt = prompt;
+		parse_init(&mini);
 		free(prompt);
 	}
+	(void)ac;
+	(void)av;
 	clear_history();
 	return (EXIT_SUCCESS);
 }

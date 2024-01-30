@@ -6,31 +6,30 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:36:00 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/26 17:50:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:03:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
+#include "../../include/minishell.h"
 
-int	pipex_main(int ac, char **av, char **env)
+
+
+void	pipex_main(char **av, char **env)
 {
 	t_pipex	pipex;
 
-	if (ac >= 5)
-	{
-		pipex.nbr_cmd = ac - 3;
-		pipex.env = env;
-		pipex.av = av;
-		pipex.input = av[1];
-		pipex.output = av[ac -1];
-		get_adresses(&pipex);
-		check_args(&pipex);
-		pipe_all(&pipex);
-		pipe_close(&pipex);
-		waiter(&pipex);
-		free_struct(&pipex);
-	}
-	else
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	pipex.nbr_cmd = array_size(av);
+	pipex.env = env;
+	pipex.av = av;
+	//pipex.input = av[1];
+	//pipex.output = av[ac -1];
+	get_adresses(&pipex);
+	check_args(&pipex);
+	printf ("%d\n", array_size(av));
+	pipe_all(&pipex);
+	pipe_close(&pipex);
+	waiter(&pipex);
+	free_struct(&pipex);
+	
 }

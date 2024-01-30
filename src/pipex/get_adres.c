@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/26 17:50:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:42:45 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_args(t_pipex *pipex)
 			* sizeof(char **));
 	while (i < pipex->nbr_cmd)
 	{
-		pipex->command_paths[i] = ft_split(pipex->av[i + 2], ' ');
+		pipex->command_paths[i] = ft_split(pipex->av[i], ' ');
 		i++;
 	}
 	pipex->command_paths[i] = NULL;
