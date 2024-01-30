@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/29 15:33:47 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:04:04 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 char *get_me_directory(t_mini *mini)
 {
@@ -19,7 +18,7 @@ char *get_me_directory(t_mini *mini)
 	char	**directories;
 	char	*temp;
 	int		x;
-	
+
 	getcwd(cwd, sizeof(cwd));
 	directories = ft_split(cwd, '/');
 	if (!directories)
