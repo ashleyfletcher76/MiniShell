@@ -6,15 +6,15 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 13:47:58 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:56:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-void	error_handler(char *msg, t_pipex *pipex, int j, int exitcode)
+void	error_handler(char *msg, t_pipex *pipex, int exitcode)
 {
-	ft_put3endl_fd("pipex: ", pipex->command_paths[j][0], msg, 2);
+	ft_put3endl_fd("pipex: ", pipex->command_paths[0], msg, 2);
 	free_struct(pipex);
 	exit (exitcode);
 }

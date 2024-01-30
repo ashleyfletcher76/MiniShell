@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 14:02:05 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:27:31 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_struct(t_pipex *pipex)
 {
 	free_double_array(pipex->all_paths);
-	free_tripple_array(pipex->command_paths);
+	free_double_array(pipex->command_paths);
 	free_double_int(pipex->pipel);
 	free(pipex->pids);
 }
@@ -68,9 +68,5 @@ void	waiter(t_pipex *pipex)
 	while (i < pipex->nbr_cmd)
 	{
 		waitpid(pipex->pids[i++], &status, 0);
-	}
-	if (WIFEXITED(status))
-	{
-		free_struct(pipex);
 	}
 }

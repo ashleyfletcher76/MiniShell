@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 13:42:45 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:24:16 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,38 @@ void	get_adresses(t_pipex *pipex)
 	}
 }
 
-void	check_args(t_pipex *pipex)
+char *get_args(t_pipex *pipex, int i)
 {
-	int	i;
-
-	i = 0;
-	pipex->command_paths = (char ***)malloc((pipex->nbr_cmd + 1)
-			* sizeof(char **));
-	while (i < pipex->nbr_cmd)
+	char *path;
+	char *temp;
+	
+	if (ft_strchr(pipex->av[i], '\''))
 	{
-		pipex->command_paths[i] = ft_split(pipex->av[i], ' ');
-		i++;
+		pipex->command_paths = ft_split(pipex->av[i], '\'');
+		temp = ft_strtrim(pipex->command_paths[0], " \n\t\v");
+		free(pipex->command_paths[0]);
+		pipex->command_paths[0] = temp;
+		temp = ft_strtrim(pipex->command_paths[2], " \n\t\v");
+		free(pipex->command_paths[2]);
+		pipex->command_paths[2] = temp;
 	}
-	pipex->command_paths[i] = NULL;
+	else if (ft_strchr(pipex->av[i], '\"'))
+	{
+		pipex->command_paths = ft_split(pipex->av[i], '\"');
+		temp = ft_strtrim(pipex->command_paths[0], " \n\t\v");
+		free(pipex->command_paths[0]);
+		pipex->command_paths[0] = temp;
+	}
+	else
+		pipex->command_paths = ft_split(pipex->av[i], ' ');
+	path = get_a_path(pipex->command_paths[0], pipex);
+	return (path);
 }
 
-char	*get_a_path(char *command, t_pipex *pipex, int i)
+char	*get_a_path(char *command, t_pipex *pipex)
 {
 	if (ft_strchr(command, '/') == NULL)
-		return (giveme_path(command, pipex, i));
+		return (giveme_path(command, pipex));
 	else
 	{
 		if (access(command, F_OK) == 0)
@@ -65,14 +78,14 @@ char	*get_a_path(char *command, t_pipex *pipex, int i)
 			{
 				return (command);
 			}
-			error_handler(": command not found", pipex, i, 126);
+			error_handler(": command not found", pipex, 126);
 		}
-		error_handler(": command not found", pipex, i, 127);
+		error_handler(": command not found", pipex, 127);
 	}
 	exit(127);
 }
 
-char	*giveme_path(char *command, t_pipex *pipex, int i)
+char	*giveme_path(char *command, t_pipex *pipex)
 {
 	char	*path;
 	char	*temp;
@@ -91,11 +104,11 @@ char	*giveme_path(char *command, t_pipex *pipex, int i)
 			}
 			free(temp);
 			free(path);
-			error_handler(": command not found", pipex, i, 126);
+			error_handler(": command not found", pipex, 126);
 		}
 		free(path);
 	}
 	free(temp);
-	error_handler(": command not found", pipex, i, 127);
+	error_handler(": command not found", pipex, 127);
 	exit(127);
 }

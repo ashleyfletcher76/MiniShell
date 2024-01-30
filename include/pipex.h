@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 14:02:14 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:22:21 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef struct s_pipex
 	int		**pipel;
 	int		nbr_cmd;
 	char	**all_paths;
-	char	***command_paths;
+	char	**command_paths;
+	char	**special_paths;
 	char	**env;
 	char	**av;
 	char	*input;
@@ -34,9 +35,10 @@ typedef struct s_pipex
 
 //main nessecaries
 void	get_adresses(t_pipex *pipex);
-void	check_args(t_pipex *pipex);
-char	*giveme_path(char *command, t_pipex *pipex, int j);
-char	*get_a_path(char *command, t_pipex *pipex, int i);
+
+char	*giveme_path(char *command, t_pipex *pipex);
+char	*get_args(t_pipex *pipex, int i);
+char	*get_a_path(char *command, t_pipex *pipex);
 
 //free stuff
 void	free_struct(t_pipex *pipex);
@@ -46,7 +48,7 @@ void	free_tripple_array(char ***array);
 void	waiter(t_pipex *pipex);
 
 //erorror
-void	error_handler(char *msg, t_pipex *pipex, int j, int exitcode);
+void	error_handler(char *msg, t_pipex *pipex, int exitcode);
 
 //piper.c
 void	pipe_all(t_pipex *pipex);

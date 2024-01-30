@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 13:59:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:55:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	only_child(t_pipex *pipex, int i)
 {
 	char	*path;
 
-	path = get_a_path(pipex->command_paths[i][0], pipex, i);
+	path = get_args(pipex, i);
 	pipe_close(pipex);
-	execve(path, pipex->command_paths[i], pipex->env);
+	execve(path, pipex->command_paths, pipex->env);
 }
 
 void	first_son(t_pipex *pipex, int i)
@@ -53,9 +53,9 @@ void	first_son(t_pipex *pipex, int i)
 	char	*path;
 
 	dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
-	path = get_a_path(pipex->command_paths[i][0], pipex, i);
+	path = get_args(pipex, i);
 	pipe_close(pipex);
-	execve(path, pipex->command_paths[i], pipex->env);
+	execve(path, pipex->command_paths, pipex->env);
 }
 
 void	last_son(t_pipex *pipex, int i)
@@ -63,9 +63,9 @@ void	last_son(t_pipex *pipex, int i)
 	char	*path;
 
 	dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
-	path = get_a_path(pipex->command_paths[i][0], pipex, i);
+	path = get_args(pipex, i);
 	pipe_close(pipex);
-	execve(path, pipex->command_paths[i], pipex->env);
+	execve(path, pipex->command_paths, pipex->env);
 }
 
 void	daughters(t_pipex *pipex, int i)
@@ -74,9 +74,9 @@ void	daughters(t_pipex *pipex, int i)
 
 	dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
 	dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
-	path = get_a_path(pipex->command_paths[i][0], pipex, i);
+	path = get_args(pipex, i);
 	pipe_close(pipex);
-	execve(path, pipex->command_paths[i], pipex->env);
+	execve(path, pipex->command_paths, pipex->env);
 }
 
 void	pipe_close(t_pipex *pipex)
