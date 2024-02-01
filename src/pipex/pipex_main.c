@@ -6,11 +6,10 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:36:00 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 16:27:48 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:20:34 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pipex.h"
 #include "../../include/minishell.h"
 
 

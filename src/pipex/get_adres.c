@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 17:24:16 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:15:52 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pipex.h"
+#include "../../include/minishell.h"
 
 void	get_adresses(t_pipex *pipex)
 {
@@ -78,9 +78,9 @@ char	*get_a_path(char *command, t_pipex *pipex)
 			{
 				return (command);
 			}
-			error_handler(": command not found", pipex, 126);
+			error_handler(": command not found: ", pipex, 126);
 		}
-		error_handler(": command not found", pipex, 127);
+		error_handler(" command not found: ", pipex, 127);
 	}
 	exit(127);
 }
@@ -104,11 +104,11 @@ char	*giveme_path(char *command, t_pipex *pipex)
 			}
 			free(temp);
 			free(path);
-			error_handler(": command not found", pipex, 126);
+			error_handler("command not found: ", pipex, 126);
 		}
 		free(path);
 	}
 	free(temp);
-	error_handler(": command not found", pipex, 127);
+	error_handler("command not found: ", pipex, 127);
 	exit(127);
 }

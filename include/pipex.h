@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 16:22:21 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:47:28 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ int		opener(t_pipex *pipex, int m);
 void	piper(t_pipex *pipex);
 void	forker(t_pipex *pipex, int i);
 void	pipex_main(char **av, char **env);
+
+
 
 #endif

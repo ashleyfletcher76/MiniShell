@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 13:37:53 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:50:25 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,15 @@ char *get_me_directory(t_mini *mini)
 	char	**directories;
 	char	*temp;
 	int		x;
+	char	*home;
+	char	*user;
+
+	user = getenv("USER");
+	home = getenv("HOME");
 
 	getcwd(cwd, sizeof(cwd));
+	if (strcmp(cwd, home) == 0)
+		return (ft_strjoin(user, "@minishell ~ % "));
 	mini->cwd = cwd;
 	directories = ft_split(cwd, '/');
 	if (!directories)
@@ -30,7 +37,11 @@ char *get_me_directory(t_mini *mini)
 	x = array_size(directories);
 	temp = ft_strjoin(directories[x - 1], " % ");
 	freearr(directories);
-	mini->prompt_msg = ft_strjoin("minishell ", temp);
+	mini->prompt_msg = ft_strjoin("@minishell ", temp);
+	free(temp);
+	temp = ft_strjoin(user, mini->prompt_msg);
+	free(mini->prompt_msg);
+	mini->prompt_msg = temp;
 	free(temp);
 	return (mini->prompt_msg);
 }

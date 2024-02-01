@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/01 14:51:26 by muhakose         ###   ########.fr       */
+/*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
+/*   Updated: 2024/02/01 14:35:02 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
-void	parse_init(t_mini *mini)
+void	ft_exit(char **commands)
 {
-	char **argv;
-
-	argv = ft_split(mini->prompt, '|');
-	
-	
-	
-	
-	if (is_built_in(argv) == 0) 
-		pipex_main(argv, mini->env);
 
 
+	(void)commands;
+	// cleanin and exit
 
+	exit(EXIT_SUCCESS);
 
 }

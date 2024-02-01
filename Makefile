@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/01/30 13:39:52 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/01 10:49:58 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ RM = rm -f
 CFLAGS = -Wall -Wextra -Werror 
 
 
-OBJ = src/main.c $(wildcard src/pipex/*.c) $(wildcard src/utils/*.c) $(wildcard src/parsing/*.c)
+OBJ = src/main.c $(wildcard src/pipex/*.c) $(wildcard src/utils/*.c) $(wildcard src/parsing/*.c) $(wildcard src/builtins/*.c)
 OBJ_MINISHELL = $(OBJ:.c=.o)
 
 NAME = minishell

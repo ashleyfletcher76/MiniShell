@@ -32,4 +32,13 @@ int		array_size(char **s);
 void	parse_init(t_mini *mini);
 
 
+//builtin
+int		is_built_in(char **commands);
+int		build_get_args(char *command);
+int		which_build(char **commands);
+int		checkPathExistence(const char *path);
+void	ft_cd(char **command);
+void	ft_exit(char **commands);
+
+
 #endif
