@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/01 14:43:39 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:53:54 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,6 @@ int	which_build(char **commands)
 	{
 		return (ft_exit(commands) ,1);
 	}
-
-
-
-
-
 
 	return (0);
 }

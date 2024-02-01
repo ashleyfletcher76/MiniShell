@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/01 13:33:04 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:54:00 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ void	only_child(t_pipex *pipex, int i)
 
 	path = get_args(pipex, i);
 	pipe_close(pipex);
-	if (path != NULL)
-		execve(path, pipex->command_paths, pipex->env);
-	printf("childcheck\n");
-	exit (1);
+	execve(path, pipex->command_paths, pipex->env);
 }
 
 void	first_son(t_pipex *pipex, int i)
