@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/01 14:15:52 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:41:52 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char *get_args(t_pipex *pipex, int i)
 {
 	char *path;
 	char *temp;
-	
+
 	if (ft_strchr(pipex->av[i], '\''))
 	{
 		pipex->command_paths = ft_split(pipex->av[i], '\'');
@@ -52,6 +52,21 @@ char *get_args(t_pipex *pipex, int i)
 		temp = ft_strtrim(pipex->command_paths[2], " \n\t\v");
 		free(pipex->command_paths[2]);
 		pipex->command_paths[2] = temp;
+		char **temp2;
+		if (ft_strchr(pipex->command_paths[0], ' '))
+		{
+			temp2 = ft_split(pipex->command_paths[0], ' ');
+			free(pipex->command_paths[0]);
+			pipex->command_paths[4] = NULL;
+			pipex->command_paths[3] = pipex->command_paths[2];
+			pipex->command_paths[2] = pipex->command_paths[1];
+			pipex->command_paths[1] = temp2[1];
+			pipex->command_paths[0] = temp2[0];
+			printf("%s\n", pipex->command_paths[0]);
+			printf("%s\n", pipex->command_paths[1]);
+			printf("%s\n", pipex->command_paths[2]);
+			printf("%s\n", pipex->command_paths[3]);
+		}
 	}
 	else if (ft_strchr(pipex->av[i], '\"'))
 	{

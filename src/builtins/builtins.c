@@ -6,30 +6,30 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/01 14:53:54 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:00:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <sys/stat.h>
 
-int	is_built_in(char **commands)
+int	is_built_in(t_mini *mini)
 {
 	int	i;
 	
 	i = 0;
-	while (commands[i])
+	while (mini->argv[i])
 	{
-		if ((build_get_args(commands[i++])) == 0)
+		if ((build_get_args(mini->argv[i], mini->env)) == 0)
 			return (0);
+		i++;
 	}
 	return (1);
 }
 
-int	build_get_args(char *command)
+int	build_get_args(char *command, char **env)
 {
-	char	*temp;
 	char	**cmd_paths;
+	char	*temp;
 
 	if (ft_strchr(command, '\''))
 	{
@@ -50,48 +50,29 @@ int	build_get_args(char *command)
 	}
 	else
 		cmd_paths = ft_split(command, ' ');
-	if (which_build(cmd_paths) == 0)
+	if (which_build(cmd_paths, env) == 0)
 		return (0);
 	return (1);
 }
 
-int	which_build(char **commands)
+int	which_build(char **commands, char **env)
 {
 	if (ft_strncmp(commands[0], "cd", 3) == 0)
 	{
-		return (ft_cd(commands) ,1);
+		return (ft_cd(commands, env) ,1);
 	}
 	if (ft_strncmp(commands[0], "exit", 5) == 0)
 	{
 		return (ft_exit(commands) ,1);
 	}
+	if (ft_strncmp(commands[0], "export", 6) == 0)
+	{
+		return (ft_export(commands, env) ,1);
+	}
+	if (ft_strncmp(commands[0], "unset", 5) == 0)
+	{
+		//return (ft_exit(commands) ,1);
+	}
 
 	return (0);
-}
-
-int	checkPathExistence(const char *path)
-{
-	struct stat buffer;
-
-	return (stat(path, &buffer) == 0);
-}
-
-void	ft_cd(char **command)
-{
-	char *home;
-
-	home = getenv("HOME");
-	if (command[1] == NULL || ft_strncmp(command[1], "~", 2) == 0 )
-	{
-		chdir(home);
-	}
-	else if (checkPathExistence(command[1]) || ft_strncmp(command[1], "..", 3) == 0 || ft_strncmp(command[1], ".", 2) == 0)
-	{
-		chdir(command[1]);
-	}
-	else
-	{
-		write(2, "cd: no such file or directory: ", 32);
-		ft_putendl_fd(command[1], 2);
-	}
 }
