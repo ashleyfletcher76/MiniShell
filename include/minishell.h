@@ -14,6 +14,7 @@ typedef struct s_commands
 	char	*cmd;
 	char	*cmd_args;
 	char	**args;
+	// char	*file
 }	t_commands;
 
 typedef struct s_mini

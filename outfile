@@ -1,0 +1,11 @@
+total 136
+-rw-r--r--   1 asfletch  2023_heilbronn   1770 Feb  6 12:53 Makefile
+-rw-r--r--   1 asfletch  2023_heilbronn     11 Jan 30 15:43 README.md
+-rw-r--r--   1 asfletch  2023_heilbronn     75 Feb  6 13:37 data.txt
+-rw-r--r--   1 asfletch  2023_heilbronn     44 Feb  6 12:53 filename.txt
+drwxr-xr-x   4 asfletch  2023_heilbronn    136 Feb  6 13:37 include
+drwxr-xr-x  60 asfletch  2023_heilbronn   2040 Feb  6 12:53 libft
+-rw-r--r--   1 asfletch  2023_heilbronn      0 Feb  6 13:54 ls
+-rwxr-xr-x   1 asfletch  2023_heilbronn  52840 Feb  6 13:37 minishell
+-rw-r--r--   1 asfletch  2023_heilbronn      0 Feb  6 13:55 outfile
+drwxr-xr-x   8 asfletch  2023_heilbronn    272 Feb  6 13:37 src
