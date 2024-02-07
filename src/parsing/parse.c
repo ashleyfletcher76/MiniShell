@@ -6,11 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/06 14:28:00 by asfletch         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/06 15:58:25 by asfletch         ###   ########.fr       */
->>>>>>> ash
+/*   Updated: 2024/02/07 10:59:53 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +14,6 @@
 
 void	parse_trial(t_mini *mini)
 {
-<<<<<<< HEAD
-	mini->commands.args = ft_split(mini->prompt, '|');
-	if (!mini->commands.args)
-		return ;
-	
-=======
 	int	i;
 	char *promt;
 
@@ -88,7 +78,6 @@ void	parse_trial(t_mini *mini)
 		i++;
 	}
 
->>>>>>> ash
 }
 
 

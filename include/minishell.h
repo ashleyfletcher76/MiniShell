@@ -11,17 +11,10 @@
 
 typedef struct s_commands
 {
-<<<<<<< HEAD
-	char	*cmd;
-	char	*cmd_args;
-	char	**args;
-	// char	*file
-=======
 	char				**cmd_args;
 	int					flag;
 	struct s_commands	 *next;
 
->>>>>>> ash
 }	t_commands;
 
 typedef struct s_mini
