@@ -12,9 +12,10 @@
 typedef struct s_commands
 {
 	char				**cmd_args;
-	int					flag;
+	char				*input;
+	char				*output;
+	int					indicator;
 	struct s_commands	 *next;
-
 }	t_commands;
 
 typedef struct s_mini
@@ -34,6 +35,11 @@ int		array_size(char **s);
 
 void	parse_init(t_mini *mini);
 void	parse_trial(t_mini *mini);
+
+void	parse_space(t_mini *mini, char **temp, int *j, int *i);
+void	parse_double_quote(t_mini *mini, int *j, int *i);
+
+char	*ft_char_join(char *s1, char c);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 
