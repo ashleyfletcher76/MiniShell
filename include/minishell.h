@@ -11,19 +11,20 @@
 
 typedef struct s_commands
 {
-	char	*cmd;
-	char	*cmd_args;
-	char	**args;
+	char				**cmd_args;
+	int					flag;
+	struct s_commands	 *next;
+
 }	t_commands;
 
 typedef struct s_mini
 {
-	t_commands	*commands;
 	char		*prompt_msg;
 	char		*prompt;
 	char		*cwd;
 	char		**argv;
 	char		**env;
+	t_commands	*commands;
 }	t_mini;
 
 
@@ -32,6 +33,8 @@ char	*give_me_prompt(t_mini *mini);
 int		array_size(char **s);
 
 void	parse_init(t_mini *mini);
+void	parse_trial(t_mini *mini);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 
 //builtin
