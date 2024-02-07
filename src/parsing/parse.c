@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/07 10:59:53 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:01:55 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,6 @@ void	parse_init(t_mini *mini)
 	argv = ft_split(mini->prompt, '\"');
 	argv = ft_split(mini->prompt, '|');
 
-<<<<<<< HEAD
-
-	mini->argv = argv;
-	if (is_built_in(mini) == 0)
-	{
-		pipex_main(argv, mini->env);
-	}
-=======
 	parse_trial(mini);
 	// mini->argv = argv;
 	// if (is_built_in(mini) == 0)
@@ -103,7 +95,6 @@ void	parse_init(t_mini *mini)
 	// 	pipex_main(argv, mini->env);
 	// }
 
->>>>>>> ash
 
 
 
