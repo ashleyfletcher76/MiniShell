@@ -52,6 +52,7 @@ void	update_pwd_env(char **environ);
 void	ft_cd(char **command, char **env);
 void	ft_exit(char **commands);
 void	ft_export(char **commands, char **env);
+int		ft_count_equal(char *s);
 
 //exec
 void	exec_init(t_mini *mini);

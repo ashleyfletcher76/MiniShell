@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:37:39 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/07 12:51:38 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:24:59 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_char_join(char *s1, char c)
 	if (s1 != NULL)
 		ft_strcpy(result, s1);
 	result[len1] = c;
-	result[total_len] = '\0';
+	result[len1 + len2] = '\0';
 	free(s1);
 	return (result);
 }
