@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/07 18:37:22 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:18:53 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,15 +212,15 @@ void	parse_trial(t_mini *mini)
 void	parse_init(t_mini *mini)
 {
 	char **argv;
-	int		i = 0;
 
 	argv = ft_split(mini->prompt, '\"');
 	argv = ft_split(mini->prompt, '|');
-
-	parse_trial(mini);
 	mini->argv = argv;
-	while (mini->commands[0].cmd_args[i])
-		printf("%s\n", mini->commands[0].cmd_args[i++]);
+
+	//parse_trial(mini);
+	//int		i = 0;
+	//while (mini->commands[0].cmd_args[i])
+	//	printf("%s\n", mini->commands[0].cmd_args[i++]);
 	if (is_built_in(mini) == 0)
 	{
 		pipex_main(argv, mini->env);

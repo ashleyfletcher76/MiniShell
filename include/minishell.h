@@ -53,5 +53,9 @@ void	ft_cd(char **command, char **env);
 void	ft_exit(char **commands);
 void	ft_export(char **commands, char **env);
 
+//exec
+void	exec_init(t_mini *mini);
+int		promt_help(t_mini *mini, char *user);
+
 
 #endif
