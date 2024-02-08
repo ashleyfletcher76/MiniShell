@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/08 13:18:53 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:52:02 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	parse_space(t_mini *mini, char **temp, int *j, int *i)
 	{
 		mini->commands[0].cmd_args = malloc(sizeof(char *) * 50);
 		mini->commands[0].cmd_args[*j] = ft_strdup(*temp);
-		//printf("%s\n", mini->commands[0].cmd_args[*j]);
-		while (mini->prompt[*i] == ' ' && mini->prompt[*i + 1] == ' ')
-				(*i)++;
+		printf("%s\n", mini->commands[0].cmd_args[*j]);
 		(*j)++;
 		*temp = NULL;
 		free (*temp);
 	}
+	while (mini->prompt[*i] == ' ' && mini->prompt[*i + 1] == ' ')
+		(*i)++;
 }
 
 void	parse_double_quote(t_mini *mini, int *j, int *i)
@@ -58,7 +58,7 @@ void	parse_double_quote(t_mini *mini, int *j, int *i)
 		mini->commands[0].cmd_args[*j] = ft_strdup(quoted_str);
 		(*j)++;
 		(*i)++;
-		// printf("%s\n", quoted_str);
+		printf("%s\n", quoted_str);
 		free (quoted_str);
 		quoted_str = NULL;
 	}
@@ -84,7 +84,6 @@ void	parse_trial(t_mini *mini)
 	if (temp)
 		free(temp);
 }
-
 
 // void	parse_space(t_mini *mini, char **temp, int j)
 // {
@@ -217,10 +216,10 @@ void	parse_init(t_mini *mini)
 	argv = ft_split(mini->prompt, '|');
 	mini->argv = argv;
 
-	//parse_trial(mini);
-	//int		i = 0;
-	//while (mini->commands[0].cmd_args[i])
-	//	printf("%s\n", mini->commands[0].cmd_args[i++]);
+	parse_trial(mini);
+	// int		i = 0;
+	// while (mini->commands[0].cmd_args[i])
+	// 	printf("%s\n", mini->commands[0].cmd_args[i++]);
 	if (is_built_in(mini) == 0)
 	{
 		pipex_main(argv, mini->env);
