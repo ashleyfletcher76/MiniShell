@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/05 11:00:22 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:45:20 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	which_build(char **commands, char **env)
 	}
 	if (ft_strncmp(commands[0], "unset", 5) == 0)
 	{
-		//return (ft_exit(commands) ,1);
+		return (ft_unset(commands, env) ,1);
 	}
 
 	return (0);

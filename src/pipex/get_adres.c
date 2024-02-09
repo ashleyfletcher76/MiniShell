@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/02 13:41:52 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:38:02 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_adresses(t_pipex *pipex)
 	}
 	else
 	{
-		pipex->all_paths = ft_split(pipex->av[i], ' ');
+		pipex->all_paths = ft_split("no path found.", ' ');
 		if (pipex->all_paths == NULL)
 			return (free_struct(pipex), exit(EXIT_FAILURE));
 	}
