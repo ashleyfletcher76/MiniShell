@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/08 13:19:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:13:20 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	main(int ac, char **av, char **env)
 {
-	int		i;
+	//int		i;
 	char	*prompt;
 	t_mini	mini;
 
 	mini.env = env;
-	i = 0;
+	//i = 0;
 	while (1)
 	{
 		prompt = readline(give_me_prompt(&mini));

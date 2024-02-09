@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
+#    By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/07 12:32:35 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/09 11:25:47 by asfletch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ COLOUR_END = \033[0m
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 
 
 OBJ = src/main.c $(wildcard src/pipex/*.c) $(wildcard src/utils/*.c) $(wildcard src/parsing/*.c) $(wildcard src/builtins/*.c) $(wildcard src/execution/*.c)
@@ -34,8 +34,12 @@ LIBFT = $(LIBFTDIR)/libft.a
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+READLINE_DIR = $(shell brew --prefix readline)
+CFLAGS += -I$(READLINE_DIR)/include
+LDFLAGS = -L$(READLINE_DIR)/lib -lreadline
+
 $(NAME) : $(OBJ_MINISHELL) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) -o $(NAME) -lreadline -lhistory
+	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline -lhistory
 	echo "$(COLOUR_GREEN)Minishell compiled successfully!$(COLOUR_END)"
 
 $(LIBFT):

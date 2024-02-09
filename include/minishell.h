@@ -41,7 +41,7 @@ void	parse_double_quote(t_mini *mini, int *j, int *i);
 
 char	*ft_char_join(char *s1, char c);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-
+char	*ft_strndup(const char *s1, size_t nbr);
 
 //builtin
 int		is_built_in(t_mini *mini);
