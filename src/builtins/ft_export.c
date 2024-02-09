@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/09 15:34:42 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:56:43 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	ft_export_command_check(char *s)
 		return (2);
 	while (s[i])
 	{
-		if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9') || s[i] == '_'))
+		if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') || s[i] == '_'))
 		{
 			return (FALSE);
 		}
