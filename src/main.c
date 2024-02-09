@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/09 11:13:20 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:03:16 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ int	main(int ac, char **av, char **env)
 	clear_history();
 	return (EXIT_SUCCESS);
 }
-

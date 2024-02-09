@@ -38,6 +38,7 @@ void	parse_trial(t_mini *mini);
 
 void	parse_space(t_mini *mini, char **temp, int *j, int *i);
 void	parse_double_quote(t_mini *mini, int *j, int *i);
+char	dquote_helper(char *quoted_str);
 
 char	*ft_char_join(char *s1, char c);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);

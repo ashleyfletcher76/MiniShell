@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
+#    By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/09 15:52:27 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/09 18:37:21 by asfletch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ LIBFT = $(LIBFTDIR)/libft.a
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# READLINE_DIR = $(shell brew --prefix readline)
+# CFLAGS += -I$(READLINE_DIR)/include
+# LDFLAGS = -L$(READLINE_DIR)/lib -lreadline
 
 $(NAME) : $(OBJ_MINISHELL) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline -lhistory
