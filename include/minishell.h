@@ -53,6 +53,10 @@ void	ft_cd(char **command, char **env);
 void	ft_exit(char **commands);
 void	ft_export(char **commands, char **env);
 int		ft_count_equal(char *s);
+void	ft_export_helper(char **commands, char **env, int equl_cnt);
+void	ft_export_print(char **env);
+int		ft_export_command_check(char *s);
+void	ft_unset(char **commands, char **env);
 
 //exec
 void	exec_init(t_mini *mini);
