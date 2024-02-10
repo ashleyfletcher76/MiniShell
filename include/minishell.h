@@ -34,6 +34,8 @@ int		array_size(char **s);
 //parsing
 void	parse_init(t_mini *mini);
 void	parse_distributor(t_mini *mini);
+void	finalize_command(t_mini *mini, char **temp, int *j, t_commands **cmd);
+void	print_commands(t_mini *mini);
 
 void	parse_space(t_mini *mini, char **temp, int *j, int *i);
 void	parse_double_quote(t_mini *mini, int *j, int *i);
