@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+         #
+#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/10 09:50:19 by asfletch         ###   ########.fr        #
+#    Updated: 2024/02/10 13:26:12 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,12 @@ LIBFT = $(LIBFTDIR)/libft.a
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-READLINE_DIR = $(shell brew --prefix readline)
-CFLAGS += -I$(READLINE_DIR)/include
-LDFLAGS = -L$(READLINE_DIR)/lib -lreadline
+#READLINE_DIR = $(shell brew --prefix readline)
+#CFLAGS += -I$(READLINE_DIR)/include
+#LDFLAGS = -L$(READLINE_DIR)/lib -lreadline
 
 $(NAME) : $(OBJ_MINISHELL) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline -lhistory
+	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline
 	echo "$(COLOUR_GREEN)Minishell compiled successfully!$(COLOUR_END)"
 
 $(LIBFT):
