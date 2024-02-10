@@ -8,7 +8,6 @@
 #include <readline/history.h>
 #include <sys/stat.h>
 
-
 typedef struct s_commands
 {
 	char				**cmd_args;
@@ -28,17 +27,19 @@ typedef struct s_mini
 	t_commands	*commands;
 }	t_mini;
 
-
 void	freearr(char **arr);
 char	*give_me_prompt(t_mini *mini);
 int		array_size(char **s);
 
+//parsing
 void	parse_init(t_mini *mini);
-void	parse_trial(t_mini *mini);
+void	parse_distributor(t_mini *mini);
 
 void	parse_space(t_mini *mini, char **temp, int *j, int *i);
 void	parse_double_quote(t_mini *mini, int *j, int *i);
-char	dquote_helper(char *quoted_str);
+char	*dquote_helper(char *quoted_str);
+void	parse_single_quote(t_mini *mini, int *j, int *i);
+char	*quote_helper(char *quoted_str);
 
 char	*ft_char_join(char *s1, char c);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
