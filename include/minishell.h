@@ -66,6 +66,9 @@ void	ft_export_helper(char **commands, char **env, int equl_cnt);
 void	ft_export_print(char **env);
 int		ft_export_command_check(char *s);
 void	ft_unset(char **commands, char **env);
+void	ft_pwd(void);
+void	ft_env(char **env);
+void	ft_echo(char **commands);
 
 //exec
 void	exec_init(t_mini *mini);
