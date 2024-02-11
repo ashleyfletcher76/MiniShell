@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/09 18:03:16 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/11 10:52:33 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	main(int ac, char **av, char **env)
 {
-	//int		i;
 	char	*prompt;
 	t_mini	mini;
 
 	mini.env = env;
-	//i = 0;
 	while (1)
 	{
 		prompt = readline(give_me_prompt(&mini));
@@ -34,6 +32,6 @@ int	main(int ac, char **av, char **env)
 	}
 	(void)ac;
 	(void)av;
-	clear_history();
+	rl_clear_history();
 	return (EXIT_SUCCESS);
 }

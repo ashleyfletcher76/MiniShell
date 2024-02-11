@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:44:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/04 12:57:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/10 12:42:57 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@ int	checkPathExistence(const char *path)
 void	ft_cd(char **command, char **env)
 {
 	char *home;
+	char *temp;
 
 	home = getenv("HOME");
 	if (command[1] == NULL || ft_strncmp(command[1], "~", 2) == 0 )
-	{
 		chdir(home);
+	else if (ft_strncmp(command[1], "~/", 2) == 0)
+	{
+		temp = ft_strjoin(home, command[1] + 1);
+		chdir(temp);
+		free(temp);
 	}
 	else if (checkPathExistence(command[1]) || ft_strncmp(command[1], "..", 3) == 0 || ft_strncmp(command[1], ".", 2) == 0)
-	{
 		chdir(command[1]);
-	}
 	else
 	{
 		write(2, "cd: no such file or directory: ", 32);

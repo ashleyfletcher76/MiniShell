@@ -7,6 +7,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 typedef struct s_commands
 {
