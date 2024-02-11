@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/09 12:45:20 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:28:07 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 int	is_built_in(t_mini *mini)
 {
-	int	i;
-	
-	i = 0;
-	while (mini->argv[i])
+	if (mini->commands[0].cmd_args[0])
 	{
-		if ((build_get_args(mini->argv[i], mini->env)) == 0)
+		if ((which_build(mini->commands[0].cmd_args, mini->env)) == 0)
 			return (0);
-		i++;
 	}
+
 	return (1);
 }
 
-int	build_get_args(char *command, char **env)
+/*int	build_get_args(char *command, char **env)
 {
 	char	**cmd_paths;
 	char	*temp;
@@ -53,7 +50,7 @@ int	build_get_args(char *command, char **env)
 	if (which_build(cmd_paths, env) == 0)
 		return (0);
 	return (1);
-}
+}*/
 
 int	which_build(char **commands, char **env)
 {
@@ -73,6 +70,5 @@ int	which_build(char **commands, char **env)
 	{
 		return (ft_unset(commands, env) ,1);
 	}
-
 	return (0);
 }

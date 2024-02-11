@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/10 12:17:58 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:27:52 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ void	parse_init(t_mini *mini)
 	//while (mini->commands[0].cmd_args[i])
 	//{
 	//	printf("%s\n", mini->commands[0].cmd_args[i++]);
-	//	nbr++;
+	//	//nbr++;
 	//}
 	//printf("%d\n", nbr);
+	//is_built_in(mini);
 	if (is_built_in(mini) == 0)
 	{
 		pipex_main(argv, mini->env);
