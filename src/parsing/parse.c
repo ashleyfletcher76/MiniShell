@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/11 16:13:52 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:17:15 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	parse_init(t_mini *mini)
 	argv = ft_split(mini->prompt, '|');
 	mini->argv = argv;
 	parse_distributor(mini);
-	print_commands(mini);
+	// print_commands(mini);
+	is_built_in(mini);
 	// if (is_built_in(mini) == 0)
 	// {
 	// 	pipex_main(argv, mini->env);
