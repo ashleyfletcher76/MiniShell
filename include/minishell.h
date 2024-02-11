@@ -15,7 +15,7 @@ typedef struct s_commands
 	char				*input;
 	char				*output;
 	int					indicator;
-	struct s_commands	 *next;
+	struct s_commands	*next;
 }	t_commands;
 
 typedef struct s_mini
@@ -35,14 +35,18 @@ int		array_size(char **s);
 //parsing
 void	parse_init(t_mini *mini);
 void	parse_distributor(t_mini *mini);
-void	finalize_command(t_mini *mini, char **temp, int *j, t_commands **cmd);
+void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator);
 void	print_commands(t_mini *mini);
 
-void	parse_space(t_mini *mini, char **temp, int *j, int *i);
-void	parse_double_quote(t_mini *mini, int *j, int *i);
+void	parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd);
+void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd);
 char	*dquote_helper(char *quoted_str);
-void	parse_single_quote(t_mini *mini, int *j, int *i);
+void	parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd);
 char	*quote_helper(char *quoted_str);
+
+t_commands	*lstnew(void);
+void	lstadd_back(t_commands **lst, t_commands *new_node);
+t_commands	*lstlast(t_commands *lst);
 
 char	*ft_char_join(char *s1, char c);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/11 11:42:44 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:48:54 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	parse_space(t_mini *mini, char **temp, int *j, int *i)
+void	parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd)
 {
-	if (mini->prompt[*i] == '\"')
+	if (mini->prompt[*i] == '\"' || mini->prompt[*i] == '\'')
 		return ;
 	if (mini->prompt[*i] == ' ' || mini->prompt[*i + 1] == '\0')
 	{
-		mini->commands[0].cmd_args[*j] = ft_strdup(*temp);
+		(*cmd)->cmd_args[*j] = ft_strdup(*temp);
 		(*j)++;
 		if (*temp)
 		{
@@ -30,61 +30,68 @@ void	parse_space(t_mini *mini, char **temp, int *j, int *i)
 		(*i)++;
 }
 
-void	finalize_command(t_mini *mini, char **temp, int *j, t_commands **cmd)
+void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 {
-	t_commands	*new_cmd;
+	t_commands	*new_node;
 
-	if (*temp && (*temp[0] != '\0'))
+	if (*temp)
 	{
 		(*cmd)->cmd_args[*j] = ft_strdup(*temp);
 		(*j)++;
 		free (*temp);
 		*temp = NULL;
 	}
-	(*cmd)->cmd_args[*j] = NULL;
-	if (mini->prompt[*j] == '|')
+	if (indicator == 0)
 	{
-		new_cmd = ft_calloc(1, sizeof(t_commands));
-		new_cmd->cmd_args = ft_calloc(1, sizeof(char *) * 50);
-		*cmd = new_cmd;
+		(*cmd)->cmd_args[*j] = NULL;
+		new_node = lstnew();
+		lstadd_back(cmd, new_node);
+		(*cmd) = (*cmd)->next;
 		*j = 0;
 	}
 }
+
+// void	add_new_command(t_mini *mini, int *i)
+// {
+
+// }
 
 void	parse_distributor(t_mini *mini)
 {
 	int			i;
 	int			j;
+	int			indicator;
 	t_commands	*command;
 	char		*temp;
 
 	i = 0;
 	j = 0;
 	temp = NULL;
-	command = ft_calloc(1, sizeof(t_commands));
-	command->cmd_args = ft_calloc(1, sizeof(char *) * 50);
+	command = lstnew();
 	mini->commands = command;
+	indicator = 0;
 	while (mini->prompt[i])
 	{
 		if (mini->prompt[i] == '|')
 		{
-			finalize_command(mini, &temp, &j, &command);
+			finalize_command(&temp, &j, &command, indicator);
 			i++;
 		}
-		else if (mini->prompt[i] == '\"')
-			parse_double_quote(mini, &j, &i);
 		else if (mini->prompt[i] == '\'')
-			parse_single_quote(mini, &i, &j);
+			parse_single_quote(mini, &j, &i, &command);
+		else if (mini->prompt[i] == '\"')
+			parse_double_quote(mini, &j, &i, &command);
 		else if (mini->prompt[i] == ' ')
-			parse_space(mini, &temp, &j, &i);
+			parse_space(mini, &temp, &j, &i, &command);
 		else
 			temp = ft_char_join(temp, mini->prompt[i]);
 		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i])
 			i++;
 		i++;
 	}
+	indicator = 1;
 	if (temp && temp[0] != '\0')
-		finalize_command(mini, &temp, &j, &command);
+		finalize_command(&temp, &j, &command, indicator);
 }
 
 void	parse_init(t_mini *mini)
@@ -94,22 +101,12 @@ void	parse_init(t_mini *mini)
 	argv = ft_split(mini->prompt, '\"');
 	argv = ft_split(mini->prompt, '|');
 	mini->argv = argv;
-	mini->commands = ft_calloc(1, sizeof(t_commands));
-	//mini->commands[0].cmd_args = ft_calloc(1 ,sizeof(char *) * 50);
 	parse_distributor(mini);
 	print_commands(mini);
-	// int	nbr = 0;
-	// int	i = 0;
-	// while (mini->commands[0].cmd_args[i])
+	// if (is_built_in(mini) == 0)
 	// {
-	// 	printf("%s\n", mini->commands[0].cmd_args[i++]);
-	// 	nbr++;
+	// 	pipex_main(argv, mini->env);
 	// }
-	// printf("%d\n", nbr);
-	if (is_built_in(mini) == 0)
-	{
-		pipex_main(argv, mini->env);
-	}
 }
 
 void	print_commands(t_mini *mini)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/10 11:25:08 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:43:25 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	parse_double_quote(t_mini *mini, int *j, int *i)
+void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 {
 	char	*quoted_str;
 
@@ -20,12 +20,14 @@ void	parse_double_quote(t_mini *mini, int *j, int *i)
 	(*i)++;
 	while (mini->prompt[*i] != '\"' && mini->prompt[*i] != '\0')
 	{
+		printf("double = %c\n", mini->prompt[*i]);
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
 		(*i)++;
 	}
 	if (mini->prompt[*i] == '\0')
 		quoted_str = dquote_helper(quoted_str);
-	mini->commands[0].cmd_args[*j] = ft_strdup(quoted_str);
+	(*cmd)->cmd_args[*j] = ft_strdup(quoted_str);
+	printf("fault is here\n");
 	(*j)++;
 	if (quoted_str)
 	{

@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/10 11:17:54 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:04:02 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	parse_single_quote(t_mini *mini, int *j, int *i)
+void	parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 {
 	char	*quoted_str;
 
 	quoted_str = NULL;
 	(*i)++;
-	while (mini->prompt[*i] != '\'' && mini->prompt[*i] != '\0')
+	while (mini->prompt[*i] != '\'' && mini->prompt[*i] != '\0' && mini->prompt[*i])
 	{
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
 		(*i)++;
 	}
 	if (mini->prompt[*i] == '\0')
 		quoted_str = quote_helper(quoted_str);
-	mini->commands[0].cmd_args[*j] = ft_strdup(quoted_str);
+	(*cmd)->cmd_args[*j] = ft_strdup(quoted_str);
 	(*j)++;
 	if (quoted_str)
 	{
