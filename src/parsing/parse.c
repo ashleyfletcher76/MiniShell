@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/11 11:42:44 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/11 11:47:30 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,8 @@ void	parse_init(t_mini *mini)
 	mini->commands = ft_calloc(1, sizeof(t_commands));
 	//mini->commands[0].cmd_args = ft_calloc(1 ,sizeof(char *) * 50);
 	parse_distributor(mini);
-	print_commands(mini);
-	// int	nbr = 0;
-	// int	i = 0;
-	// while (mini->commands[0].cmd_args[i])
-	// {
-	// 	printf("%s\n", mini->commands[0].cmd_args[i++]);
-	// 	nbr++;
-	// }
-	// printf("%d\n", nbr);
+	// print_commands(mini);
+
 	if (is_built_in(mini) == 0)
 	{
 		pipex_main(argv, mini->env);
