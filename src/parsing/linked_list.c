@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:14:59 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/11 14:28:51 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:03:33 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_commands	*lstnew(void)
 	if (new == NULL)
 		return (NULL);
 	new->cmd_args = ft_calloc(1, sizeof(char *) * 50);
-	new->input = NULL;
-	new->output = NULL;
+	new->input = ft_calloc(1, sizeof(char));
+	new->output = ft_calloc(1, sizeof(char));
 	new->indicator = 0;
-	new -> next = NULL;
+	new->next = NULL;
 	return (new);
 }
 
