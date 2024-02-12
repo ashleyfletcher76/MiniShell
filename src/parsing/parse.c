@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/12 09:10:31 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:30:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,8 @@ void	parse_distributor(t_mini *mini)
 
 void	parse_init(t_mini *mini)
 {
-	char **argv = NULL;
-
-	argv = ft_split(mini->prompt, '\"');
-	argv = ft_split(mini->prompt, '|');
-	mini->argv = argv;
 	parse_distributor(mini);
-	print_commands(mini);
-	is_built_in(mini);
-	pipex_main(argv, mini->env);
+	//print_commands(mini);
 }
 
 void	print_commands(t_mini *mini)

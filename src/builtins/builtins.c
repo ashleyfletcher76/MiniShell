@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/11 16:24:20 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:30:07 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ int	is_built_in(t_mini *mini)
 	head = mini->commands;
 	while (head != NULL)
 	{
-		if (head->cmd_args[0] != NULL)
+		if (mini->commands->cmd_args[0] != NULL)
 		{
-			which_build(head->cmd_args, mini->env);
+			if (which_build(head->cmd_args, mini->env) == 0)
+			{
+				pipex_main(mini->argv, mini->env);
+			}
 		}
 		head = head->next;
 	}
