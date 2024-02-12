@@ -9,11 +9,21 @@
 #include <sys/stat.h>
 #include <signal.h>
 
+typedef struct s_indexes
+{
+	int	prompt_index;
+	int	args_index;
+	int	input_index;
+	int	output_index;
+}	t_indexs;
+
 typedef struct s_commands
 {
 	char				**cmd_args;
 	char				*input;
+	char				*double_input;
 	char				*output;
+	char				*double_output;
 	int					indicator;
 	struct s_commands	*next;
 }	t_commands;
@@ -25,6 +35,7 @@ typedef struct s_mini
 	char		*cwd;
 	char		**argv;
 	char		**env;
+	t_indexs	*indexes;
 	t_commands	*commands;
 }	t_mini;
 

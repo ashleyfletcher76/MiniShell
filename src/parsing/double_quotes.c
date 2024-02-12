@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/11 15:43:25 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:07:03 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 	(*i)++;
 	while (mini->prompt[*i] != '\"' && mini->prompt[*i] != '\0')
 	{
-		printf("double = %c\n", mini->prompt[*i]);
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
 		(*i)++;
 	}
 	if (mini->prompt[*i] == '\0')
 		quoted_str = dquote_helper(quoted_str);
 	(*cmd)->cmd_args[*j] = ft_strdup(quoted_str);
-	printf("fault is here\n");
 	(*j)++;
 	if (quoted_str)
 	{
