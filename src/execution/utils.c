@@ -6,15 +6,16 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/01 11:51:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:10:28 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/minishell.h"
 #include "../../include/pipex.h"
 
 void	error_handler(char *msg, t_pipex *pipex, int exitcode)
 {
-	ft_put3endl_fd("minishell: ", msg, pipex->command_paths[0], 2);
+	ft_put3endl_fd("minishell: ", msg, pipex->commands->cmd_args[0], 2);
 	free_struct(pipex);
 	exit (exitcode);
 }
@@ -41,7 +42,7 @@ int	opener(t_pipex *pipex, int m)
 
 	if (m == 0)
 	{
-		fd = open(pipex->input, O_RDONLY);
+		fd = open(pipex->commands->input, O_RDONLY);
 		if (fd < 0)
 		{
 			perror("pipex: input");
@@ -52,7 +53,7 @@ int	opener(t_pipex *pipex, int m)
 	}
 	else
 	{
-		fd = open(pipex->output, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		fd = open(pipex->commands->output, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			perror("pipex: output");

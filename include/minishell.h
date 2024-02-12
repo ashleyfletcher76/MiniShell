@@ -1,36 +1,48 @@
 #ifndef MINISHELL
 #define MINISHELL
 
-#include "../libft/libft.h"
-#include "pipex.h"
+# include "pipex.h"
+# include "../libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <signal.h>
+# include <stdlib.h>
 
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/stat.h>
-#include <signal.h>
+//main nessecaries
+void		get_adresses(t_pipex *pipex);
+char		*giveme_path(char *command, t_pipex *pipex);
+char		*get_a_path(char *command, t_pipex *pipex);
 
-typedef struct s_commands
-{
-	char				**cmd_args;
-	char				*input;
-	char				*output;
-	int					indicator;
-	struct s_commands	*next;
-}	t_commands;
+//free stuff
+void		free_struct(t_pipex *pipex);
+void		free_double_int(int **array);
+void		free_double_array(char **array);
+void		free_tripple_array(char ***array);
+void		waiter(t_pipex *pipex);
 
-typedef struct s_mini
-{
-	char		*prompt_msg;
-	char		*prompt;
-	char		*cwd;
-	char		**argv;
-	char		**env;
-	t_commands	*commands;
-}	t_mini;
+//erorror
+void		error_handler(char *msg, t_pipex *pipex, int exitcode);
 
+//piper.c
+void		pipe_all(t_pipex *pipex);
+void		pipe_close(t_pipex *pipex);
+void		only_child(t_pipex *pipex, int i);
+void		first_son(t_pipex *pipex, int i);
+void		last_son(t_pipex *pipex, int i);
+void		daughters(t_pipex *pipex, int i);
+void		dup2er(int input, int output, t_pipex *pipex);
+int			opener(t_pipex *pipex, int m);
+void		piper(t_pipex *pipex);
+void		forker(t_pipex *pipex, int i);
+
+//utils
 void		freearr(char **arr);
 char		*give_me_prompt(t_mini *mini);
 int			array_size(char **s);
+int			ft_lstsize_t_cmds(t_commands *lst);
+int			promt_help(t_mini *mini, char *user);
 
 //parsing
 void		parse_init(t_mini *mini);
@@ -55,9 +67,9 @@ void		*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char		*ft_strndup(const char *s1, size_t nbr);
 
 //builtin
-int			is_built_in(t_mini *mini);
-int			build_get_args(char *command, char **env);
+
 int			which_build(char **commands, char **env);
+int			 exist_build(char **commands);
 int			checkPathExistence(const char *path);
 void		update_pwd_env(char **environ);
 void		ft_cd(char **command, char **env);
@@ -74,7 +86,9 @@ void		ft_echo(char **commands);
 
 //exec
 void		exec_init(t_mini *mini);
-int			promt_help(t_mini *mini, char *user);
+void		exec_main(t_mini *mini);
+
+int			is_built_in(t_pipex *pipex);
 
 
 #endif

@@ -6,16 +6,16 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/01/30 16:27:31 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:21:18 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pipex.h"
+#include "../../include/minishell.h"
 
 void	free_struct(t_pipex *pipex)
 {
 	free_double_array(pipex->all_paths);
-	free_double_array(pipex->command_paths);
+	free_double_array(pipex->commands->cmd_args);
 	free_double_int(pipex->pipel);
 	free(pipex->pids);
 }
