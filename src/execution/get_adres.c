@@ -6,11 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/09 14:38:02 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:10:31 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../../include/pipex.h"
 
 void	get_adresses(t_pipex *pipex)
 {
@@ -36,49 +37,6 @@ void	get_adresses(t_pipex *pipex)
 		if (pipex->all_paths == NULL)
 			return (free_struct(pipex), exit(EXIT_FAILURE));
 	}
-}
-
-char *get_args(t_pipex *pipex, int i)
-{
-	char *path;
-	char *temp;
-
-	if (ft_strchr(pipex->av[i], '\''))
-	{
-		pipex->command_paths = ft_split(pipex->av[i], '\'');
-		temp = ft_strtrim(pipex->command_paths[0], " \n\t\v");
-		free(pipex->command_paths[0]);
-		pipex->command_paths[0] = temp;
-		temp = ft_strtrim(pipex->command_paths[2], " \n\t\v");
-		free(pipex->command_paths[2]);
-		pipex->command_paths[2] = temp;
-		char **temp2;
-		if (ft_strchr(pipex->command_paths[0], ' '))
-		{
-			temp2 = ft_split(pipex->command_paths[0], ' ');
-			free(pipex->command_paths[0]);
-			pipex->command_paths[4] = NULL;
-			pipex->command_paths[3] = pipex->command_paths[2];
-			pipex->command_paths[2] = pipex->command_paths[1];
-			pipex->command_paths[1] = temp2[1];
-			pipex->command_paths[0] = temp2[0];
-			printf("%s\n", pipex->command_paths[0]);
-			printf("%s\n", pipex->command_paths[1]);
-			printf("%s\n", pipex->command_paths[2]);
-			printf("%s\n", pipex->command_paths[3]);
-		}
-	}
-	else if (ft_strchr(pipex->av[i], '\"'))
-	{
-		pipex->command_paths = ft_split(pipex->av[i], '\"');
-		temp = ft_strtrim(pipex->command_paths[0], " \n\t\v");
-		free(pipex->command_paths[0]);
-		pipex->command_paths[0] = temp;
-	}
-	else
-		pipex->command_paths = ft_split(pipex->av[i], ' ');
-	path = get_a_path(pipex->command_paths[0], pipex);
-	return (path);
 }
 
 char	*get_a_path(char *command, t_pipex *pipex)

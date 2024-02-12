@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/10 14:44:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:38:08 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	ft_export_print(char **env)
 	}
 	i = -1;
 	while (export[++i])
+	{
+		ft_printf("declare -x ");
 		ft_printf("%s\n", export[i]);
+	}
 	free_double_array(export);
 }
 
