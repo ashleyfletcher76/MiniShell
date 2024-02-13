@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/12 11:07:03 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:56:04 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 		free (quoted_str);
 		quoted_str = NULL;
 	}
-	if (mini->prompt[*i] == '\"')
+	if (mini->prompt[*i] == '\"' && mini->prompt[*i + 1] != '\0')
 		(*i)++;
+	printf("double quotes ascii = %d\n", mini->prompt[*i]);
 }
 
 char	*dquote_helper(char *quoted_str)

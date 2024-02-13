@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/11 16:04:02 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:43:06 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 	if (mini->prompt[*i] == '\0')
 		quoted_str = quote_helper(quoted_str);
 	(*cmd)->cmd_args[*j] = ft_strdup(quoted_str);
+	printf("single quotes = %s\n", quoted_str);
 	(*j)++;
 	if (quoted_str)
 	{

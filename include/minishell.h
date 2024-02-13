@@ -90,6 +90,7 @@ int			promt_help(t_mini *mini, char *user);
 void		direction_handler(t_pipex *pipex);
 void		input_handler(t_pipex *pipex);
 void		output_handler(t_pipex *pipex);
-
+void		output_handler_append(t_pipex *pipex);
+void		heredoc_found(t_pipex *pipex);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 11:45:23 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:33:15 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,18 @@ void	direction_handler(t_pipex *pipex)
 	output_handler(pipex);
 }
 
+void	heredoc_found(t_pipex *pipex)
+{
+	(void)pipex;
+}
+
 void	input_handler(t_pipex *pipex)
 {
 	int	fd;
 
 	fd = 0;
+	if (pipex->commands->indicator_input == TRUE)
+		return (heredoc_found(pipex));
 	if (pipex->commands->input != NULL)
 	{
 		pipex->fd_in_orj = dup(STDIN_FILENO);
@@ -51,7 +58,10 @@ void	output_handler(t_pipex *pipex)
 	if (pipex->commands->output != NULL)
 	{
 		pipex->fd_out_orj = dup(STDOUT_FILENO);
-		fd = open(pipex->commands->output, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		if (pipex->commands->indicator_output == FALSE)
+			fd = open(pipex->commands->output, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		else
+			fd = open(pipex->commands->output, O_CREAT | O_APPEND | O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			perror("pipex: output");

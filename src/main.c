@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/11 10:52:33 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:41:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ int	main(int ac, char **av, char **env)
 		add_history(prompt);
 		mini.prompt = prompt;
 		parse_init(&mini);
-		exec_init(&mini);
+		//exec_init(&mini);
 		free(prompt);
+		prompt = NULL;
 	}
 	(void)ac;
 	(void)av;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/13 12:15:32 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:53:23 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd)
 	if (mini->prompt[*i] == ' ' || mini->prompt[*i + 1] == '\0')
 	{
 		(*cmd)->cmd_args[*j] = ft_strdup(*temp);
+		printf("parse space = %s\n", *temp);
 		(*j)++;
 		if (*temp)
 		{
@@ -44,7 +45,6 @@ void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 		(*cmd)->cmd_args[*j] = NULL;
 		new_node = lstnew();
 		lstadd_back(cmd, new_node);
-		//(*cmd)->next = new_node;
 		(*cmd) = (*cmd)->next;
 		*j = 0;
 	}
@@ -64,6 +64,7 @@ void	parse_distributor(t_mini *mini)
 	mini->commands = command;
 	while (mini->prompt[i])
 	{
+		printf("ascii ==> %d\n", mini->prompt[i]);
 		if (mini->prompt[i] == '|')
 		{
 			finalize_command(&temp, &j, &command, 0);
@@ -81,18 +82,18 @@ void	parse_distributor(t_mini *mini)
 			parse_space(mini, &temp, &j, &i, &command);
 		else
 			temp = ft_char_join(temp, mini->prompt[i]);
-		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i])
+		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i + 1])
 			i++;
 		i++;
 	}
-	if (temp && temp[0] != '\0')
-		finalize_command(&temp, &j, &command, 1);
+	//if (temp && temp[0] != '\0')
+	//	finalize_command(&temp, &j, &command, 1);
 }
 
 void	parse_init(t_mini *mini)
 {
 	parse_distributor(mini);
-	// print_commands(mini);
+	print_commands(mini);
 }
 
 void	print_commands(t_mini *mini)
