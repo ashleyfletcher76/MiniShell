@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:21:29 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/13 17:14:46 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:39:55 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	parse_output(t_mini *mini, int *i, t_commands **cmd)
 		temp = ft_char_join(temp, mini->prompt[*i]);
 		(*i)++;
 	}
+	if (mini->prompt[*i] == '\0')
+		(*i)--;
 	update_output_arg(cmd, &temp, flag);
 	free (temp);
 	temp = NULL;
