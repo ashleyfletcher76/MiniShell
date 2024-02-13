@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:29:13 by muhakose          #+#    #+#             */
-/*   Updated: 2023/12/06 13:27:24 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:44:57 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned char	*c1;
 	unsigned char	*c2;
 
+	if (!s1 || !s2)
+		return (-1);
 	c1 = (unsigned char *)s1;
 	c2 = (unsigned char *)s2;
 	i = 0;

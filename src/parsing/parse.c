@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/12 14:05:51 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:08:49 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	parse_distributor(t_mini *mini)
 void	parse_init(t_mini *mini)
 {
 	parse_distributor(mini);
-	print_commands(mini);
+	// print_commands(mini);
 }
 
 void	print_commands(t_mini *mini)

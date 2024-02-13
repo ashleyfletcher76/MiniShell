@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/12 13:01:47 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:01:40 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,7 @@ void	exec_main(t_mini *mini)
 	pipex.env = mini->env;
 	pipex.commands = mini->commands;
 	get_adresses(&pipex);
-
 	pipe_all(&pipex);
-
-
-
 	pipe_close(&pipex);
 	waiter(&pipex);
 	

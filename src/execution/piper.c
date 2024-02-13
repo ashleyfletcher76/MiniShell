@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/12 11:24:58 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:52:09 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 void	pipe_all(t_pipex *pipex)
 {
-	int		i;
+	int			i;
+	t_commands	*head;
 
+	head = pipex->commands;
 	i = 0;
 	piper(pipex);
 	pipex->pids = malloc((pipex->nbr_cmd) * sizeof(pid_t));
@@ -29,6 +31,7 @@ void	pipe_all(t_pipex *pipex)
 			forker(pipex, i);
 			if (pipex->pids[i] == 0)
 			{
+				//direction_handler(pipex);
 				if (i == 0 && pipex->nbr_cmd == 1)
 					only_child(pipex, i);
 				else if (i == 0 && pipex->nbr_cmd != 1)
@@ -51,6 +54,7 @@ void	only_child(t_pipex *pipex, int i)
 	(void)i;
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);
+	//direction_handler
 	execve(path, pipex->commands->cmd_args, pipex->env);
 }
 

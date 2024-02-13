@@ -88,6 +88,8 @@ void		exec_init(t_mini *mini);
 void		exec_main(t_mini *mini);
 int			promt_help(t_mini *mini, char *user);
 void		direction_handler(t_pipex *pipex);
+void		input_handler(t_pipex *pipex);
+void		output_handler(t_pipex *pipex);
 
 
 #endif

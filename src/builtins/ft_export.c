@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/12 10:38:08 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:33:03 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_export_print(char **env)
 		sorted = 1;
 		while (export[i + 1] != NULL)
 		{
-			if (strcmp(export[i], export[i + 1]) > 0)
+			if (ft_strcmp(export[i], export[i + 1]) > 0)
 			{
 				temp = export[i];
 				export[i] = export[i + 1];
