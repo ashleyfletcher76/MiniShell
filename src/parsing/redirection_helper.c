@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:07:48 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/13 17:14:37 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:53:43 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	update_output_arg(t_commands **cmd, char **temp, int flag)
 		(*cmd)->output = ft_strdup(*temp);
 		if (!(*cmd)->output)
 			return ;
-		fd = open((*cmd)->output, O_CREAT | O_TRUNC, 0644);
+		fd = open((*cmd)->output, O_CREAT | O_APPEND, 0644);
 		close(fd);
 	}
 	else
