@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/13 12:15:32 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:58:19 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 void	parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd)
 {
-	if (mini->prompt[*i] == ' ' || mini->prompt[*i + 1] == '\0')
+	(*cmd)->cmd_args[*j] = ft_strdup(*temp);
+	(*j)++;
+	if (*temp)
 	{
-		(*cmd)->cmd_args[*j] = ft_strdup(*temp);
-		(*j)++;
-		if (*temp)
-		{
 			free (*temp);
 			*temp = NULL;
-		}
 	}
 	while (mini->prompt[*i] == ' ' && mini->prompt[*i + 1] == ' ')
 		(*i)++;
@@ -44,7 +41,6 @@ void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 		(*cmd)->cmd_args[*j] = NULL;
 		new_node = lstnew();
 		lstadd_back(cmd, new_node);
-		//(*cmd)->next = new_node;
 		(*cmd) = (*cmd)->next;
 		*j = 0;
 	}
@@ -81,7 +77,7 @@ void	parse_distributor(t_mini *mini)
 			parse_space(mini, &temp, &j, &i, &command);
 		else
 			temp = ft_char_join(temp, mini->prompt[i]);
-		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i])
+		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i + 1] != '\0')
 			i++;
 		i++;
 	}
@@ -92,7 +88,7 @@ void	parse_distributor(t_mini *mini)
 void	parse_init(t_mini *mini)
 {
 	parse_distributor(mini);
-	// print_commands(mini);
+	print_commands(mini);
 }
 
 void	print_commands(t_mini *mini)

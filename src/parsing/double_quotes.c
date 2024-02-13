@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/12 11:07:03 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:24:32 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 
 	quoted_str = NULL;
 	(*i)++;
+	if (mini->prompt[*i] == '\"')
+	{
+		(*cmd)->cmd_args[*j] = ft_strdup(" ");
+		(*j)++;
+		return ;
+	}
+		return ;
 	while (mini->prompt[*i] != '\"' && mini->prompt[*i] != '\0')
 	{
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
@@ -32,7 +39,7 @@ void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 		free (quoted_str);
 		quoted_str = NULL;
 	}
-	if (mini->prompt[*i] == '\"')
+	if (mini->prompt[*i] == '\"' && mini->prompt[*i + 1] != '\0')
 		(*i)++;
 }
 

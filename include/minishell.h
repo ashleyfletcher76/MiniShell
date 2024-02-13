@@ -56,6 +56,8 @@ void		parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd);
 char		*quote_helper(char *quoted_str);
 void		parse_input(t_mini *mini, int *i, t_commands **cmd);
 void		parse_output(t_mini *mini, int *i, t_commands **cmd);
+void		update_input_arg(t_commands **cmd, char **temp, int flag);
+void		update_output_arg(t_commands **cmd, char **temp, int flag);
 
 void		lstadd_back(t_commands **lst, t_commands *new_node);
 t_commands	*lstnew(void);
