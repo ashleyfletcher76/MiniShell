@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piper.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 12:16:11 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:27:11 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	pipe_all(t_pipex *pipex)
 			forker(pipex, i);
 			if (pipex->pids[i] == 0)
 			{
-				//direction_handler(pipex);
 				if (i == 0 && pipex->nbr_cmd == 1)
 					only_child(pipex, i);
 				else if (i == 0 && pipex->nbr_cmd != 1)
@@ -54,7 +53,7 @@ void	only_child(t_pipex *pipex, int i)
 	(void)i;
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);
-	//direction_handler
+	direction_handler(pipex);
 	execve(path, pipex->commands->cmd_args, pipex->env);
 }
 
@@ -62,7 +61,12 @@ void	first_son(t_pipex *pipex, int i)
 {
 	char	*path;
 
-	dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
+	if (pipex->commands->input != NULL)
+		input_handler(pipex);
+	if (pipex->commands->output != NULL)
+		output_handler(pipex);
+	else
+		dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);
 	execve(path, pipex->commands->cmd_args, pipex->env);
@@ -73,7 +77,12 @@ void	last_son(t_pipex *pipex, int i)
 {
 	char	*path;
 
-	dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
+	if (pipex->commands->output != NULL)
+		output_handler(pipex);
+	if (pipex->commands->input != NULL)
+		input_handler(pipex);
+	else
+		dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);
 	execve(path, pipex->commands->cmd_args, pipex->env);
@@ -83,8 +92,14 @@ void	daughters(t_pipex *pipex, int i)
 {
 	char	*path;
 
-	dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
-	dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
+	if (pipex->commands->input != NULL)
+		input_handler(pipex);
+	else
+		dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
+	if (pipex->commands->output != NULL)
+		output_handler(pipex);
+	else
+		dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);
 	execve(path, pipex->commands->cmd_args, pipex->env);
