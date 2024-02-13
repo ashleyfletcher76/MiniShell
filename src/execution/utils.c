@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/12 11:10:28 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:16:23 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/pipex.h"
+#include "../../include/structs.h"
 
 void	error_handler(char *msg, t_pipex *pipex, int exitcode)
 {

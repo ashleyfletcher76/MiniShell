@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/12 14:08:49 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:15:32 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void	print_commands(t_mini *mini)
 		}
 		printf("input = %s\n", current->input);
 		printf("output = %s\n", current->output);
-		printf("double input = %s\n", current->double_input);
-		printf("double output = %s\n", current->double_output);
 		current = current->next;
 	}
 }

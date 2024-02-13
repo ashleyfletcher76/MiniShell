@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   piper.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 11:52:09 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:16:11 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/pipex.h"
+#include "../../include/structs.h"
 
 void	pipe_all(t_pipex *pipex)
 {

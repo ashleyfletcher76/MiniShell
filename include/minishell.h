@@ -1,7 +1,7 @@
 #ifndef MINISHELL
 #define MINISHELL
 
-# include "pipex.h"
+# include "structs.h"
 # include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>

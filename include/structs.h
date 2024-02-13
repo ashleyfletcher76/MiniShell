@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 11:39:04 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:15:55 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 # include <sys/wait.h>
 
@@ -20,9 +20,8 @@ typedef struct s_commands
 	char				**cmd_args;
 	char				*input;
 	char				*output;
-	int					indicator;
-	char				*double_input;
-	char				*double_output;
+	int					indicator_input;
+	int					indicator_output;
 	struct s_commands	*next;
 }	t_commands;
 
