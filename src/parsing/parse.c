@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/16 17:54:49 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:57:15 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	parse_distributor(t_mini *mini)
 void	parse_init(t_mini *mini)
 {
 	parse_distributor(mini);
-	print_commands(mini);
+	//print_commands(mini);
 }
 
 void	print_commands(t_mini *mini)
