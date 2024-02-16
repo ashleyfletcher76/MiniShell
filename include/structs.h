@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 15:56:29 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:40:05 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_pipex
 	pid_t		*pids;
 	int			**pipel;
 	int			nbr_cmd;
+	int			nbr_cmd_builts;
 	char		**all_paths;
 	char		**env;
 	int			fd_in_orj;

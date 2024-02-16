@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 15:21:50 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:47:17 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ int	is_built_in(t_pipex *pipex)
 		{
 			direction_handler(pipex);
 			which_build(pipex->commands->cmd_args, pipex->env);
-			if (pipex->commands->input != NULL)
-				dup2(pipex->fd_in_orj, STDIN_FILENO);
-			if (pipex->commands->output != NULL)
-				dup2(pipex->fd_out_orj, STDOUT_FILENO);
 			return (TRUE);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 15:33:15 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:19:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	input_handler(t_pipex *pipex)
 		fd = open(pipex->commands->input, O_RDONLY);
 		if (fd == -1)
 		{
-			perror("pipex: input");
+			perror("minishell: input");
 			free_struct(pipex);
 			exit(EXIT_FAILURE);
 		}
@@ -64,7 +64,7 @@ void	output_handler(t_pipex *pipex)
 			fd = open(pipex->commands->output, O_CREAT | O_APPEND | O_WRONLY, 0644);
 		if (fd < 0)
 		{
-			perror("pipex: output");
+			perror("minishell: output");
 			free_struct(pipex);
 			exit(EXIT_FAILURE);
 		}

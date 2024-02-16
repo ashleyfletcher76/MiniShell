@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:27:17 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/12 11:23:11 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:38:55 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,29 @@ int	array_size(char **s)
 	return (i);
 }
 
-int	ft_lstsize_t_cmds(t_commands *lst)
+int	commands_size_all(t_commands *lst)
 {
 	size_t	len;
 
 	len = 0;
 	while (lst)
 	{
-		lst = lst -> next;
 		len++;
+		lst = lst -> next;
+	}
+	return (len);
+}
+
+int	commands_size_buildin(t_commands *lst)
+{
+	size_t	len;
+
+	len = 0;
+	while (lst)
+	{
+		if (exist_build(lst->cmd_args) == TRUE)
+			len++;
+		lst = lst -> next;
 	}
 	return (len);
 }
