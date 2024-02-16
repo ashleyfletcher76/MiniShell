@@ -55,6 +55,8 @@ char		*dquote_helper(char *quoted_str);
 void		parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd);
 char		*quote_helper(char *quoted_str);
 void		parse_input(t_mini *mini, int *i, t_commands **cmd);
+char		*append_heredoc(char *temp);
+char		*full_heredoc(char *orig_str, char *new_str, char *new_line, int first_line);
 void		parse_output(t_mini *mini, int *i, t_commands **cmd);
 void		update_input_arg(t_commands **cmd, char **temp, int flag);
 void		update_output_arg(t_commands **cmd, char **temp, int flag);

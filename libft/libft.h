@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:54:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/12 14:30:41 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:24:24 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
-int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strcmp(char *s1, char *s2);
 
 typedef struct s_list
 {
