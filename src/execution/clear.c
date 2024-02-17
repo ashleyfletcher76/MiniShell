@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 10:07:01 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:46:41 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	waiter(t_pipex *pipex)
 	while (i < pipex->nbr_cmd)
 	{
 		waitpid(pipex->pids[i++], &status, 0);
+		pipex->exitcode = WEXITSTATUS(status);
 	}
-	pipex->exitcode = status;
 }

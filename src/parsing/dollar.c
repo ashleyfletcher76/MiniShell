@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 12:32:15 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:35:27 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	handle_dollar(t_mini *mini, int*i, int *j, t_commands **cmd)
 		{
 			(*i)++;
 			exit_code = ft_itoa(mini->exitcode);
-			printf("exit code  = %s\n", exit_code);
 			(*cmd)->cmd_args[*j] = exit_code;
-			printf("arg code  = %s\n", (*cmd)->cmd_args[*j]);
 			return ;
 		}
 		(*i)++;
