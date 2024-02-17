@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:07:48 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 11:15:26 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:33:19 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	update_output_arg(t_commands **cmd, char **temp, int flag)
 	}
 }
 
-//doesnt work with space after hi/ delim
 char	*append_heredoc(char *temp)
 {
 	char	*new_str;
