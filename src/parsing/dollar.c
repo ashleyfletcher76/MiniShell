@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 12:32:15 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/17 13:16:56 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,31 @@ void	handle_dollar(t_mini *mini, int*i, int *j, t_commands **cmd)
 	(*j)++;
 }
 
-// char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
-// {
+char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
+{
+	char	*temp_env;
+	char	*new_temp;
 
-// }
+	temp_env = NULL;
+	if (mini->prompt[*i] == '$')
+	{
+		(*i)++;
+		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0')
+		{
+			if (mini->prompt[*i + 1] == '\'')
+			{
+				temp_env = ft_char_join(temp_env, mini->prompt[*i]);
+				new_temp = ft_strdup(temp_env);
+				temp_env = getenv(new_temp);
+				printf("new temp = %s\n", new_temp);
+				new_temp = ft_strjoin(quoted_str, temp_env);
+				return (new_temp);
+			}
+			temp_env = ft_char_join(temp_env, mini->prompt[*i]);
+			(*i)++;
+		}
+	}
+	temp_env = getenv(temp_env);
+	quoted_str = ft_strjoin(quoted_str, temp_env);
+	return (quoted_str);
+}

@@ -62,6 +62,7 @@ void		parse_output(t_mini *mini, int *i, t_commands **cmd);
 void		update_input_arg(t_commands **cmd, char **temp, int flag);
 void		update_output_arg(t_commands **cmd, char **temp, int flag);
 void		handle_dollar(t_mini *mini, int*i, int *j, t_commands **cmd);
+char		*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str);
 
 void		lstadd_back(t_commands **lst, t_commands *new_node);
 t_commands	*lstnew(void);
