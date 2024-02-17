@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 10:13:46 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:56:16 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ void	ft_export(char **commands, char **env, t_pipex *pipex)
 	if (commands[1] == NULL)
 	{
 		ft_export_print(env);
+		pipex->exitcode = EXIT_SUCCESS;
 		return ;
 	}
 	if (ft_export_error(commands, env) == 1)
+	{
+		pipex->exitcode = EXIT_FAILURE;
 		return ;
+	}
 	equl_cnt = ft_count_equal(commands[1]);
 	while(env[i] != NULL && equl_cnt != 0)
 	{
@@ -36,7 +40,7 @@ void	ft_export(char **commands, char **env, t_pipex *pipex)
 		i++;
 	}
 	ft_export_helper(commands, env, equl_cnt);
-	pipex->exitcode = 0;
+	pipex->exitcode = EXIT_SUCCESS;
 }
 
 int	ft_export_error(char **commands, char **env)

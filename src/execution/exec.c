@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 10:32:59 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:45:23 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	exec_main(t_mini *mini)
 			dup2(pipex.fd_in_orj, STDIN_FILENO);
 		if (pipex.commands->output != NULL)
 			dup2(pipex.fd_out_orj, STDOUT_FILENO);
+		mini->exitcode = pipex.exitcode;
 		return ;
 	}
 	get_adresses(&pipex);
@@ -40,5 +41,4 @@ void	exec_main(t_mini *mini)
 	pipe_close(&pipex);
 	waiter(&pipex);
 	mini->exitcode = pipex.exitcode;
-	//free_struct(&pipex);
 }

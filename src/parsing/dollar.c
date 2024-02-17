@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 13:16:56 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/17 13:47:21 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	handle_dollar(t_mini *mini, int*i, int *j, t_commands **cmd)
 		{
 			(*i)++;
 			exit_code = ft_itoa(mini->exitcode);
-			printf("exit code  = %s\n", exit_code);
 			(*cmd)->cmd_args[*j] = exit_code;
-			printf("arg code  = %s\n", (*cmd)->cmd_args[*j]);
 			return ;
 		}
 		(*i)++;
