@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:45:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/09 17:08:56 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:15:13 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ int	ft_count_equal2(char *s)
 	return (i);
 }
 
-void	ft_unset(char **commands, char **env)
+void	ft_unset(char **commands, char **env, t_pipex *pipex)
 {
 	int		i;
-	//char	*temp;
 	int		count_eql;
 
-	//temp = NULL;
 	i = 0;
 	if (commands[1] == NULL)
 		return (ft_putendl_fd("unset: not enough arguments", 2));
@@ -55,4 +53,5 @@ void	ft_unset(char **commands, char **env)
 		}
 		i++;
 	}
+	pipex->exitcode = 0;
 }

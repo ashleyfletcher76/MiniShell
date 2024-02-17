@@ -6,13 +6,13 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/12 14:33:03 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:13:46 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_export(char **commands, char **env)
+void	ft_export(char **commands, char **env, t_pipex *pipex)
 {
 	int i;
 	int	equl_cnt;
@@ -23,10 +23,8 @@ void	ft_export(char **commands, char **env)
 		ft_export_print(env);
 		return ;
 	}
-	if (ft_export_command_check(commands[1]) == FALSE)
-		return (ft_put3endl_fd("export", ": not valid in this context: ", commands[1], 2));
-	else if (ft_export_command_check(commands[1]) == 2)
-		return (ft_put3endl_fd("export", ": not an identifier: ", commands[1], 2));
+	if (ft_export_error(commands, env) == 1)
+		return ;
 	equl_cnt = ft_count_equal(commands[1]);
 	while(env[i] != NULL && equl_cnt != 0)
 	{
@@ -38,97 +36,51 @@ void	ft_export(char **commands, char **env)
 		i++;
 	}
 	ft_export_helper(commands, env, equl_cnt);
+	pipex->exitcode = 0;
 }
 
-void	ft_export_print(char **env)
+int	ft_export_error(char **commands, char **env)
 {
-	char	**export;
-	char	*temp = NULL;
-	int		i;
-
-	i = 0;
-	export = malloc (sizeof(char *) * (40));
-	while (env[i] != NULL)
+	if (ft_export_command_check(commands[1]) == FALSE)
+		return (ft_put3endl_fd("export", ": not valid in this context: ", commands[1], 2), 1);
+	else if (ft_export_command_check(commands[1]) == 2)
+		return (ft_put3endl_fd("export", ": not an identifier: ", commands[1], 2), 1);
+	if (commands[2] != NULL)
 	{
-		export[i] = ft_strdup(env[i]);
-		i++;
-	}
-	export[i] = NULL;
-	int sorted = 0;
-	while (!sorted)
-	{
-		i = 0;
-		sorted = 1;
-		while (export[i + 1] != NULL)
-		{
-			if (ft_strcmp(export[i], export[i + 1]) > 0)
-			{
-				temp = export[i];
-				export[i] = export[i + 1];
-				export[i + 1] = temp;
-				sorted = 0;
-			}
-			i++;
-		}
-	}
-	i = -1;
-	while (export[++i])
-	{
-		ft_printf("declare -x ");
-		ft_printf("%s\n", export[i]);
-	}
-	free_double_array(export);
-}
-
-void	ft_export_helper(char **commands, char **env, int equl_cnt)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	if (equl_cnt == 0)
-	{
-		env[i] = env[i - 1];
-		env[i - 1] = ft_strjoin(commands[1], "=");
-		env[i + 1] = NULL;
-	}
-	else
-	{
-		env[i] = env[i - 1];
-		env[i - 1] = commands[1];
-		env[i + 1] = NULL; 
-	}
-}
-
-int	ft_count_equal(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == '=')
-			return (i + 1);
-		i++;
+		if (ft_export_error_helper(commands, env) == 1)
+			return (1);
 	}
 	return (0);
 }
 
-int	ft_export_command_check(char *s)
+int	ft_export_error_helper(char **commands, char **env)
 {
-	int	i;
+	int		equal_cnt;
+	int		equal_cnt2;
+	int		i;
+	char	*temp;
 
 	i = 0;
-	if (s[i] >= '0' && s[i] <= '9')
-		return (2);
-	while (s[i])
+	equal_cnt = ft_count_equal(commands[1]);
+	equal_cnt2 = ft_count_equal(commands[2]);
+	if (equal_cnt == 0 && equal_cnt2 != 0)
 	{
-		if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') || s[i] == '_' || s[i] == '='))
+		temp = ft_strjoin (commands[2],commands[1]);
+		while(env[i] != NULL)
 		{
-			return (FALSE);
+			if (ft_strncmp(env[i], commands[2], equal_cnt2) == 0)
+			{
+				ft_strcpy(env[i], temp);
+				free(temp);
+				return (1);
+			}
+			i++;
 		}
-		i++;
+		env[i] = env[i - 1];
+		env[i - 1] = temp;
+		env[i + 1] = NULL; 
+		return (1);
 	}
-	return (TRUE);
+	return (0);
 }
+
