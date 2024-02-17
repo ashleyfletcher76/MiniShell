@@ -72,13 +72,13 @@ char		*ft_strndup(const char *s1, size_t nbr);
 
 //builtin
 int			is_built_in(t_pipex *pipex);
-int			which_build(char **commands, char **env);
+int			which_build(char **commands, char **env, t_pipex *pipex);
 int			exist_build(char **commands);
 int			checkPathExistence(const char *path);
 void		update_pwd_env(char **environ);
-void		ft_cd(char **command, char **env);
+void		ft_cd(char **command, char **env, t_pipex *pipex);
 void		ft_exit(char **commands);
-void		ft_export(char **commands, char **env);
+void		ft_export(char **commands, char **env, t_pipex *pipex);
 int			ft_export_error(char **commands, char **env);
 int			ft_export_error_helper(char **commands, char **env);
 int			ft_count_equal(char *s);
@@ -86,10 +86,10 @@ void		ft_export_helper(char **commands, char **env, int equl_cnt);
 void		ft_export_print(char **env);
 int			ft_export_command_check(char *s);
 void		bouble_sort_char(char **export);
-void		ft_unset(char **commands, char **env);
-void		ft_pwd(void);
-void		ft_env(char **env);
-void		ft_echo(char **commands);
+void		ft_unset(char **commands, char **env, t_pipex *pipex);
+void		ft_pwd(t_pipex *pipex);
+void		ft_env(char **env, t_pipex *pipex);
+void		ft_echo(char **commands, t_pipex *pipex);
 
 //exec
 void		exec_init(t_mini *mini);

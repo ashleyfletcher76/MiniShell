@@ -6,13 +6,13 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:29:22 by muhakose          #+#    #+#             */
-/*   Updated: 2023/10/14 14:54:55 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 09:52:39 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	basamak_sayar(int n)
+/*int	basamak_sayar(int n)
 {
 	int	basamak;
 
@@ -25,7 +25,7 @@ int	basamak_sayar(int n)
 		basamak++;
 	}
 	return (basamak);
-}
+}*/
 
 char	*ft_itoa(int n)
 {

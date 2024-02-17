@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/16 16:40:05 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:15:31 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_pipex
 	char		**env;
 	int			fd_in_orj;
 	int			fd_out_orj;
+	int			exitcode;
 	t_commands	*commands;
 }	t_pipex;
 
@@ -51,6 +52,7 @@ typedef struct s_mini
 	char		*cwd;
 	char		**argv;
 	char		**env;
+	int			exitcode;
 	t_commands	*commands;
 }	t_mini;
 
