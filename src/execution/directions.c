@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/16 16:19:36 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:31:59 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	direction_handler(t_pipex *pipex)
 {
-	input_handler(pipex);
 	output_handler(pipex);
+	input_handler(pipex);
 }
 
 void	heredoc_found(t_pipex *pipex)
 {
-	(void)pipex;
+	ft_printf("%s", pipex->commands->input);
 }
 
 void	input_handler(t_pipex *pipex)

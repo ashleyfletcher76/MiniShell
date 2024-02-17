@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:44:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/10 12:42:57 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:12:11 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	checkPathExistence(const char *path)
 	return (stat(path, &buffer) == 0);
 }
 
-void	ft_cd(char **command, char **env)
+void	ft_cd(char **command, char **env, t_pipex *pipex)
 {
 	char *home;
 	char *temp;
@@ -41,6 +41,7 @@ void	ft_cd(char **command, char **env)
 		ft_putendl_fd(command[1], 2);
 	}
 	update_pwd_env(env);
+	pipex->exitcode = 0;
 }
 
 void update_pwd_env(char **environ)

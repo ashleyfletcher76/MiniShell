@@ -6,21 +6,22 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:01:53 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 15:44:28 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:19:52 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_pwd(void)
+void	ft_pwd(t_pipex *pipex)
 {
 	char	*pwd;
 
 	pwd = getenv("PWD");
 	ft_putendl_fd(pwd,1);
+	pipex->exitcode = 0;
 }
 
-void	ft_env(char **env)
+void	ft_env(char **env, t_pipex *pipex)
 {
 	int	i;
 
@@ -29,15 +30,18 @@ void	ft_env(char **env)
 	{
 		ft_printf("%s\n", env[i++]);
 	}
+	pipex->exitcode = 0;
 }
 
-void	ft_echo(char **commands)
+void	ft_echo(char **commands, t_pipex *pipex)
 {
 	int	i;
 	int	n;
 
 	n = 0;
 	i = 1;
+	if (ft_strncmp(commands[1], "$?", 3) == 0)
+		commands[1] = ft_itoa(pipex->exitcode);
 	if (ft_strncmp(commands[1], "-n", 3) == 0)
 	{
 		i++;
@@ -48,4 +52,5 @@ void	ft_echo(char **commands)
 	ft_printf("%s", commands[i]);
 	if (n == 0)
 		ft_printf("\n");
+	pipex->exitcode = 0;
 }

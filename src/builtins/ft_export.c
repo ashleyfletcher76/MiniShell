@@ -6,13 +6,13 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/16 13:18:51 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:13:46 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_export(char **commands, char **env)
+void	ft_export(char **commands, char **env, t_pipex *pipex)
 {
 	int i;
 	int	equl_cnt;
@@ -36,6 +36,7 @@ void	ft_export(char **commands, char **env)
 		i++;
 	}
 	ft_export_helper(commands, env, equl_cnt);
+	pipex->exitcode = 0;
 }
 
 int	ft_export_error(char **commands, char **env)
