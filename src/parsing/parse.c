@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/16 12:44:38 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:05:29 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	parse_distributor(t_mini *mini)
 			parse_double_quote(mini, &j, &i, &command);
 		else if (mini->prompt[i] == ' ')
 			parse_space(mini, &temp, &j, &i, &command);
+		else if (mini->prompt[i] == '$')
+			handle_dollar(mini, &i, &j, &command);
 		else
 			temp = ft_char_join(temp, mini->prompt[i]);
 		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i + 1] != '\0')
