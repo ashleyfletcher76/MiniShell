@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/13 17:46:06 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:17:03 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 
 	quoted_str = NULL;
 	(*i)++;
-	if (mini->prompt[*i] == '\"')
+	if (mini->prompt[*i] == '\'')
+	{
+		(*cmd)->cmd_args[*j] = ft_strdup(" ");
+		(*j)++;
 		return ;
+	}
 	while (mini->prompt[*i] != '\'' && mini->prompt[*i] != '\0' && mini->prompt[*i])
 	{
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
@@ -30,10 +34,7 @@ void	parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 	(*cmd)->cmd_args[*j] = ft_strdup(quoted_str);
 	(*j)++;
 	if (quoted_str)
-	{
 		free (quoted_str);
-		quoted_str = NULL;
-	}
 	if (mini->prompt[*i] == '\'' && mini->prompt[*i + 1] != '\0')
 		(*i)++;
 }
