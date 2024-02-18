@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:27:17 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 11:26:18 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:55:45 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	commands_size_all(t_commands *lst)
 	size_t	len;
 
 	len = 0;
+	if (lst->cmd_args[0] == NULL)
+		return (0);
 	while (lst)
 	{
-		if (lst->cmd_args[0] == NULL)
-			return (0);
 		len++;
 		lst = lst -> next;
 	}

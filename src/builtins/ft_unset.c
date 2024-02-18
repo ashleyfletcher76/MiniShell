@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:45:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 12:57:14 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:39:04 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	ft_unset(char **commands, char **env, t_pipex *pipex)
 	i = 0;
 	if (commands[1] == NULL)
 	{
-		pipex->exitcode = EXIT_FAILURE;
-		return (ft_putendl_fd("unset: not enough arguments", 2));
+		pipex->exitcode = EXIT_SUCCESS;
+		return ;
 	}
 	count_eql = ft_count_equal2(commands[1]);
 	if (count_eql == -1 )

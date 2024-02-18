@@ -1,0 +1,9 @@
+# cat <minishell.h|ls # doenst work because input doesnot stop when its see the | operator.
+# |ls # this also doenst work its skipping "l"
+# echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye # this is related to the outputing erorr message.
+# $PWD # malloc freed erorr.
+# $EMPTY # segfault when there is no variable name inside env
+# echo $ # should give back the only $.
+# echo HELLO="123 A-" # there is a leak end of the string  HELLO=123 A-_git % like this. probably while loop doenst end when its a null terminator  only does this with export"masum" similar like this context
+
+

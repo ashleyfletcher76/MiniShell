@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:01:53 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 12:34:53 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:44:41 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	ft_echo(char **commands, t_pipex *pipex)
 	}
 	while (commands[i] && commands[i + 1] != NULL)
 		ft_printf("%s ", commands[i++]);
-	ft_printf("%s", commands[i]);
+	if (commands[i])
+		ft_printf("%s", commands[i]);
 	if (n == 0)
 		ft_printf("\n");
 	pipex->exitcode = 0;

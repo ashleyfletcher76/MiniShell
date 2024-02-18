@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:44:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 10:12:11 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:47:19 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_cd(char **command, char **env, t_pipex *pipex)
 	char *home;
 	char *temp;
 
+	pipex->exitcode = 0;
 	home = getenv("HOME");
 	if (command[1] == NULL || ft_strncmp(command[1], "~", 2) == 0 )
 		chdir(home);
@@ -39,9 +40,10 @@ void	ft_cd(char **command, char **env, t_pipex *pipex)
 	{
 		write(2, "cd: no such file or directory: ", 32);
 		ft_putendl_fd(command[1], 2);
+		pipex->exitcode = 1;
+		return ;
 	}
 	update_pwd_env(env);
-	pipex->exitcode = 0;
 }
 
 void update_pwd_env(char **environ)

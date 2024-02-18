@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+         #
+#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/11 11:43:18 by asfletch         ###   ########.fr        #
+#    Updated: 2024/02/18 18:49:35 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ LIBFT = $(LIBFTDIR)/libft.a
 
 $(NAME) : $(OBJ_MINISHELL) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline
+	$(RM) $(OBJ_MINISHELL)
 	echo "$(COLOUR_GREEN)Minishell compiled successfully!$(COLOUR_END)"
 
 $(LIBFT):
