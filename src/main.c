@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 16:36:11 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:41:00 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-void	prompt_init(t_mini *mini)
+void	promt_init(t_mini *mini)
 {
 	char		*prompt;
 	static int	exitcode;
@@ -41,7 +41,7 @@ int	main(int ac, char **av, char **env)
 	t_mini	mini;
 
 	mini.env = env;
-	prompt_init(&mini);
+	promt_init(&mini);
 	(void)ac;
 	(void)av;
 	return (EXIT_SUCCESS);
