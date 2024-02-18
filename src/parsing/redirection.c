@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:21:29 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 10:06:51 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/18 16:33:45 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	parse_input(t_mini *mini, int *i, t_commands **cmd)
 		temp = append_heredoc(temp);
 	if (mini->prompt[*i] == '\0')
 		(*i)--;
-	update_input_arg(cmd, &temp, flag);
+	update_input_arg(cmd, &temp, flag, mini);
 	free (temp);
 	temp = NULL;
 }

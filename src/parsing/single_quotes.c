@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/18 14:30:40 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/18 16:44:31 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,20 @@ char	*parse_single_quote(t_mini *mini, int *i)
 {
 	char	*quoted_str;
 
-	quoted_str = NULL;
+	quoted_str = ft_strdup("");
 	(*i)++;
 	if (mini->prompt[*i] == '\'')
 		return (ft_strdup(""));
 	while (mini->prompt[*i] != '\'' && mini->prompt[*i] != '\0')
 	{
+		if (mini->prompt[*i] == '$')
+		{
+			quoted_str = ft_strjoin_freeself(quoted_str, handle_dollar(mini, i));
+			(*i)++;
+		}
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
-		(*i)++;
+		if (mini->prompt[*i] != '\'' || mini->prompt[*i] != '\'')
+			(*i)++;
 	}
 	if (mini->prompt[*i] == '\0')
 	{

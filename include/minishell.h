@@ -14,6 +14,7 @@
 void		get_adresses(t_pipex *pipex);
 char		*giveme_path(char *command, t_pipex *pipex);
 char		*get_a_path(char *command, t_pipex *pipex);
+void		prompt_init(t_mini *mini);
 
 //free stuff
 void		free_struct(t_pipex *pipex);
@@ -59,7 +60,7 @@ void		parse_input(t_mini *mini, int *i, t_commands **cmd);
 char		*append_heredoc(char *temp);
 char		*full_heredoc(char *orig_str, char *new_str, char *new_line, int first_line);
 void		parse_output(t_mini *mini, int *i, t_commands **cmd);
-void		update_input_arg(t_commands **cmd, char **temp, int flag);
+void		update_input_arg(t_commands **cmd, char **temp, int flag, t_mini *mini);
 void		update_output_arg(t_commands **cmd, char **temp, int flag);
 char		*handle_dollar(t_mini *mini, int *i);
 char		*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str);

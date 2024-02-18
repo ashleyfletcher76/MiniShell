@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:07:48 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 12:33:19 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/18 16:46:50 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	update_input_arg(t_commands **cmd, char **temp, int flag)
+void	update_input_arg(t_commands **cmd, char **temp, int flag, t_mini *mini)
 {
 	int	fd;
 
@@ -33,9 +33,16 @@ void	update_input_arg(t_commands **cmd, char **temp, int flag)
 			free ((*cmd)->input);
 		(*cmd)->indicator_input = FALSE;
 		(*cmd)->input = ft_strdup(*temp);
-		if (!(*cmd)->output)
+		if (!(*cmd)->input)
 			return ;
 		fd = open((*cmd)->input, O_RDONLY, 0644);
+		//if (fd < 0)
+		//{
+		//	perror("minishell: input");
+		//	prompt_init(mini);
+		//	exit(mini->exitcode);
+		//}
+		(void)mini;
 		close(fd);
 	}
 }
