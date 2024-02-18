@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/16 17:07:32 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:19:51 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	error_handler(char *msg, t_pipex *pipex, int exitcode)
 {
-	ft_put3endl_fd("minishell: ", msg, pipex->commands->cmd_args[0], 2);
+	ft_put3endl_fd("minishell: ", pipex->commands->cmd_args[0], msg, 2);
 	free_struct(pipex);
 	exit (exitcode);
 }
