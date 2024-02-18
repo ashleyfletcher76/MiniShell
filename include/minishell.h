@@ -80,6 +80,7 @@ int			checkPathExistence(const char *path);
 void		update_pwd_env(char **environ);
 void		ft_cd(char **command, char **env, t_pipex *pipex);
 void		ft_exit(char **commands);
+void		ft_exit_helper(char *code);
 void		ft_export(char **commands, char **env, t_pipex *pipex);
 int			ft_export_error(char **commands, char **env);
 int			ft_export_error_helper(char **commands, char **env);
@@ -100,7 +101,6 @@ int			promt_help(t_mini *mini, char *user);
 void		direction_handler(t_pipex *pipex);
 void		input_handler(t_pipex *pipex);
 void		output_handler(t_pipex *pipex);
-void		output_handler_append(t_pipex *pipex);
 void		heredoc_found(t_pipex *pipex);
 
 #endif

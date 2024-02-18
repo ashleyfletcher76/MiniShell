@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 20:06:12 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:14:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	ft_exit_helper(char *code)
 		i++;
 	}
 	ft_printf("exit\n");
-	exit(ft_atoi(code[1]));
+	exit(ft_atoi(code));
 }
