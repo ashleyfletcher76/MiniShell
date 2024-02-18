@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/18 12:26:30 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:30:40 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,21 @@ char	*parse_single_quote(t_mini *mini, int *i)
 
 	quoted_str = NULL;
 	(*i)++;
-	if (mini->prompt[*i] == '\"')
-	{
+	if (mini->prompt[*i] == '\'')
 		return (ft_strdup(""));
-	}
-	while (mini->prompt[*i] != '\'' && mini->prompt[*i] != '\0' && mini->prompt[*i])
+	while (mini->prompt[*i] != '\'' && mini->prompt[*i] != '\0')
 	{
-		if (mini->prompt[*i] == '$')
-		{
-			quoted_str = dollar_inside_quotes(mini, i, quoted_str);
-			(*i)++;
-		}
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
-		if (mini->prompt[*i] != '\'')
-			(*i)++;
+		(*i)++;
 	}
 	if (mini->prompt[*i] == '\0')
-		quoted_str = quote_helper(quoted_str);
+	{
+		if (!quoted_str)
+			quoted_str = ft_strdup("");
+		quoted_str = dquote_helper(quoted_str);
+	}
+	if (mini->prompt[*i] == '\'')
+		(*i)++;
 	return (quoted_str);
 }
 
