@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/18 14:32:04 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:40:41 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	parse_distributor(t_mini *mini)
 		}
 		else if (mini->prompt[i] == ' ' && mini->prompt[i + 1] != ' ')
 		{
+			while (mini->prompt[i] && mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ')
+				i++;
 			command->cmd_args[j++] = ft_strdup(temp);
 			free(temp);
 			temp = NULL;
@@ -89,8 +91,6 @@ void	parse_distributor(t_mini *mini)
 		}
 		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i + 1] != '\0')
 			i++;
-		if (mini->prompt[i] == '\0')
-			break ;
 		i++;
 	}
 	if (temp && temp[0] != '\0')
@@ -100,7 +100,7 @@ void	parse_distributor(t_mini *mini)
 void	parse_init(t_mini *mini)
 {
 	parse_distributor(mini);
-	print_commands(mini);
+	//print_commands(mini);
 }
 
 void	print_commands(t_mini *mini)
