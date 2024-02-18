@@ -3,30 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 13:47:21 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:00:42 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	handle_dollar(t_mini *mini, int*i, int *j, t_commands **cmd)
+char	*handle_dollar(t_mini *mini, int *i)
 {
 	char	*new_temp;
-	char	*exit_code;
 
 	new_temp = NULL;
 	if (mini->prompt[*i] == '$')
 	{
-		if (mini->prompt[*i + 1] == '?')
-		{
-			(*i)++;
-			exit_code = ft_itoa(mini->exitcode);
-			(*cmd)->cmd_args[*j] = exit_code;
-			return ;
-		}
 		(*i)++;
 		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0')
 		{
@@ -35,8 +27,7 @@ void	handle_dollar(t_mini *mini, int*i, int *j, t_commands **cmd)
 		}
 	}
 	new_temp = getenv(new_temp);
-	(*cmd)->cmd_args[*j] = ft_strdup(new_temp);
-	(*j)++;
+	return (new_temp);
 }
 
 char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)

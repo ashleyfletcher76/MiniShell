@@ -51,9 +51,9 @@ void		finalize_command(char **temp, int *j, t_commands **cmd, int indicator);
 void		print_commands(t_mini *mini);
 
 void		parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd);
-void		parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd);
+char		*parse_double_quote(t_mini *mini, int *i);
 char		*dquote_helper(char *quoted_str);
-void		parse_single_quote(t_mini *mini, int *j, int *i, t_commands **cmd);
+char		*parse_single_quote(t_mini *mini, int *i);
 char		*quote_helper(char *quoted_str);
 void		parse_input(t_mini *mini, int *i, t_commands **cmd);
 char		*append_heredoc(char *temp);
@@ -61,7 +61,7 @@ char		*full_heredoc(char *orig_str, char *new_str, char *new_line, int first_lin
 void		parse_output(t_mini *mini, int *i, t_commands **cmd);
 void		update_input_arg(t_commands **cmd, char **temp, int flag);
 void		update_output_arg(t_commands **cmd, char **temp, int flag);
-void		handle_dollar(t_mini *mini, int*i, int *j, t_commands **cmd);
+char		*handle_dollar(t_mini *mini, int *i);
 char		*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str);
 
 void		lstadd_back(t_commands **lst, t_commands *new_node);

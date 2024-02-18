@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/17 10:15:31 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 11:25:35 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_pipex
 	int			nbr_cmd_builts;
 	char		**all_paths;
 	char		**env;
+	char		*prompt;
 	int			fd_in_orj;
 	int			fd_out_orj;
 	int			exitcode;

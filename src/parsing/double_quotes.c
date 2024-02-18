@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 10:11:22 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:26:53 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
+char	*parse_double_quote(t_mini *mini, int *i)
 {
 	char	*quoted_str;
 
@@ -20,9 +20,7 @@ void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 	(*i)++;
 	if (mini->prompt[*i] == '\"')
 	{
-		(*cmd)->cmd_args[*j] = ft_strdup(" ");
-		(*j)++;
-		return ;
+		return (ft_strdup(""));
 	}
 	while (mini->prompt[*i] != '\"' && mini->prompt[*i] != '\0')
 	{
@@ -31,12 +29,7 @@ void	parse_double_quote(t_mini *mini, int *j, int *i, t_commands **cmd)
 	}
 	if (mini->prompt[*i] == '\0')
 		quoted_str = dquote_helper(quoted_str);
-	(*cmd)->cmd_args[*j] = ft_strdup(quoted_str);
-	(*j)++;
-	if (quoted_str)
-		free (quoted_str);
-	if (mini->prompt[*i] == '\"' && mini->prompt[*i + 1] != '\0')
-		(*i)++;
+	return (quoted_str);
 }
 
 char	*dquote_helper(char *quoted_str)

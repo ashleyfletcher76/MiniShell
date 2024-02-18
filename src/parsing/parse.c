@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 13:46:21 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:26:12 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	parse_distributor(t_mini *mini)
 	i = 0;
 	j = 0;
 	temp = NULL;
+	temp = ft_strdup("");
 	command = lstnew();
 	mini->commands = command;
 	while (mini->prompt[i])
@@ -65,22 +66,27 @@ void	parse_distributor(t_mini *mini)
 			finalize_command(&temp, &j, &command, 0);
 			i++;
 		}
-		else if (mini->prompt[i] == '<')
-			parse_input(mini, &i, &command);
-		else if (mini->prompt[i] == '>')
-			parse_output(mini, &i, &command);
-		else if (mini->prompt[i] == '\'')
-			parse_single_quote(mini, &j, &i, &command);
-		else if (mini->prompt[i] == '\"')
-			parse_double_quote(mini, &j, &i, &command);
-		else if (mini->prompt[i] == ' ')
-			parse_space(mini, &temp, &j, &i, &command);
-		else if (mini->prompt[i] == '$')
-			handle_dollar(mini, &i, &j, &command);
+		else if (mini->prompt[i] == ' ' && mini->prompt[i + 1] != ' ')
+		{
+			command->cmd_args[j++] = ft_strdup(temp);
+			temp = NULL;
+			//free(temp);
+		}
 		else
-			temp = ft_char_join(temp, mini->prompt[i]);
-		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i + 1] != '\0')
-			i++;
+		{
+			if (mini->prompt[i] == '<')
+				parse_input(mini, &i, &command);
+			else if (mini->prompt[i] == '>')
+				parse_output(mini, &i, &command);
+			else if (mini->prompt[i] == '\'')
+				temp = ft_strjoin_freeself(temp ,parse_single_quote(mini, &i));
+			else if (mini->prompt[i] == '\"')
+				temp = ft_strjoin_freeself(temp ,parse_double_quote(mini, &i));
+			else if (mini->prompt[i] == '$')
+				temp = ft_strjoin_freeself(temp ,handle_dollar(mini, &i));
+			else
+				temp = ft_char_join(temp, mini->prompt[i]);
+		}
 		i++;
 	}
 	if (temp && temp[0] != '\0')

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:20 by muhakose          #+#    #+#             */
-/*   Updated: 2023/12/11 15:11:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:19:29 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,30 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strcpy(result, s1);
 	ft_strcat(result, s2);
 	return (result);
+}
+
+char *ft_strjoin_freeself(char *reamins, char *buffer)
+{
+	char *array;
+	unsigned int	size;
+	int i;
+	int j;
+
+	if (!reamins && !buffer)
+		return (NULL);
+	size = ft_strlen(reamins) + ft_strlen(buffer);
+	array = malloc (sizeof(char) * (size + 1));
+	i = 0;
+	j = 0;
+	if (reamins)
+	{
+		while (reamins[i])
+			array[j++] = reamins[i++];
+		i = 0;
+	}
+	while (buffer[i])
+		array[j++] = buffer[i++];
+	array[size] = '\0';
+	free ((void *)reamins);
+	return (array);
 }
