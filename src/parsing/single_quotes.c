@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/18 16:16:53 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:07:49 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ char	*parse_single_quote(t_mini *mini, int *i)
 		return (ft_strdup(""));
 	while (mini->prompt[*i] != '\'' && mini->prompt[*i] != '\0')
 	{
-		if (mini->prompt[*i] == '$')
-		{
-			quoted_str = dollar_inside_quotes(mini, i, quoted_str);
-			(*i)++;
-		}
 		quoted_str = ft_char_join(quoted_str, mini->prompt[*i]);
 		(*i)++;
 	}
@@ -36,7 +31,7 @@ char	*parse_single_quote(t_mini *mini, int *i)
 			quoted_str = ft_strdup("");
 		quoted_str = dquote_helper(quoted_str);
 	}
-	if (mini->prompt[*i] == '\'')
+	if (mini->prompt[*i] == '\'' && mini->prompt[*i + 1] != '\0')
 		(*i)++;
 	return (quoted_str);
 }
