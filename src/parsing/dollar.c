@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/19 15:37:24 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:24:59 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*handle_dollar(t_mini *mini, int *i)
 	if (mini->prompt[*i] == ':')
 		(*i)--;
 	if (!getenv(new_temp))
-		return (NULL);
+		return (ft_strdup(""));
 	new_temp = ft_strdup(getenv(new_temp));
 	return (new_temp);
 }

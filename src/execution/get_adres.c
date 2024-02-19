@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_adres.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/13 12:16:31 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:24:15 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,18 @@ void	get_adresses(t_pipex *pipex)
 
 char	*get_a_path(char *command, t_pipex *pipex)
 {
+	struct stat path_stat;
+
 	if (ft_strchr(command, '/') == NULL)
 		return (giveme_path(command, pipex));
 	else
 	{
 		if (access(command, F_OK) == 0)
 		{
+			if (stat(command, &path_stat) == 0)
+				error_handler(": is a directory: ", pipex, 126);
 			if (access(command, X_OK) == 0)
-			{
 				return (command);
-			}
 			error_handler(": command not found: ", pipex, 126);
 		}
 		error_handler(" command not found: ", pipex, 127);

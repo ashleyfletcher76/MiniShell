@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/19 15:37:36 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:27:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	parse_distributor(t_mini *mini)
 		}
 		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i + 1] != '\0')
 			i++;
-		i++;
+		if (mini->prompt[i] != '\0')
+			i++;
 	}
 	if (temp && temp[0] != '\0')
 		finalize_command(&temp, &j, &command, 1);
