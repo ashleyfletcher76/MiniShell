@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/19 19:27:36 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:49:17 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,33 +64,26 @@ void	parse_distributor(t_mini *mini)
 		if (mini->prompt[i] == '|')
 		{
 			finalize_command(&temp, &j, &command, 0);
-			i++;
+			i++; 
 		}
 		else if (mini->prompt[i] == ' ' && mini->prompt[i + 1] != ' ')
 		{
-			while (mini->prompt[i] && mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ')
-				i++;
 			command->cmd_args[j++] = ft_strdup(temp);
 			free(temp);
 			temp = NULL;
 		}
-		else
-		{
-			if (mini->prompt[i] == '<')
-				parse_input(mini, &i, &command);
-			else if (mini->prompt[i] == '>')
-				parse_output(mini, &i, &command);
-			else if (mini->prompt[i] == '\'')
-				temp = ft_strjoin_freeself(temp, parse_single_quote(mini, &i));
-			else if (mini->prompt[i] == '\"')
-				temp = ft_strjoin_freeself(temp, parse_double_quote(mini, &i));
-			else if (mini->prompt[i] == '$')
-				temp = ft_strjoin_freeself(temp, handle_dollar(mini, &i));
-			else
-				temp = ft_char_join(temp, mini->prompt[i]);
-		}
-		while (mini->prompt[i] == ' ' && mini->prompt[i + 1] == ' ' && mini->prompt[i + 1] != '\0')
-			i++;
+		if (mini->prompt[i] == '<')
+			parse_input(mini, &i, &command);
+		else if (mini->prompt[i] == '>')
+			parse_output(mini, &i, &command);
+		else if (mini->prompt[i] == '\'')
+			temp = ft_strjoin_freeself(temp, parse_single_quote(mini, &i));
+		else if (mini->prompt[i] == '\"')
+			temp = ft_strjoin_freeself(temp, parse_double_quote(mini, &i));
+		else if (mini->prompt[i] == '$')
+			temp = ft_strjoin_freeself(temp, handle_dollar(mini, &i));
+		else if (mini->prompt[i] != ' ')
+			temp = ft_char_join(temp, mini->prompt[i]);
 		if (mini->prompt[i] != '\0')
 			i++;
 	}
