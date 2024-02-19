@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/19 14:37:22 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:26:27 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*handle_dollar(t_mini *mini, int *i)
 	{
 		if (mini->prompt[*i + 1] == '?')
 		{
+			(*i)++;
 			(*i)++;
 			exit_code = ft_itoa(mini->exitcode);
 			return (exit_code);
@@ -43,22 +44,6 @@ char	*handle_dollar(t_mini *mini, int *i)
 
 char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 {
-	char	*temp_env;
-
-	temp_env = NULL;
-	if (mini->prompt[*i] == '$')
-	{
-		(*i)++;
-		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\"')
-		{
-			temp_env = ft_char_join(temp_env, mini->prompt[*i]);
-			if (mini->prompt[*i] != ' ')
-				(*i)++;
-		}
-	}
-	if (!getenv(temp_env))
-		return (quoted_str);
-	temp_env = ft_strdup(getenv(temp_env));
-	quoted_str = ft_strjoin_freeself(quoted_str, temp_env);
+	quoted_str = ft_strjoin_freeself(quoted_str, handle_dollar(mini, i));
 	return (quoted_str);
 }
