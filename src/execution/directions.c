@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 19:00:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:40:47 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	direction_handler(t_pipex *pipex)
 
 void	heredoc_found(t_pipex *pipex)
 {
-	ft_printf("%s", pipex->commands->input);
+	ft_printf("%s", pipex->commands->input[0]);
 }
 
 void	input_handler(t_pipex *pipex)
@@ -28,12 +28,12 @@ void	input_handler(t_pipex *pipex)
 	int	fd;
 
 	fd = 0;
-	if (pipex->commands->indicator_input == TRUE)
+	if (pipex->commands->indicator_input[0] == TRUE)
 		return (heredoc_found(pipex));
-	if (pipex->commands->input != NULL)
+	if (pipex->commands->input[0] != NULL)
 	{
 		pipex->fd_in_orj = dup(STDIN_FILENO);
-		fd = open(pipex->commands->input, O_RDONLY);
+		fd = open(pipex->commands->input[0], O_RDONLY);
 		if (fd == -1)
 		{
 			perror("minishell: input");
@@ -59,13 +59,13 @@ void	output_handler(t_pipex *pipex)
 	{
 		pipex->fd_out_orj = dup(STDOUT_FILENO);
 		if (pipex->commands->indicator_output == FALSE)
-			fd = open(pipex->commands->output, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+			fd = open(pipex->commands->output[0], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		else
-			fd = open(pipex->commands->output, O_CREAT | O_APPEND | O_WRONLY, 0644);
+			fd = open(pipex->commands->output[0], O_CREAT | O_APPEND | O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			write(2, "minishell: ", 18);
-			perror(pipex->commands->output);
+			perror(pipex->commands->output[0]);
 			free_struct(pipex);
 			exit(EXIT_FAILURE);
 		}

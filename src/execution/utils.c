@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 20:19:51 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:41:10 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	opener(t_pipex *pipex, int m)
 
 	if (m == 0)
 	{
-		fd = open(pipex->commands->input, O_RDONLY);
+		fd = open(pipex->commands->input[0], O_RDONLY);
 		if (fd < 0)
 		{
 			perror("pipex: input");
@@ -53,7 +53,7 @@ int	opener(t_pipex *pipex, int m)
 	}
 	else
 	{
-		fd = open(pipex->commands->output, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		fd = open(pipex->commands->output[0], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			perror("pipex: output");

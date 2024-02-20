@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 11:25:35 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:26:22 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ typedef struct s_here_doc
 typedef struct s_commands
 {
 	char				**cmd_args;
-	char				*input;
-	char				*output;
-	int					indicator_input;
-	int					indicator_output;
+	char				**input;
+	char				**output;
+	int					*indicator_input;
+	int					*indicator_output;
+	int					input_index;
+	int					output_index;
 	struct s_commands	*next;
 }	t_commands;
 

@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:07:48 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/17 12:33:19 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:45:38 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,30 @@
 
 void	update_input_arg(t_commands **cmd, char **temp, int flag)
 {
-	int	fd;
-
 	if (!*temp)
 		return ;
+	(*cmd)->input[(*cmd)->input_index] = ft_strdup(*temp);
+	if (!(*cmd)->input[(*cmd)->input_index])
+			return ;
 	if (flag)
-	{
-		if (!(*cmd)->output)
-			free ((*cmd)->input);
-		(*cmd)->indicator_input = TRUE;
-		(*cmd)->input = ft_strdup(*temp);
-		if (!(*cmd)->input)
-			return ;
-	}
+		(*cmd)->indicator_input[(*cmd)->input_index++] = TRUE;
 	else
-	{
-		if (!(*cmd)->input)
-			free ((*cmd)->input);
-		(*cmd)->indicator_input = FALSE;
-		(*cmd)->input = ft_strdup(*temp);
-		if (!(*cmd)->output)
-			return ;
-		fd = open((*cmd)->input, O_RDONLY, 0644);
-		close(fd);
-	}
+		(*cmd)->indicator_input[(*cmd)->input_index++] = FALSE;
+	(*cmd)->input[(*cmd)->input_index] = NULL;
 }
 
 void	update_output_arg(t_commands **cmd, char **temp, int flag)
 {
-	int	fd;
-
 	if (!*temp)
 		return ;
+	(*cmd)->output[(*cmd)->output_index] = ft_strdup(*temp);
+	if (!(*cmd)->output[(*cmd)->output_index])
+			return ;
 	if (flag)
-	{
-		if (!(*cmd)->output)
-			free ((*cmd)->output);
-		(*cmd)->indicator_output = TRUE;
-		(*cmd)->output = ft_strdup(*temp);
-		if (!(*cmd)->output)
-			return ;
-		fd = open((*cmd)->output, O_CREAT | O_APPEND, 0644);
-		close(fd);
-	}
+		(*cmd)->indicator_output[(*cmd)->output_index++] = TRUE;
 	else
-	{
-		if (!(*cmd)->output)
-			free ((*cmd)->output);
-		(*cmd)->indicator_output = FALSE;
-		(*cmd)->output = ft_strdup(*temp);
-		if (!(*cmd)->output)
-			return ;
-		fd = open((*cmd)->output, O_CREAT | O_TRUNC, 0644);
-		close(fd);
-	}
+		(*cmd)->indicator_output[(*cmd)->output_index++] = FALSE;
+	(*cmd)->output[(*cmd)->output_index] = NULL;
 }
 
 char	*append_heredoc(char *temp)
