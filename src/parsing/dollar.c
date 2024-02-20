@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/19 19:24:59 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:33:39 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*handle_dollar(t_mini *mini, int *i)
 	new_temp = NULL;
 	if (mini->prompt[*i] == '$')
 	{
+		if (mini->prompt[*i + 1] == ' ' || mini->prompt[*i + 1] == '\0')
+			return (ft_strdup("$"));
 		if (mini->prompt[*i + 1] == '?')
 		{
 			(*i)++;

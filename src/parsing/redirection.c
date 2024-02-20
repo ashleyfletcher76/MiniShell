@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:21:29 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/19 19:50:36 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:52:59 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	parse_input(t_mini *mini, int *i, t_commands **cmd)
 	}
 	while ((mini->prompt[*i] == ' ' || mini->prompt[*i] == '\t') && mini->prompt[*i])
 		(*i)++;
-	while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0')
+	while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '|')
 	{
 		temp = ft_char_join(temp, mini->prompt[*i]);
 		(*i)++;
 	}
 	if (flag)
 		temp = append_heredoc(temp);
-	if (mini->prompt[*i] == '\0')
+	if (mini->prompt[*i] == '\0' || mini->prompt[*i] == '|')
 		(*i)--;
 	update_input_arg(cmd, &temp, flag);
 	free (temp);
