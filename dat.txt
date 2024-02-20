@@ -1,0 +1,13 @@
+total 176
+-rw-r--r--   1 muhakose  2023_heilbronn   1954 Feb 18 20:21 Makefile
+-rw-r--r--   1 muhakose  2023_heilbronn     11 Jan 24 10:40 README.md
+-rw-r--r--   1 muhakose  2023_heilbronn      0 Feb 20 16:57 dat.txt
+-rw-r--r--   1 muhakose  2023_heilbronn    100 Feb 20 16:56 data.txt
+----------   1 muhakose  2023_heilbronn      3 Feb 20 14:41 data1.txt
+-rw-r--r--   1 muhakose  2023_heilbronn      0 Feb 20 15:26 data2.txt
+drwxr-xr-x   4 muhakose  2023_heilbronn    136 Feb 20 14:35 include
+drwxr-xr-x  61 muhakose  2023_heilbronn   2074 Feb 20 16:36 libft
+-rwxr-xr-x   1 muhakose  2023_heilbronn  73072 Feb 20 16:56 minishell
+drwxr-xr-x  21 muhakose  2023_heilbronn    714 Feb 20 13:08 minishell_tester
+drwxr-xr-x   8 muhakose  2023_heilbronn    272 Feb 20 16:56 src
+drwxr-xr-x   2 muhakose  2023_heilbronn     68 Feb 20 15:45 trying

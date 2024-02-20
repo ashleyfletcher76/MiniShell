@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 13:40:47 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:57:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,67 +14,69 @@
 
 void	direction_handler(t_pipex *pipex)
 {
-	output_handler(pipex);
-	input_handler(pipex);
+	int	i;
+	int	direction_count;
+	int	input;
+	int	output;
+
+	input = 0;
+	output = 0;
+	i = 1;
+	direction_count = pipex->commands->input_index + pipex->commands->output_index;
+	while (i <= direction_count + 1 && direction_count != 0)
+	{
+		if (i == pipex->commands->order_input[input])
+		{
+			input_handler(pipex, input);
+			input++;
+		}
+		if (i == pipex->commands->order_output[output])
+		{
+			output_handler(pipex, output);
+			output++;
+		}
+		i++;
+	}
 }
 
-void	heredoc_found(t_pipex *pipex)
+void	input_handler(t_pipex *pipex, int input)
 {
+	int		fd;
+	char	*s;
+	int		flag;
+
+	flag = pipex->commands->indicator_input[input];
+	s = pipex->commands->input[input];
+	fd = 0;
+	if (flag == TRUE)
+		heredoc_found(pipex, input);
+	pipex->fd_in_orj = dup_maker(pipex, STDIN_FILENO);
+	fd = input_opener(pipex, s);
+	input_dup2(fd, pipex);
+	close(fd);
+}
+
+void	output_handler(t_pipex *pipex, int output)
+{
+	int		fd;
+	char	*s;
+	int		flag;
+
+	flag = pipex->commands->indicator_output[output];
+	s = pipex->commands->output[output];
+	fd = 0;
+	pipex->fd_out_orj = dup_maker(pipex, STDOUT_FILENO);
+	if (pipex->commands->indicator_output == FALSE)
+		fd = output_opener(pipex, s, FALSE);
+	else
+		fd = output_opener(pipex, s, TRUE);
+
+	output_dup2(fd, pipex);
+	close(fd);
+}
+
+void	heredoc_found(t_pipex *pipex, int input)
+{
+	(void)input;
 	ft_printf("%s", pipex->commands->input[0]);
-}
-
-void	input_handler(t_pipex *pipex)
-{
-	int	fd;
-
-	fd = 0;
-	if (pipex->commands->indicator_input[0] == TRUE)
-		return (heredoc_found(pipex));
-	if (pipex->commands->input[0] != NULL)
-	{
-		pipex->fd_in_orj = dup(STDIN_FILENO);
-		fd = open(pipex->commands->input[0], O_RDONLY);
-		if (fd == -1)
-		{
-			perror("minishell: input");
-			free_struct(pipex);
-			exit(EXIT_FAILURE);
-		}
-		if (dup2(fd, STDIN_FILENO) == -1)
-		{
-			perror("dup2");
-			free_struct(pipex);
-			exit(9);
-		}
-		close(fd);
-	}
-}
-
-void	output_handler(t_pipex *pipex)
-{
-	int	fd;
-
-	fd = 0;
-	if (pipex->commands->output != NULL)
-	{
-		pipex->fd_out_orj = dup(STDOUT_FILENO);
-		if (pipex->commands->indicator_output == FALSE)
-			fd = open(pipex->commands->output[0], O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		else
-			fd = open(pipex->commands->output[0], O_CREAT | O_APPEND | O_WRONLY, 0644);
-		if (fd < 0)
-		{
-			write(2, "minishell: ", 18);
-			perror(pipex->commands->output[0]);
-			free_struct(pipex);
-			exit(EXIT_FAILURE);
-		}
-		if (dup2(fd, STDOUT_FILENO) == -1)
-		{
-			perror("dup2");
-			free_struct(pipex);
-			exit(9);
-		}
-		close(fd);
-	}
 }

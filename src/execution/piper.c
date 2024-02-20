@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 18:51:03 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:38:31 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,8 @@ void	first_son(t_pipex *pipex, int i)
 {
 	char	*path;
 
-	if (pipex->commands->input != NULL)
-		input_handler(pipex);
-	if (pipex->commands->output != NULL)
-		output_handler(pipex);
-	else
+	direction_handler(pipex);
+	if (pipex->commands->output_index == 0)
 		dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);
@@ -78,11 +75,8 @@ void	last_son(t_pipex *pipex, int i)
 {
 	char	*path;
 
-	if (pipex->commands->output != NULL)
-		output_handler(pipex);
-	if (pipex->commands->input != NULL)
-		input_handler(pipex);
-	else
+	direction_handler(pipex);
+	if (pipex->commands->input_index == 0)
 		dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);
@@ -95,13 +89,10 @@ void	daughters(t_pipex *pipex, int i)
 {
 	char	*path;
 
-	if (pipex->commands->input != NULL)
-		input_handler(pipex);
-	else
+	direction_handler(pipex);
+	if (pipex->commands->input_index == 0)
 		dup2(pipex->pipel[i - 1][READ_END], STDIN_FILENO);
-	if (pipex->commands->output != NULL)
-		output_handler(pipex);
-	else
+	if (pipex->commands->output_index == 0)
 		dup2(pipex->pipel[i][WRITE_END], STDOUT_FILENO);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	pipe_close(pipex);

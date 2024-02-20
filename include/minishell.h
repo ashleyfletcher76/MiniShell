@@ -25,24 +25,13 @@ void		waiter(t_pipex *pipex);
 //erorror
 void		error_handler(char *msg, t_pipex *pipex, int exitcode);
 
-//piper.c
-void		pipe_all(t_pipex *pipex);
-void		pipe_close(t_pipex *pipex);
-void		only_child(t_pipex *pipex, int i);
-void		first_son(t_pipex *pipex, int i);
-void		last_son(t_pipex *pipex, int i);
-void		daughters(t_pipex *pipex, int i);
-void		dup2er(int input, int output, t_pipex *pipex);
-int			opener(t_pipex *pipex, int m);
-void		piper(t_pipex *pipex);
-void		forker(t_pipex *pipex, int i);
-
 //utils
 void		freearr(char **arr);
 char		*give_me_prompt(t_mini *mini);
 int			array_size(char **s);
 int			commands_size_all(t_commands *lst);
 int			commands_size_buildin(t_commands *lst);
+int			promt_help(t_mini *mini, char *user);
 
 //parsing
 void		parse_init(t_mini *mini);
@@ -97,10 +86,25 @@ void		ft_echo(char **commands, t_pipex *pipex);
 //exec
 void		exec_init(t_mini *mini);
 void		exec_main(t_mini *mini);
-int			promt_help(t_mini *mini, char *user);
+void		pipe_all(t_pipex *pipex);
+void		pipe_close(t_pipex *pipex);
+void		only_child(t_pipex *pipex, int i);
+void		first_son(t_pipex *pipex, int i);
+void		last_son(t_pipex *pipex, int i);
+void		daughters(t_pipex *pipex, int i);
+void		piper(t_pipex *pipex);
+void		forker(t_pipex *pipex, int i);
+
+//direction
 void		direction_handler(t_pipex *pipex);
-void		input_handler(t_pipex *pipex);
-void		output_handler(t_pipex *pipex);
-void		heredoc_found(t_pipex *pipex);
+void		input_handler(t_pipex *pipex, int input);
+void		output_handler(t_pipex *pipex, int output);
+void		output_dup2(int input,t_pipex *pipex);
+void		input_dup2(int input,t_pipex *pipex);
+void		dup2er(int input, int output, t_pipex *pipex);
+int			output_opener(t_pipex *pipex, char *s, int flag);
+int			input_opener(t_pipex *pipex, char *s);
+int			dup_maker(t_pipex *pipex, int flag);
+void		heredoc_found(t_pipex *pipex, int input);
 
 #endif

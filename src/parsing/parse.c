@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/20 13:42:01 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:00:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	parse_distributor(t_mini *mini)
 void	parse_init(t_mini *mini)
 {
 	parse_distributor(mini);
-	print_commands(mini);
+	//print_commands(mini);
 }
 
 void	print_commands(t_mini *mini)
@@ -113,15 +113,20 @@ void	print_commands(t_mini *mini)
 		while (current->input[j])
 		{
 			printf("input = %s\n", current->input[j]);
-			printf("input indicator = %d\n", current->indicator_input[j++]);
+			printf("input indicator = %d\n", current->indicator_input[j]);
+			printf("order_idnex == %d\n", current->order_input[j]);
+			j++;
 		}
 		j = 0;
 		while (current->output[j])
 		{
 			printf("output = %s\n", current->output[j]);
-			printf("output indicator = %d\n", current->indicator_output[j++]);
+			printf("output indicator = %d\n", current->indicator_output[j]);
+			printf("order_idnex == %d\n", current->order_output[j]);
+			j++;
 		}
-		printf("exit code = %d\n", mini->exitcode);
+		//printf("exit code = %d\n", mini->exitcode);
 		current = current->next;
 	}
+	printf("-----------------------------\n");
 }

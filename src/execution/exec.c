@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 12:16:51 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:02:15 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	exec_main(t_mini *mini)
 	if (pipex.nbr_cmd_builts == 1 && pipex.nbr_cmd == 1)
 	{
 		is_built_in(&pipex);
-		if (pipex.commands->input != NULL)
+		if (pipex.commands->input_index != 0)
 			dup2(pipex.fd_in_orj, STDIN_FILENO);
-		if (pipex.commands->output != NULL)
+		if (pipex.commands->output_index != 0)
 			dup2(pipex.fd_out_orj, STDOUT_FILENO);
 		mini->exitcode = pipex.exitcode;
 		return ;

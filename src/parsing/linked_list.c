@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:14:59 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/20 13:45:30 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:15:07 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_commands	*lstnew(void)
 	new->output = ft_calloc(1, sizeof(char *) * 50);
 	new->indicator_input = ft_calloc(1, sizeof(int *) * 50);
 	new->indicator_output = ft_calloc(1, sizeof(int *) * 50);
+	new->order_input = ft_calloc(1, sizeof(int *) * 50);
+	new->order_output = ft_calloc(1, sizeof(int *) * 50);
 	new->input_index = 0;
 	new->output_index = 0;
 	new->next = NULL;
