@@ -11,7 +11,7 @@
 # include <stdlib.h>
 
 //main nessecaries
-void		promt_init(t_mini *mini);
+void		prompt_init(t_mini *mini, int exit_code);
 int			main(int ac, char **av, char **env);
 
 //free stuff

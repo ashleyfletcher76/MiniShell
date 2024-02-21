@@ -1,3 +1,2 @@
-# cat <"./test_files/infile" >"./outfiles/outfile01" # double quetos in directions
-# echo $PWD hi # does not put space between them.
-# echo hi < ./test_files/infile bye bye # freed non allocateded
+# echo <"./test_files/infile_big" | echo <"./test_files/infile" # skipping end charectrer
+

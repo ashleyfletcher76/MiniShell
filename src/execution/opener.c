@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/21 13:42:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:25:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	dup_saver(t_pipex *pipex, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
-				pipex->exitcode = 9;
-				promt_init(pipex->mini);
+				prompt_init(pipex->mini, 9);
 				return ;
 			}
 			exit(9);
@@ -39,8 +38,7 @@ void	dup_saver(t_pipex *pipex, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
-				pipex->exitcode = 9;
-				promt_init(pipex->mini);
+				prompt_init(pipex->mini, 9);
 				return ;
 			}
 			exit(9);
@@ -60,8 +58,7 @@ int	input_opener(t_pipex *pipex, char *s)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
-			pipex->exitcode = 1;
-			promt_init(pipex->mini);
+			prompt_init(pipex->mini, 1);
 			return (1);
 		}
 		exit(EXIT_FAILURE);
@@ -82,9 +79,7 @@ int	output_opener(t_pipex *pipex, char *s, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
-				pipex->exitcode = 1;
-				printf("here\n");
-				promt_init(pipex->mini);
+				prompt_init(pipex->mini, 1);
 				return (1);
 			}
 		}
@@ -99,8 +94,7 @@ int	output_opener(t_pipex *pipex, char *s, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
-				pipex->exitcode = 1;
-				promt_init(pipex->mini);
+				prompt_init(pipex->mini, 1);
 				return (1);
 			}
 			exit(EXIT_FAILURE);
@@ -117,8 +111,7 @@ void	dup2er(int input, int output, t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
-			pipex->exitcode = 9;
-			promt_init(pipex->mini);
+			prompt_init(pipex->mini, 9);
 			return ;
 		}
 		exit(9);
@@ -129,8 +122,7 @@ void	dup2er(int input, int output, t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
-			pipex->exitcode = 9;
-			promt_init(pipex->mini);
+			prompt_init(pipex->mini, 9);
 			return ;
 		}
 		exit(9);
@@ -145,8 +137,7 @@ void	input_dup2(int input,t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
-			pipex->exitcode = 9;
-			promt_init(pipex->mini);
+			prompt_init(pipex->mini, 9);
 			return ;
 		}
 		exit(9);
@@ -161,8 +152,7 @@ void	output_dup2(int input,t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
-			pipex->exitcode = 9;
-			promt_init(pipex->mini);
+			prompt_init(pipex->mini, 9);
 			return ;
 		}
 		exit(9);

@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/21 16:03:49 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:36:47 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-void	promt_init(t_mini *mini)
+void	prompt_init(t_mini *mini, int exit_code)
 {
 	char		*prompt;
-	static int	exitcode;
 
 	while (1)
 	{
@@ -26,13 +25,13 @@ void	promt_init(t_mini *mini)
 		free(mini->prompt_msg);
 		add_history(prompt);
 		mini->prompt = prompt;
-		mini->exitcode = exitcode;
+		mini->exitcode = exit_code;
 		parse_init(mini);
 		print_commands(mini);
 		exec_init(mini);
 		free(prompt);
 		prompt = NULL;
-		exitcode = mini->exitcode;
+		exit_code = mini->exitcode;
 	}
 	rl_clear_history();
 }
@@ -40,9 +39,11 @@ void	promt_init(t_mini *mini)
 int	main(int ac, char **av, char **env)
 {
 	t_mini	mini;
+	int		exit_code;
 
+	exit_code = 0;
 	mini.env = env;
-	promt_init(&mini);
+	prompt_init(&mini, exit_code);
 	(void)ac;
 	(void)av;
 	return (EXIT_SUCCESS);
