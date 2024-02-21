@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 16:35:59 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:48:29 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	input_opener(t_pipex *pipex, char *s)
 {
 	int	fd;
 
+	fd = 0;
 	fd = open(s, O_RDONLY);
 	if (fd < 0)
 	{

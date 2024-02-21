@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:07:48 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/20 16:55:08 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:59:34 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*full_heredoc(char *orig_str, char *new_str, char *new_line, int first_line
 
 	while (1)
 	{
-		read_line = readline("here_doc> ");
+		read_line = readline("heredoc> ");
 		if (!read_line || ft_strcmp(read_line, orig_str) == 0)
 		{
 			free (read_line);
@@ -99,5 +99,5 @@ char	*full_heredoc(char *orig_str, char *new_str, char *new_line, int first_line
 		new_str = temp_str;
 		free (read_line);
 	}
-	return (new_str);
+	return (ft_char_join(new_str, '\n'));
 }
