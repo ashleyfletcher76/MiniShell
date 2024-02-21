@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 14:30:58 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:41:08 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*ft_strjoin_freeself(char *remains, char *buffer)
 		return (NULL);
 	if (!remains)
 		return (buffer);
+	if (!buffer)
+		return (remains);
 	size = ft_strlen(remains) + ft_strlen(buffer);
 	array = malloc (sizeof(char) * (size + 1));
 	i = 0;
@@ -56,7 +58,9 @@ char	*ft_strjoin_freeself(char *remains, char *buffer)
 	while (buffer[i])
 		array[j++] = buffer[i++];
 	array[size] = '\0';
-	free ((void *)remains);
-	free ((void *)buffer);
+	if (remains)
+		free ((void *)remains);
+	if (buffer)
+		free ((void *)buffer);
 	return (array);
 }
