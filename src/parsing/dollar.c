@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/20 11:33:39 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:44:04 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 	if (mini->prompt[*i] == '$')
 	{
 		(*i)++;
+		if (!quoted_str)
+			quoted_str = ft_strdup("");
+		if (mini->prompt[*i] == '?')
+				return ((*i)++, ft_strjoin(quoted_str, ft_itoa(mini->exitcode)));
+		if (mini->prompt[*i] == ' ' || mini->prompt[*i] == '\0')
+		{
+			if (!quoted_str)
+			 quoted_str	 = ft_strdup("");
+			return (ft_char_join(quoted_str, '$'));
+		}
 		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\"')
 		{
 			temp_env = ft_char_join(temp_env, mini->prompt[*i]);
