@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/21 16:25:56 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:56:33 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	dup_saver(t_pipex *pipex, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
+				if (pipex->commands->input_index != 0)
+					input_dup2(pipex->fd_in_orj, pipex);
+				if (pipex->commands->output_index != 0)
+					output_dup2(pipex->fd_out_orj, pipex);
 				prompt_init(pipex->mini, 9);
 				return ;
 			}
@@ -38,6 +42,10 @@ void	dup_saver(t_pipex *pipex, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
+				if (pipex->commands->input_index != 0)
+					input_dup2(pipex->fd_in_orj, pipex);
+				if (pipex->commands->output_index != 0)
+					output_dup2(pipex->fd_out_orj, pipex);
 				prompt_init(pipex->mini, 9);
 				return ;
 			}
@@ -58,6 +66,10 @@ int	input_opener(t_pipex *pipex, char *s)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
+			if (pipex->commands->input_index != 0)
+				input_dup2(pipex->fd_in_orj, pipex);
+			if (pipex->commands->output_index != 0)
+				output_dup2(pipex->fd_out_orj, pipex);
 			prompt_init(pipex->mini, 1);
 			return (1);
 		}
@@ -79,6 +91,10 @@ int	output_opener(t_pipex *pipex, char *s, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
+				if (pipex->commands->input_index != 0)
+					input_dup2(pipex->fd_in_orj, pipex);
+				if (pipex->commands->output_index != 0)
+					output_dup2(pipex->fd_out_orj, pipex);
 				prompt_init(pipex->mini, 1);
 				return (1);
 			}
@@ -94,6 +110,10 @@ int	output_opener(t_pipex *pipex, char *s, int flag)
 			free_struct(pipex);
 			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			{
+				if (pipex->commands->input_index != 0)
+					input_dup2(pipex->fd_in_orj, pipex);
+				if (pipex->commands->output_index != 0)
+					output_dup2(pipex->fd_out_orj, pipex);
 				prompt_init(pipex->mini, 1);
 				return (1);
 			}
@@ -111,6 +131,10 @@ void	dup2er(int input, int output, t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
+			if (pipex->commands->input_index != 0)
+				input_dup2(pipex->fd_in_orj, pipex);
+			if (pipex->commands->output_index != 0)
+				output_dup2(pipex->fd_out_orj, pipex);
 			prompt_init(pipex->mini, 9);
 			return ;
 		}
@@ -122,6 +146,10 @@ void	dup2er(int input, int output, t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
+			if (pipex->commands->input_index != 0)
+				input_dup2(pipex->fd_in_orj, pipex);
+			if (pipex->commands->output_index != 0)
+				output_dup2(pipex->fd_out_orj, pipex);
 			prompt_init(pipex->mini, 9);
 			return ;
 		}
@@ -137,6 +165,10 @@ void	input_dup2(int input,t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
+			if (pipex->commands->input_index != 0)
+				input_dup2(pipex->fd_in_orj, pipex);
+			if (pipex->commands->output_index != 0)
+				output_dup2(pipex->fd_out_orj, pipex);
 			prompt_init(pipex->mini, 9);
 			return ;
 		}
@@ -152,6 +184,10 @@ void	output_dup2(int input,t_pipex *pipex)
 		free_struct(pipex);
 		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
+			if (pipex->commands->input_index != 0)
+				input_dup2(pipex->fd_in_orj, pipex);
+			if (pipex->commands->output_index != 0)
+				output_dup2(pipex->fd_out_orj, pipex);
 			prompt_init(pipex->mini, 9);
 			return ;
 		}

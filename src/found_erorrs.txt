@@ -1,2 +1,2 @@
-# echo <"./test_files/infile_big" | echo <"./test_files/infile" # skipping end charectrer
+Test  70: ❌ echo <"./test_files/infile_big" | echo <"./test_files/infile" parsing
 
