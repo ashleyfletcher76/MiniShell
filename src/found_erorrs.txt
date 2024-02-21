@@ -1,4 +1,3 @@
 # cat <"./test_files/infile" >"./outfiles/outfile01" # double quetos in directions
 # echo $PWD hi # does not put space between them.
-# echo "$" # dolar sign inside quetos
 # echo hi < ./test_files/infile bye bye # freed non allocateded

@@ -6,38 +6,46 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 17:48:29 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:42:19 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	dup_maker(t_pipex *pipex, int flag)
+void	dup_saver(t_pipex *pipex, int flag)
 {
-	int	fd;
-
-	fd = 0;
 	if (flag == 0)
 	{
 		pipex->fd_in_orj = dup(STDIN_FILENO);
-		if (fd == -1)
+		if (pipex->fd_in_orj == -1)
 		{
 			perror("dup");
 			free_struct(pipex);
+			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			{
+				pipex->exitcode = 9;
+				promt_init(pipex->mini);
+				return ;
+			}
 			exit(9);
 		}
 	}
 	else
 	{
-		pipex->fd_in_orj = dup(STDOUT_FILENO);
-		if (fd == -1)
+		pipex->fd_out_orj = dup(STDOUT_FILENO);
+		if (pipex->fd_out_orj == -1)
 		{
 			perror("dup");
 			free_struct(pipex);
+			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			{
+				pipex->exitcode = 9;
+				promt_init(pipex->mini);
+				return ;
+			}
 			exit(9);
 		}
 	}
-	return (fd);
 }
 
 int	input_opener(t_pipex *pipex, char *s)
@@ -50,6 +58,12 @@ int	input_opener(t_pipex *pipex, char *s)
 	{
 		perror("minihell: input");
 		free_struct(pipex);
+		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		{
+			pipex->exitcode = 1;
+			promt_init(pipex->mini);
+			return (1);
+		}
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
@@ -66,7 +80,13 @@ int	output_opener(t_pipex *pipex, char *s, int flag)
 		{
 			perror("minishell: output");
 			free_struct(pipex);
-			exit(EXIT_FAILURE);
+			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			{
+				pipex->exitcode = 1;
+				printf("here\n");
+				promt_init(pipex->mini);
+				return (1);
+			}
 		}
 		return (fd);
 	}
@@ -77,6 +97,12 @@ int	output_opener(t_pipex *pipex, char *s, int flag)
 		{
 			perror("minishell: output");
 			free_struct(pipex);
+			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			{
+				pipex->exitcode = 1;
+				promt_init(pipex->mini);
+				return (1);
+			}
 			exit(EXIT_FAILURE);
 		}
 		return (fd);
@@ -89,12 +115,24 @@ void	dup2er(int input, int output, t_pipex *pipex)
 	{
 		perror("dup2");
 		free_struct(pipex);
+		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		{
+			pipex->exitcode = 9;
+			promt_init(pipex->mini);
+			return ;
+		}
 		exit(9);
 	}
 	if (dup2(output, STDOUT_FILENO) == -1)
 	{
 		perror("dup2");
 		free_struct(pipex);
+		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		{
+			pipex->exitcode = 9;
+			promt_init(pipex->mini);
+			return ;
+		}
 		exit(9);
 	}
 }
@@ -105,6 +143,12 @@ void	input_dup2(int input,t_pipex *pipex)
 	{
 		perror("dup2");
 		free_struct(pipex);
+		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		{
+			pipex->exitcode = 9;
+			promt_init(pipex->mini);
+			return ;
+		}
 		exit(9);
 	}
 }
@@ -115,6 +159,12 @@ void	output_dup2(int input,t_pipex *pipex)
 	{
 		perror("dup2");
 		free_struct(pipex);
+		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		{
+			pipex->exitcode = 9;
+			promt_init(pipex->mini);
+			return ;
+		}
 		exit(9);
 	}
 }

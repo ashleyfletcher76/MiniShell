@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 15:36:04 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:47:11 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	promt_init(t_mini *mini)
 		mini->prompt = prompt;
 		mini->exitcode = exitcode;
 		parse_init(mini);
+		print_commands(mini);
 		exec_init(mini);
 		free(prompt);
 		prompt = NULL;

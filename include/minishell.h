@@ -11,9 +11,8 @@
 # include <stdlib.h>
 
 //main nessecaries
-void		get_adresses(t_pipex *pipex);
-char		*giveme_path(char *command, t_pipex *pipex);
-char		*get_a_path(char *command, t_pipex *pipex);
+void		promt_init(t_mini *mini);
+int			main(int ac, char **av, char **env);
 
 //free stuff
 void		free_struct(t_pipex *pipex);
@@ -22,7 +21,7 @@ void		free_double_array(char **array);
 void		free_tripple_array(char ***array);
 void		waiter(t_pipex *pipex);
 
-//erorror
+//error
 void		error_handler(char *msg, t_pipex *pipex, int exitcode);
 
 //utils
@@ -38,7 +37,6 @@ void		parse_init(t_mini *mini);
 void		parse_distributor(t_mini *mini);
 void		finalize_command(char **temp, int *j, t_commands **cmd, int indicator);
 void		print_commands(t_mini *mini);
-
 void		parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd);
 char		*parse_double_quote(t_mini *mini, int *i);
 char		*dquote_helper(char *quoted_str);
@@ -94,6 +92,9 @@ void		last_son(t_pipex *pipex, int i);
 void		daughters(t_pipex *pipex, int i);
 void		piper(t_pipex *pipex);
 void		forker(t_pipex *pipex, int i);
+void		get_adresses(t_pipex *pipex);
+char		*giveme_path(char *command, t_pipex *pipex);
+char		*get_a_path(char *command, t_pipex *pipex);
 
 //direction
 void		direction_handler(t_pipex *pipex);
@@ -104,7 +105,7 @@ void		input_dup2(int input,t_pipex *pipex);
 void		dup2er(int input, int output, t_pipex *pipex);
 int			output_opener(t_pipex *pipex, char *s, int flag);
 int			input_opener(t_pipex *pipex, char *s);
-int			dup_maker(t_pipex *pipex, int flag);
+void		dup_saver(t_pipex *pipex, int flag);
 void		heredoc_found(t_pipex *pipex, int input);
 
 #endif

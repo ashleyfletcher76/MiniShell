@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   directions.c                                       :+:      :+:    :+:   */
+/*   directions_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/21 12:23:54 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:17:01 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	direction_handler(t_pipex *pipex)
 	input = 0;
 	output = 0;
 	i = 1;
-	//pipex->fd_out_orj = dup_maker(pipex, STDOUT_FILENO);
 	direction_count = pipex->commands->input_index + pipex->commands->output_index;
 	while (i <= direction_count + 1 && direction_count != 0)
 	{
@@ -51,7 +50,6 @@ void	input_handler(t_pipex *pipex, int input)
 	fd = 0;
 	if (flag == TRUE)
 		return (heredoc_found(pipex, input));
-	pipex->fd_in_orj = dup_maker(pipex, STDIN_FILENO);
 	fd = input_opener(pipex, s);
 	input_dup2(fd, pipex);
 	close(fd);
