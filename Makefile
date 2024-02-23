@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/18 18:49:35 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/22 14:14:52 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,6 @@ LIBFT = $(LIBFTDIR)/libft.a
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-#READLINE_DIR = $(shell brew --prefix readline)
-#CFLAGS += -I$(READLINE_DIR)/include
-#LDFLAGS = -L$(READLINE_DIR)/lib -lreadline
 
 $(NAME) : $(OBJ_MINISHELL) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline

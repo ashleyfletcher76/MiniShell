@@ -95,6 +95,7 @@ void		forker(t_pipex *pipex, int i);
 void		get_adresses(t_pipex *pipex);
 char		*giveme_path(char *command, t_pipex *pipex);
 char		*get_a_path(char *command, t_pipex *pipex);
+void		file_check(char *command, t_pipex *pipex);
 
 //direction
 void		direction_handler(t_pipex *pipex);
