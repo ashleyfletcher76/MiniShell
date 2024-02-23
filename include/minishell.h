@@ -10,6 +10,8 @@
 # include <signal.h>
 # include <stdlib.h>
 
+volatile sig_atomic_t	sigint_received;
+
 //main nessecaries
 void		prompt_init(t_mini *mini, int exit_code);
 int			main(int ac, char **av, char **env);
