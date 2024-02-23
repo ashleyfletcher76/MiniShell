@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/21 15:49:26 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:42:50 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*handle_dollar(t_mini *mini, int *i)
 	if (mini->prompt[*i] == ':')
 		(*i)--;
 	if (!getenv(new_temp))
-		return (ft_strdup(""));
+		return (NULL);
 	new_temp = ft_strdup(getenv(new_temp));
 	return (new_temp);
 }
