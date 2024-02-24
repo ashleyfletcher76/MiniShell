@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/24 14:11:59 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:49:02 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ void	output_handler(t_pipex *pipex, int output)
 {
 	int		fd;
 	char	*s;
-	int		flag;
 
-	flag = pipex->commands->indicator_output[output];
 	s = pipex->commands->output[output];
 	fd = 0;
 	if (pipex->commands->indicator_output[output] == FALSE)

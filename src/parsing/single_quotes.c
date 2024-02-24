@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/24 15:05:02 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:48:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ char	*quote_helper(char *quoted_str)
 {
 	char	*temp1;
 	char	*temp2;
-	char	*temp3;
 	char	*new_str;
 	char	*new_quoted;
 
-	temp3 = ft_strdup("");
 	temp2 = ft_strdup("");
 	new_str = quoted_str;
 	while (1)
