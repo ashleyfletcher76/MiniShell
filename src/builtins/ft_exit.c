@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 20:14:56 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:23:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_exit(char **commands)
 	}
 	if (commands[1] != NULL)
 		ft_exit_helper(commands[1]);
-	ft_printf("exit\n");
+	//ft_printf("exit\n");
 	exit(EXIT_SUCCESS);
 }
 

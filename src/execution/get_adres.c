@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/23 12:17:53 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:38:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void	get_adresses(t_pipex *pipex)
 
 char	*get_a_path(char *command, t_pipex *pipex)
 {
-	file_check(command, pipex);
 	if (ft_strchr(command, '/') == NULL)
 		return (giveme_path(command, pipex));
 	else
 	{
+		file_check(command, pipex);
 		if (access(command, F_OK) == 0)
 		{
 			if (access(command, X_OK) == 0)
 				return (command);
-			error_handler(": is a directory", pipex, 126);
+			error_handler(": command not found", pipex, 126);
 		}
 		error_handler(": command not found", pipex, 127);
 	}
@@ -94,6 +94,6 @@ void	file_check(char *command, t_pipex *pipex)
 		if (S_ISDIR(path_stat.st_mode))
 			error_handler(": is a directory", pipex, 126);
 		else if (!(path_stat.st_mode & S_IXUSR))
-			error_handler(": permission denied", pipex, 126);
+			error_handler(": Permission denied", pipex, 126);
 	}
 }

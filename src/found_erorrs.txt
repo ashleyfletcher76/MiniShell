@@ -1,2 +1,2 @@
-Test  70: ❌ echo <"./test_files/infile_big" | echo <"./test_files/infile" parsing
-// execcutebables doenc work.
+// echo $1234
+

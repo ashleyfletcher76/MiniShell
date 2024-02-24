@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/21 15:43:11 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/24 15:06:16 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*parse_double_quote(t_mini *mini, int *i)
 			quoted_str = ft_strdup("");
 		quoted_str = dquote_helper(quoted_str);
 	}
-	if (mini->prompt[*i] == '\"' && mini->prompt[*i + 1] != '\0' && mini->prompt[*i + 1] != '\"' && mini->prompt[*i + 1] != '\'')
+	if (mini->prompt[*i] == '\"' && mini->prompt[*i] == ' ' && mini->prompt[*i + 1] != '\0' && mini->prompt[*i + 1] != '\"' && mini->prompt[*i + 1] != '\'')
 		(*i)++;
 	return (quoted_str);
 }
@@ -56,6 +56,7 @@ char	*dquote_helper(char *quoted_str)
 		temp1 = readline("dquote> ");
 		if (!temp1)
 			break ;
+		temp1 = ft_strjoin("\n", temp1);
 		temp2 = ft_strchr(temp1, '\"');
 		if (temp2)
 			*temp2 = '\0';

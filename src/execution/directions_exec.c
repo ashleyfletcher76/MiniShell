@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/21 13:17:01 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:11:59 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	output_handler(t_pipex *pipex, int output)
 	flag = pipex->commands->indicator_output[output];
 	s = pipex->commands->output[output];
 	fd = 0;
-	if (pipex->commands->indicator_output == FALSE)
-		fd = output_opener(pipex, s, FALSE);
+	if (pipex->commands->indicator_output[output] == FALSE)
+		fd = output_opener(pipex, s);
 	else
-		fd = output_opener(pipex, s, TRUE);
+		fd = output_append_opener(pipex, s);
 
 	output_dup2(fd, pipex);
 	close(fd);
@@ -77,7 +77,7 @@ void	heredoc_found(t_pipex *pipex, int input)
 {
 	int	fd;
 
-	fd = output_opener(pipex, "./.heredoc_found", FALSE);
+	fd = output_opener(pipex, "./.heredoc_found");
 	output_dup2(fd, pipex);
 	ft_printf("%s", pipex->commands->input[input]);
 	close(fd);

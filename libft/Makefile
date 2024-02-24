@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 12:11:50 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/12 14:31:05 by asfletch         ###   ########.fr        #
+#    Updated: 2024/02/24 12:10:15 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SOURCES =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.
 			ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c \
 			ft_putstr_fd.c ft_putnbr_fd.c ft_split.c ft_strcat.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
 			ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strncpy.c ft_strnstr.c ft_strrchr.c \
-			ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_strcpy.c \
+			ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_strcpy.c get_next_line.c \
 			ft_printf.c ft_putchar_fd_print.c ft_putnbr_fd_print.c ft_putstr_fd_print.c ft_unsignednbr_fd.c hexatransformlower.c \
 			hexatransformupper.c ft_strlen_print.c 	ft_pointerprint.c ft_strcmp.c\
 			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstmap.c ft_lstiter.c\
