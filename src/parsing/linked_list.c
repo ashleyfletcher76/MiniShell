@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:14:59 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/25 09:56:11 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:01:43 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_commands	*lstnew(void)
 	new = (t_commands *)malloc(sizeof(t_commands));
 	if (new == NULL)
 		return (NULL);
-	new->cmd_args = ft_calloc(1, sizeof(char *) * 50);
+	new->cmd_args = ft_calloc(1, sizeof(char *) * 150);
 	new->input = ft_calloc(1, sizeof(char *) * 50);
 	new->output = ft_calloc(1, sizeof(char *) * 50);
 	new->indicator_input = ft_calloc(1, sizeof(int *) * 50);

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:53:42 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:37:21 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	which_build(char **commands, char **env, t_pipex *pipex)
 	if (ft_strncmp(commands[0], "cd", 3) == 0)
 		return (ft_cd(commands, env, pipex), TRUE);
 	if (ft_strncmp(commands[0], "exit", 6) == 0)
-		return (ft_exit(commands), TRUE);
+		return (ft_exit(commands, pipex), TRUE);
 	if (ft_strncmp(commands[0], "export", 7) == 0)
 		return (ft_export(commands, env, pipex), TRUE);
 	if (ft_strncmp(commands[0], "unset", 6) == 0)

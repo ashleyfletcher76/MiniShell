@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:55:32 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:07:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	get_adresses(t_pipex *pipex)
 
 char	*get_a_path(char *command, t_pipex *pipex)
 {
-	if (ft_strchr(command, '/') == NULL)
+	if (ft_strchr(command, '/') == NULL && command[0] != '\0')
 		return (giveme_path(command, pipex));
 	else
 	{

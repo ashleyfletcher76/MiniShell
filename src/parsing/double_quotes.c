@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/25 09:56:06 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 11:33:04 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*parse_double_quote(t_mini *mini, int *i)
 			quoted_str = ft_strdup("");
 		quoted_str = dquote_helper(quoted_str);
 	}
-	if (mini->prompt[*i] == '\"' && mini->prompt[*i] == ' ' && mini->prompt[*i + 1] != '\0' && mini->prompt[*i + 1] != '\"' && mini->prompt[*i + 1] != '\'')
+	if (mini->prompt[*i] == '\"' && mini->prompt[*i] == ' ' && mini->prompt[*i] == '\t'  && mini->prompt[*i + 1] != '\0' && mini->prompt[*i + 1] != '\"' && mini->prompt[*i + 1] != '\'')
 		(*i)++;
 	return (quoted_str);
 }

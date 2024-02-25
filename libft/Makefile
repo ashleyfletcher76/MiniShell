@@ -6,17 +6,24 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 12:11:50 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/24 12:10:15 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/25 10:16:10 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 .SILENT:
 
-COLOUR_GREEN = \033[0;32m
+COLOUR_DEFAULT = \033[0m
+COLOUR_BLACK = \033[0;30m
 COLOUR_RED = \033[0;31m
+COLOUR_GREEN = \033[0;32m
+COLOUR_YELLOW = \033[0;33m
 COLOUR_BLUE = \033[0;34m
-COLOUR_END = \033[0m
+COLOUR_MAGENTA = \033[0;35m
+COLOUR_CYAN = \033[0;36m
+COLOUR_WHITE = \033[0;37m
+COLOUR_BOLD = \033[1m
+COLOUR_UNDERLINE = \033[4m
 
 CFLAGS	= -Wall -Wextra -Werror
 RM = rm -f
@@ -40,7 +47,7 @@ OBJECTS	= ${SOURCES:.c=.o}
 
 ${NAME}: ${OBJECTS}
 	ar rcs ${NAME} ${OBJECTS}
-	echo "$(COLOUR_RED)Libft compiled successfully!$(COLOUR_END)"
+	echo "$(COLOUR_YELLOW)Libft compiled successfully!$(COLOUR_END)"
 
 all: ${NAME}
 
@@ -50,7 +57,7 @@ clean:
 
 fclean: clean
 	${RM} ${NAME}
-	echo "$(COLOUR_RED)Libft cleaned successfully!$(COLOUR_END)"
+	echo "$(COLOUR_YELLOW)$(COLOUR_UNDERLINE)Libft cleaned successfully!$(COLOUR_END)"
 
 re: fclean all
 

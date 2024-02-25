@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:01:53 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:55:10 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:08:48 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_echo(char **commands, t_pipex *pipex)
 
 	n = 0;
 	i = 1;
-	if (ft_strncmp(commands[1], "-n", 3) == 0)
+	while (ft_strncmp(commands[i], "-n", 3) == 0 && commands[i])
 	{
 		i++;
 		n = 1;

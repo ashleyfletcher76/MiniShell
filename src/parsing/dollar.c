@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/25 09:56:03 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:17:11 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*handle_dollar(t_mini *mini, int *i)
 	new_temp = NULL;
 	if (mini->prompt[*i] == '$')
 	{
-		if (mini->prompt[*i + 1] == ' ' || mini->prompt[*i + 1] == '\0')
+		if (mini->prompt[*i + 1] == ' ' || mini->prompt[*i] == '\t' || mini->prompt[*i + 1] == '\0')
 			return (ft_strdup("$"));
 		if (mini->prompt[*i + 1] == '?')
 		{
@@ -29,15 +29,14 @@ char	*handle_dollar(t_mini *mini, int *i)
 			return (exit_code);
 		}
 		(*i)++;
-		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
+		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
 		{
 			new_temp = ft_char_join(new_temp, mini->prompt[*i]);
 			(*i)++;
 		}
 	}
-	if (mini->prompt[*i] == ' ' || mini->prompt[*i] == '\0' || mini->prompt[*i] == '\'' || mini->prompt[*i] == '\"' || mini->prompt[*i] == ':' || mini->prompt[*i] == '-')
+	if (mini->prompt[*i] == ' ' || mini->prompt[*i] == '\t' || mini->prompt[*i] == '\0' || mini->prompt[*i] == '\'' || mini->prompt[*i] == '\"' || mini->prompt[*i] == ':' || mini->prompt[*i] == '-')
 		(*i)--;
-
 	if (!get_env(mini->env, new_temp))
 		return (NULL);
 	new_temp = ft_strdup(get_env(mini->env, new_temp));

@@ -6,13 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 10:00:04 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:11:12 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-volatile sig_atomic_t	sigint_received = 0;
 
 void	sigint_handler(int sig)
 {
@@ -37,7 +35,7 @@ void	prompt_init(t_mini *mini, int exit_code)
 {
 	char		*prompt;
 
-	sig_init();
+	//sig_init();
 	while (1)
 	{
 		sigint_received = 0;
@@ -49,19 +47,13 @@ void	prompt_init(t_mini *mini, int exit_code)
 			continue ;
 		}
 		if (!prompt)
-			continue ;
-		if (prompt && prompt[0] == '\0')
-		{
-			free (mini->prompt_msg);
-			free (prompt);
-			continue ;
-		}
+			exit(EXIT_FAILURE) ;
 		free(mini->prompt_msg);
 		add_history(prompt);
 		mini->prompt = prompt;
 		mini->exitcode = exit_code;
 		parse_init(mini);
-		print_commands(mini);
+		//print_commands(mini);
 		exec_init(mini);
 		free(prompt);
 		prompt = NULL;

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:44:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:54:39 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 11:52:55 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	ft_cd(char **command, char **env, t_pipex *pipex)
 		chdir(command[1]);
 	else
 	{
-		write(2, "cd: no such file or directory: ", 32);
-		ft_putendl_fd(command[1], 2);
+		write(2, "minishell: cd: ", 16);
+		write(2, command[1], ft_strlen(command[1]));
+		write(2, ": No such file or directory\n" ,29);
 		pipex->exitcode = 1;
 		return ;
 	}

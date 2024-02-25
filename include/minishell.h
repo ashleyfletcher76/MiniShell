@@ -9,6 +9,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <limits.h>
 
 volatile	sig_atomic_t	sigint_received;
 
@@ -71,8 +72,8 @@ int			checkPathExistence(const char *path);
 void		update_pwd_env(t_pipex *pipex);
 void		update_oldpwd_env(t_pipex *pipex, char *temp);
 void		ft_cd(char **command, char **env, t_pipex *pipex);
-void		ft_exit(char **commands);
-void		ft_exit_helper(char *code);
+void		ft_exit(char **commands, t_pipex *pipex);
+int			ft_exit_helper(char *code);
 void		ft_export(char **commands, char **env, t_pipex *pipex);
 int			ft_export_error(char **commands, char **env);
 int			ft_export_error_helper(char **commands, char **env);
