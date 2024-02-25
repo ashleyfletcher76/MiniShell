@@ -6,12 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/23 12:38:22 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:55:32 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/structs.h"
+#include "minishell.h"
+#include "structs.h"
 
 void	get_adresses(t_pipex *pipex)
 {

@@ -6,12 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 16:02:57 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:55:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/structs.h"
+#include "minishell.h"
+#include "structs.h"
 
 void	error_handler(char *msg, t_pipex *pipex, int exitcode)
 {

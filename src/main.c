@@ -6,28 +6,62 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/24 18:41:56 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 10:00:04 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
+volatile sig_atomic_t	sigint_received = 0;
+
+void	sigint_handler(int sig)
+{
+	(void)sig;
+	write (1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	sigint_received = 1;
+}
+void	sig_init(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = sigint_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
+}
 
 void	prompt_init(t_mini *mini, int exit_code)
 {
 	char		*prompt;
 
+	sig_init();
 	while (1)
 	{
+		sigint_received = 0;
 		prompt = readline(give_me_prompt(mini));
+		if (sigint_received)
+		{
+			free (prompt);
+			free (mini->prompt_msg);
+			continue ;
+		}
 		if (!prompt)
-			exit(EXIT_FAILURE);
+			continue ;
+		if (prompt && prompt[0] == '\0')
+		{
+			free (mini->prompt_msg);
+			free (prompt);
+			continue ;
+		}
 		free(mini->prompt_msg);
 		add_history(prompt);
 		mini->prompt = prompt;
 		mini->exitcode = exit_code;
 		parse_init(mini);
-		// print_commands(mini);
+		print_commands(mini);
 		exec_init(mini);
 		free(prompt);
 		prompt = NULL;

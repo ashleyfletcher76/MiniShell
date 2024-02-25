@@ -6,12 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/24 18:18:54 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:55:46 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/structs.h"
+#include "minishell.h"
+#include "structs.h"
 
 void	pipe_all(t_pipex *pipex)
 {
