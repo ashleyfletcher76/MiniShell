@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/26 12:24:30 by asfletch         ###   ########.fr        #
+#    Updated: 2024/02/26 12:32:41 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ COLOUR_CYAN = \033[0;36m
 COLOUR_WHITE = \033[0;37m
 COLOUR_BOLD = \033[1m
 COLOUR_UNDERLINE = \033[4m
+COLOUR_END = \033[0m
 
 CC = cc
 RM = rm -f
@@ -62,5 +63,6 @@ fclean: clean
 	echo "$(COLOUR_MAGENTA)$(COLOUR_UNDERLINE)Minishell cleaned successfully!$(COLOUR_END)"
 
 re: fclean all
+
 
 .PHONY: all clean fclean re

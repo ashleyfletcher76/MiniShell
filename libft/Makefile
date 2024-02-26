@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 12:11:50 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/25 10:16:10 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/26 12:31:42 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ COLOUR_CYAN = \033[0;36m
 COLOUR_WHITE = \033[0;37m
 COLOUR_BOLD = \033[1m
 COLOUR_UNDERLINE = \033[4m
+COLOR_END = \033[0m
 
 CFLAGS	= -Wall -Wextra -Werror
 RM = rm -f
