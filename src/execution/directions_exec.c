@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directions_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:55:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:33:51 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,21 @@ void	direction_handler(t_pipex *pipex)
 	direction_count = pipex->commands->input_index + pipex->commands->output_index;
 	while (i <= direction_count + 1 && direction_count != 0)
 	{
-		if (i == pipex->commands->order_input[input])
+		if (pipex->commands->input != NULL)
 		{
-			input_handler(pipex, input);
-			input++;
+			if (i == pipex->commands->order_input[input])
+			{
+				input_handler(pipex, input);
+				input++;
+			}
 		}
-		if (i == pipex->commands->order_output[output])
+		if (pipex->commands->output != NULL)
 		{
-			output_handler(pipex, output);
-			output++;
+			if (i == pipex->commands->order_output[output])
+			{
+				output_handler(pipex, output);
+				output++;
+			}
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/26 13:14:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:40:41 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	parse_distributor(t_mini *mini)
 		{
 			if (temp)
 			{
-				command->cmd_args = ft_realloc_double_char(command->cmd_args,j);
+				command->cmd_args = ft_realloc_double_char(command->cmd_args, j);
 				command->cmd_args[j++] = ft_strdup(temp);
 				command->cmd_args[j] = NULL;
 			}
@@ -100,24 +100,33 @@ void	print_commands(t_mini *mini)
 	while (current != NULL)
 	{
 		printf("Command %d:\n", cmd_number++);
-		for	(int i = 0; current->cmd_args[i] != NULL; i++)
+		if (current->cmd_args != NULL)
 		{
-			printf("  arg[%d]: %s\n", i, current->cmd_args[i]);
+			for	(int i = 0; current->cmd_args[i] != NULL; i++)
+			{
+				printf("  arg[%d]: %s\n", i, current->cmd_args[i]);
+			}
 		}
-		while (current->input[j])
+		if (current->input != NULL)
 		{
-			printf("input = %s\n", current->input[j]);
-			printf("input indicator = %d\n", current->indicator_input[j]);
-			printf("order_idnex == %d\n", current->order_input[j]);
-			j++;
+			while (current->input[j])
+			{
+				printf("input = %s\n", current->input[j]);
+				printf("input indicator = %d\n", current->indicator_input[j]);
+				printf("order_idnex == %d\n", current->order_input[j]);
+				j++;
+			}
 		}
 		j = 0;
-		while (current->output[j])
+		if (current->output != NULL)
 		{
-			printf("output = %s\n", current->output[j]);
-			printf("output indicator = %d\n", current->indicator_output[j]);
-			printf("order_idnex == %d\n", current->order_output[j]);
-			j++;
+			while (current->output[j])
+			{
+				printf("output = %s\n", current->output[j]);
+				printf("output indicator = %d\n", current->indicator_output[j]);
+				printf("order_idnex == %d\n", current->order_output[j]);
+				j++;
+			}
 		}
 		//printf("exit code = %d\n", mini->exitcode);
 		current = current->next;
