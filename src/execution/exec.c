@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 17:02:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:23:00 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_built_in(t_pipex *pipex, t_mini *mini)
 	if (pipex->commands->output_index != 0)
 		output_dup2(pipex->fd_out_orj, pipex);
 	mini->exitcode = pipex->exitcode;
-	//clean 
+	//clean
 	return ;
 }
 
@@ -42,6 +42,7 @@ void	exec_main(t_mini *mini)
 	pipex.commands = mini->commands;
 	pipex.exitcode = mini->exitcode;
 	pipex.mini = mini;
+	mini->nbrcmds = pipex.nbr_cmd;
 	pipex.nbr_cmd_builts = commands_size_buildin(mini->commands);
 	if (pipex.nbr_cmd_builts == 1 && pipex.nbr_cmd == 1)
 		return (init_built_in(&pipex, mini));

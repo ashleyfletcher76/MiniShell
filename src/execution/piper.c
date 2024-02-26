@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piper.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 17:08:31 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:24:21 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	pipe_all(t_pipex *pipex)
 	pipex->pids = malloc((pipex->nbr_cmd) * sizeof(pid_t));
 	if (pipex->pids == NULL)
 		return (free_struct(pipex), exit(EXIT_FAILURE));
+	sigint_received = 1;
 	while (i < pipex->nbr_cmd)
 	{
 		forker(pipex, i);
@@ -52,6 +53,7 @@ void	only_child(t_pipex *pipex, int i)
 		exit(EXIT_SUCCESS);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	execve(path, pipex->commands->cmd_args, pipex->env);
+	exit(EXIT_SUCCESS);
 }
 
 void	first_son(t_pipex *pipex, int i)

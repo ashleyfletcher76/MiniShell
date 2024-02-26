@@ -9,9 +9,10 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <termios.h>
 # include <limits.h>
 
-volatile	sig_atomic_t	sigint_received;
+volatile sig_atomic_t	sigint_received;
 
 //main nessecaries
 void		prompt_init(t_mini *mini, int exit_code);
@@ -115,5 +116,9 @@ int			output_append_opener(t_pipex *pipex, char *s);
 int			input_opener(t_pipex *pipex, char *s);
 void		dup_saver(t_pipex *pipex, int flag);
 void		heredoc_found(t_pipex *pipex, int input);
+
+void		configure_terminal(void);
+void		sigint_handler(int sig);
+void		sig_init(void);
 
 #endif

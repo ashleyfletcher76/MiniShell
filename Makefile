@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
+#    By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/25 11:13:38 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/26 12:24:30 by asfletch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I./include/
 
-					
+
 OBJ_DIR = obj
 OBJ = $(OBJ_DIR)/main.o \
 	$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(wildcard src/utils/*.c)) \
