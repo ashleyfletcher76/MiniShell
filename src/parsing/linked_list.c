@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:14:59 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/20 15:15:07 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:56:11 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 t_commands	*lstnew(void)
 {

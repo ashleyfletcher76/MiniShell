@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:18:30 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/19 14:46:39 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:55:05 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	ft_export_print(char **env)
 {

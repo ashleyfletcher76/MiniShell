@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:54:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 12:19:41 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:18:26 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@
 # include <stdarg.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 # define TRUE 1
 # define FALSE 0
 # define READ_END 0
 # define WRITE_END 1
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 int					ft_isdigit(int c);
 int					iswhitespace(char c);
@@ -106,5 +111,7 @@ int					basamak_sayar_print(unsigned int n);
 int					basamak_sayar_base16(unsigned int n);
 int					ft_pointerprint(unsigned long long n);
 int					hexatransformlowerpointer(unsigned long long n);
+char				*get_next_line(int fd);
+
 
 #endif

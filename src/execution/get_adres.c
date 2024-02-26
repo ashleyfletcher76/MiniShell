@@ -6,12 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 11:38:12 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:55:32 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/structs.h"
+#include "minishell.h"
+#include "structs.h"
 
 void	get_adresses(t_pipex *pipex)
 {
@@ -41,21 +41,18 @@ void	get_adresses(t_pipex *pipex)
 
 char	*get_a_path(char *command, t_pipex *pipex)
 {
-	struct stat path_stat;
-
 	if (ft_strchr(command, '/') == NULL)
 		return (giveme_path(command, pipex));
 	else
 	{
+		file_check(command, pipex);
 		if (access(command, F_OK) == 0)
 		{
-			if (stat(command, &path_stat) == 0)
-				error_handler(": is a directory", pipex, 126);
 			if (access(command, X_OK) == 0)
 				return (command);
-			error_handler(": command not found: ", pipex, 126);
+			error_handler(": command not found", pipex, 126);
 		}
-		error_handler(" command not found: ", pipex, 127);
+		error_handler(": command not found", pipex, 127);
 	}
 	exit(127);
 }
@@ -79,11 +76,24 @@ char	*giveme_path(char *command, t_pipex *pipex)
 			}
 			free(temp);
 			free(path);
-			error_handler("command not found: ", pipex, 126);
+			error_handler(": command not found", pipex, 126);
 		}
 		free(path);
 	}
 	free(temp);
-	error_handler("command not found: ", pipex, 127);
+	error_handler(": command not found", pipex, 127);
 	exit(127);
+}
+
+void	file_check(char *command, t_pipex *pipex)
+{
+	struct stat path_stat;
+
+	if (stat(command, &path_stat) == 0)
+	{
+		if (S_ISDIR(path_stat.st_mode))
+			error_handler(": is a directory", pipex, 126);
+		else if (!(path_stat.st_mode & S_IXUSR))
+			error_handler(": Permission denied", pipex, 126);
+	}
 }

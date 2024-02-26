@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
+#    By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/18 18:49:35 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/25 12:19:47 by asfletch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,28 +19,26 @@ COLOUR_END = \033[0m
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I./include/
 
 
-OBJ = src/main.c $(wildcard src/pipex/*.c) $(wildcard src/utils/*.c) $(wildcard src/parsing/*.c) $(wildcard src/builtins/*.c) $(wildcard src/execution/*.c)
-OBJ_MINISHELL = $(OBJ:.c=.o)
+OBJ_DIR = obj
+OBJ = $(OBJ_DIR)/main.o \
+	$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(wildcard src/utils/*.c)) \
+	$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(wildcard src/parsing/*.c)) \
+	$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(wildcard src/builtins/*.c)) \
+	$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(wildcard src/execution/*.c))
 
 NAME = minishell
 
 LIBFTDIR = libft
 LIBFT = $(LIBFTDIR)/libft.a
 
-
-%.o: %.c
+$(OBJ_DIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-#READLINE_DIR = $(shell brew --prefix readline)
-#CFLAGS += -I$(READLINE_DIR)/include
-#LDFLAGS = -L$(READLINE_DIR)/lib -lreadline
-
-$(NAME) : $(OBJ_MINISHELL) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ_MINISHELL) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline
-	$(RM) $(OBJ_MINISHELL)
+$(NAME) : $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline
 	echo "$(COLOUR_GREEN)Minishell compiled successfully!$(COLOUR_END)"
 
 $(LIBFT):
@@ -49,7 +47,7 @@ $(LIBFT):
 all : $(NAME)
 
 clean:
-	$(RM) $(OBJ_MINISHELL)
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)

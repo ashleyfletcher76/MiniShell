@@ -6,18 +6,18 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:01:53 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 18:44:41 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:55:10 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	ft_pwd(t_pipex *pipex)
 {
-	char	*pwd;
+	char	cwd[1024];
 
-	pwd = getenv("PWD");
-	ft_putendl_fd(pwd,1);
+	getcwd(cwd, sizeof(cwd));
+	ft_putendl_fd(cwd, 1);
 	pipex->exitcode = 0;
 }
 

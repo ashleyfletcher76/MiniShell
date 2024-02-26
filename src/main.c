@@ -6,33 +6,26 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/23 16:29:42 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:03:40 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 volatile sig_atomic_t	sigint_received = 0;
 
-void	sigint_handler(int sig)
-{
-	(void)sig;
-
-	write (1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	sigint_received = 1;
-}
-
 void	sig_init(void)
 {
-	struct sigaction	sa;
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
 
-	sa.sa_handler = sigint_handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
+	sa_int.sa_handler = sigint_handler;
+	sigemptyset(&sa_int.sa_mask);
+	sa_int.sa_flags = 0;
+	sigaction(SIGINT, &sa_int, NULL);
+
+	sa_quit.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
 void	prompt_init(t_mini *mini, int exit_code)
@@ -40,23 +33,15 @@ void	prompt_init(t_mini *mini, int exit_code)
 	char		*prompt;
 
 	sig_init();
+	configure_terminal();
 	while (1)
 	{
 		sigint_received = 0;
 		prompt = readline(give_me_prompt(mini));
-		if (sigint_received)
-		{
-			free (prompt);
-			free (mini->prompt_msg);
-			continue ;
-		}
 		if (!prompt)
-			continue ;
-		if (prompt && prompt[0] == '\0')
 		{
-			free (mini->prompt_msg);
-			free (prompt);
-			continue ;
+			write (1, "exiting...\n", 11);
+			break ;
 		}
 		free(mini->prompt_msg);
 		add_history(prompt);
@@ -83,4 +68,27 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	return (EXIT_SUCCESS);
+}
+
+void	sigint_handler(int sig)
+{
+	(void)sig;
+
+	write (1, "\n", 1);
+	if (!sigint_received)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
+void	configure_terminal(void)
+{
+	struct termios	term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag |= (ECHO | ICANON | ISIG);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }

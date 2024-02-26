@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/20 17:26:49 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:53:42 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	is_built_in(t_pipex *pipex)
 {

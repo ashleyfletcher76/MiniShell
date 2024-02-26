@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/21 13:40:43 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:07:07 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd)
 {
@@ -68,7 +68,8 @@ void	parse_distributor(t_mini *mini)
 		}
 		else if (mini->prompt[i] == ' ' && mini->prompt[i + 1] != ' ')
 		{
-			command->cmd_args[j++] = ft_strdup(temp);
+			if (temp[0] != '\0')
+				command->cmd_args[j++] = ft_strdup(temp);
 			free(temp);
 			temp = NULL;
 		}

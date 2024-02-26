@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:44:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 19:47:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:54:39 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	checkPathExistence(const char *path)
 {
@@ -21,16 +21,23 @@ int	checkPathExistence(const char *path)
 
 void	ft_cd(char **command, char **env, t_pipex *pipex)
 {
-	char *home;
-	char *temp;
+	char	*home;
+	char	*temp;
 
 	pipex->exitcode = 0;
-	home = getenv("HOME");
+	home = get_env(env, "HOME");
 	if (command[1] == NULL || ft_strncmp(command[1], "~", 2) == 0 )
+	{
+		if (!home)
+		{
+			pipex->exitcode = EXIT_FAILURE;
+			return (ft_putendl_fd("minishell: cd: HOME not set", 2));
+		}
 		chdir(home);
+	}
 	else if (ft_strncmp(command[1], "~/", 2) == 0)
 	{
-		temp = ft_strjoin(home, command[1] + 1);
+		temp = ft_strjoin(getenv(home), command[1] + 1);
 		chdir(temp);
 		free(temp);
 	}
@@ -43,33 +50,67 @@ void	ft_cd(char **command, char **env, t_pipex *pipex)
 		pipex->exitcode = 1;
 		return ;
 	}
-	update_pwd_env(env);
+	update_pwd_env(pipex);
 }
 
-void update_pwd_env(char **environ)
+void	update_pwd_env(t_pipex *pipex)
 {
-    char	cwd[1024];
+	char	cwd[1024];
 	char	*temp;
 	int		i;
 	
 	i = 0;
-	temp = NULL;
+	temp = ft_strdup(get_env(pipex->env, "PWD"));
+	if (!temp)
+		temp = ft_strdup("");
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		while (environ[i] != NULL)
+		if (get_env(pipex->env, "PWD") != NULL)
 		{
-			if (ft_strncmp(environ[i], "PWD=", 4) == 0)
+			while (pipex->env[i] != NULL)
 			{
-				temp = ft_strdup(environ[i]);
-				ft_strncpy(environ[i], ft_strjoin("PWD=", cwd), ft_strlen(cwd) + 5);
+				if (ft_strncmp(pipex->env[i], "PWD=", 4) == 0)
+				{
+					ft_strncpy(pipex->env[i], ft_strjoin("PWD=", cwd), ft_strlen(cwd) + 5);
+					break ;
+				}
+				i++;
 			}
-			if (ft_strncmp(environ[i], "OLDPWD=", 7) == 0)
+		}
+		else
+		{
+			while (pipex->env[i])
+				i++;
+			pipex->env[i] = ft_strdup(ft_strjoin("PWD=", cwd));
+			pipex->env[i + 1] = NULL;
+		}
+	}
+	update_oldpwd_env(pipex, temp);
+}
+
+void	update_oldpwd_env(t_pipex *pipex, char *temp)
+{
+	int		i;
+
+	i = 0;
+	if (get_env(pipex->env, "OLDPWD"))
+	{
+		while (pipex->env[i] != NULL)
+		{
+			if (ft_strncmp(pipex->env[i], "OLDPWD=", 7) == 0)
 			{
-				ft_strncpy(environ[i],  ft_strjoin("OLDPWD=", temp + 4), ft_strlen(temp) + 3);
-				environ[i][ft_strlen(temp) + 3] = '\0';
+				ft_strncpy(pipex->env[i] + 7, temp, ft_strlen(temp) + 1);
+				break ;
 			}
 			i++;
 		}
-		free(temp);
 	}
+	else
+	{
+		while(pipex->env[i])
+			i++;
+		pipex->env[i] = ft_strdup(ft_strjoin("OLDPWD=", temp));
+		pipex->env[i + 1] = NULL;
+	}
+	free(temp);
 }

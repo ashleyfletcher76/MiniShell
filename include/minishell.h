@@ -9,6 +9,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <termios.h>
 
 volatile sig_atomic_t	sigint_received;
 
@@ -33,6 +34,8 @@ int			array_size(char **s);
 int			commands_size_all(t_commands *lst);
 int			commands_size_buildin(t_commands *lst);
 int			promt_help(t_mini *mini, char *user);
+char		*get_env(char **env, char *var);
+char		**update_env(char **env, char *var, char *value);
 
 //parsing
 void		parse_init(t_mini *mini);
@@ -66,7 +69,8 @@ int			is_built_in(t_pipex *pipex);
 int			which_build(char **commands, char **env, t_pipex *pipex);
 int			exist_build(char **commands);
 int			checkPathExistence(const char *path);
-void		update_pwd_env(char **environ);
+void		update_pwd_env(t_pipex *pipex);
+void		update_oldpwd_env(t_pipex *pipex, char *temp);
 void		ft_cd(char **command, char **env, t_pipex *pipex);
 void		ft_exit(char **commands);
 void		ft_exit_helper(char *code);
@@ -97,6 +101,7 @@ void		forker(t_pipex *pipex, int i);
 void		get_adresses(t_pipex *pipex);
 char		*giveme_path(char *command, t_pipex *pipex);
 char		*get_a_path(char *command, t_pipex *pipex);
+void		file_check(char *command, t_pipex *pipex);
 
 //direction
 void		direction_handler(t_pipex *pipex);
@@ -105,9 +110,14 @@ void		output_handler(t_pipex *pipex, int output);
 void		output_dup2(int input,t_pipex *pipex);
 void		input_dup2(int input,t_pipex *pipex);
 void		dup2er(int input, int output, t_pipex *pipex);
-int			output_opener(t_pipex *pipex, char *s, int flag);
+int			output_opener(t_pipex *pipex, char *s);
+int			output_append_opener(t_pipex *pipex, char *s);
 int			input_opener(t_pipex *pipex, char *s);
 void		dup_saver(t_pipex *pipex, int flag);
 void		heredoc_found(t_pipex *pipex, int input);
+
+void		configure_terminal(void);
+void		sigint_handler(int sig);
+void		sig_init(void);
 
 #endif

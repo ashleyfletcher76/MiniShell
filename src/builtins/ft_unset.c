@@ -6,11 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:45:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/18 19:39:04 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:55:13 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	ft_count_equal2(char *s)
 {
