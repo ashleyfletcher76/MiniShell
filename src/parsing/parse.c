@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/26 13:14:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:16:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 		new_node = lstnew();
 		lstadd_back(cmd, new_node);
 		(*cmd) = (*cmd)->next;
+		//check_syntax_pipe()
 		*j = 0;
 	}
 }
@@ -88,7 +89,11 @@ void	parse_distributor(t_mini *mini)
 
 void	parse_init(t_mini *mini)
 {
+	if (check_syntax(mini) == FALSE)
+		return ;
 	parse_distributor(mini);
+	print_commands(mini);
+	exec_init(mini);
 }
 
 void	print_commands(t_mini *mini)

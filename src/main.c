@@ -6,11 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 12:58:56 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:56:20 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 volatile sig_atomic_t	sigint_received = 0;
 
@@ -41,41 +42,28 @@ void	prompt_init(t_mini *mini, int exit_code)
 		if (!prompt)
 		{
 			write (1, "exiting...\n", 11);
-			break ;
+			//cleaning staff
+			exit(EXIT_SUCCESS);
 		}
-		free(mini->prompt_msg);
 		add_history(prompt);
 		mini->prompt = prompt;
 		mini->exitcode = exit_code;
 		parse_init(mini);
-		print_commands(mini);
-		exec_init(mini);
-		free(prompt);
+		free(mini->prompt_msg);
+		free(mini->prompt);
 		prompt = NULL;
 		exit_code = mini->exitcode;
 	}
 	rl_clear_history();
 }
 
-int	main(int ac, char **av, char **env)
-{
-	t_mini	mini;
-	int		exit_code;
-
-	exit_code = 0;
-	mini.env = env;
-	prompt_init(&mini, exit_code);
-	(void)ac;
-	(void)av;
-	return (EXIT_SUCCESS);
-}
 
 void	sigint_handler(int sig)
 {
 	(void)sig;
 
 	write (1, "\n", 1);
-	if (!sigint_received)
+	if (!sigint_received && sig == SIGINT)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -91,4 +79,24 @@ void	configure_terminal(void)
 	term.c_lflag |= (ECHO | ICANON | ISIG);
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	printf(ANSI_COLOR_RESET "" ANSI_COLOR_RESET);
+}
+
+void	leaks()
+{
+	system("minishell");
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_mini	mini;
+	int		exit_code;
+
+	exit_code = 0;
+	mini.env = env;
+	prompt_init(&mini, exit_code);
+	atexit(leaks);
+	(void)ac;
+	(void)av;
+	return (EXIT_SUCCESS);
 }

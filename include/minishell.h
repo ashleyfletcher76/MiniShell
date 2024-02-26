@@ -1,6 +1,8 @@
 #ifndef MINISHELL
 #define MINISHELL
 
+# define ANSI_COLOR_RESET	"\x1b[0m"
+
 # include "structs.h"
 # include "../libft/libft.h"
 # include <readline/readline.h>
@@ -37,6 +39,7 @@ int			commands_size_buildin(t_commands *lst);
 int			promt_help(t_mini *mini, char *user);
 char		*get_env(char **env, char *var);
 char		**update_env(char **env, char *var, char *value);
+int			check_syntax(t_mini *mini);
 
 //parsing
 void		parse_init(t_mini *mini);
