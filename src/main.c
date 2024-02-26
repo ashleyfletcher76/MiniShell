@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 17:56:20 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:37:50 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,15 @@ void	prompt_init(t_mini *mini, int exit_code)
 		prompt = readline(give_me_prompt(mini));
 		if (!prompt)
 		{
-			write (1, "exiting...\n", 11);
-			//cleaning staff
-			exit(EXIT_SUCCESS);
+			printf("exit\n");
+			exit(EXIT_SUCCESS) ;
 		}
+		free(mini->prompt_msg);
 		add_history(prompt);
 		mini->prompt = prompt;
 		mini->exitcode = exit_code;
 		parse_init(mini);
-		free(mini->prompt_msg);
-		free(mini->prompt);
+		free(prompt);
 		prompt = NULL;
 		exit_code = mini->exitcode;
 	}
@@ -79,7 +78,6 @@ void	configure_terminal(void)
 	term.c_lflag |= (ECHO | ICANON | ISIG);
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	printf(ANSI_COLOR_RESET "" ANSI_COLOR_RESET);
 }
 
 void	leaks()

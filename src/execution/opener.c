@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:55:36 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:22:26 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	dup_saver(t_pipex *pipex, int flag)
 		{
 			perror("dup");
 			free_struct(pipex);
-			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 			{
 				if (pipex->commands->input_index != 0)
 					input_dup2(pipex->fd_in_orj, pipex);
@@ -40,7 +40,7 @@ void	dup_saver(t_pipex *pipex, int flag)
 		{
 			perror("dup");
 			free_struct(pipex);
-			if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 			{
 				if (pipex->commands->input_index != 0)
 					input_dup2(pipex->fd_in_orj, pipex);
@@ -64,7 +64,7 @@ int	input_opener(t_pipex *pipex, char *s)
 	{
 		perror("minihell: input");
 		free_struct(pipex);
-		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);
@@ -87,7 +87,7 @@ int	output_opener(t_pipex *pipex, char *s)
 	{
 		perror("minishell: output");
 		free_struct(pipex);
-		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);
@@ -110,7 +110,7 @@ int	output_append_opener(t_pipex *pipex, char *s)
 	{
 		perror("minishell: output");
 		free_struct(pipex);
-		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);
@@ -130,7 +130,7 @@ void	dup2er(int input, int output, t_pipex *pipex)
 	{
 		perror("dup2");
 		free_struct(pipex);
-		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);
@@ -145,7 +145,7 @@ void	dup2er(int input, int output, t_pipex *pipex)
 	{
 		perror("dup2");
 		free_struct(pipex);
-		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);
@@ -164,7 +164,7 @@ void	input_dup2(int input,t_pipex *pipex)
 	{
 		perror("dup2");
 		free_struct(pipex);
-		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);

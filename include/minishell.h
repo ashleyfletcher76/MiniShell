@@ -40,6 +40,10 @@ int			promt_help(t_mini *mini, char *user);
 char		*get_env(char **env, char *var);
 char		**update_env(char **env, char *var, char *value);
 int			check_syntax(t_mini *mini);
+int			check_pipe(char *s);
+int			check_input_direction(char *s);
+int			check_output_direction(char *s);
+int			skip_quotes(char *s, int i);
 
 //parsing
 void		parse_init(t_mini *mini);

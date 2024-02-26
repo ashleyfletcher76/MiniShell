@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 18:17:18 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:29:35 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,9 @@ void	direction_handler(t_pipex *pipex)
 	while (i <= direction_count + 1 && direction_count != 0)
 	{
 		if (i == pipex->commands->order_input[input])
-		{
-			input_handler(pipex, input);
-			input++;
-		}
+			input_handler(pipex, input++);
 		if (i == pipex->commands->order_output[output])
-		{
-			output_handler(pipex, output);
-			output++;
-		}
+			output_handler(pipex, output++);
 		i++;
 	}
 }
@@ -50,6 +44,8 @@ void	input_handler(t_pipex *pipex, int input)
 	flag = pipex->commands->indicator_input[input];
 	s = pipex->commands->input[input];
 	fd = 0;
+	if (pipex->nbr_cmd == 0 && flag == TRUE)
+		return ;
 	if (flag == TRUE)
 		return (heredoc_found(pipex, input));
 	fd = input_opener(pipex, s);

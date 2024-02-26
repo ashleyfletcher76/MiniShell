@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 17:16:03 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:20:27 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ void	exec_init(t_mini *mini)
 
 void	init_built_in(t_pipex *pipex, t_mini *mini)
 {
-	if (pipex->commands->input_index != 0)
-		dup_saver(pipex, STDIN_FILENO);
-	if (pipex->commands->output_index != 0)
-		dup_saver(pipex, STDOUT_FILENO);
 	is_built_in(pipex);
 	if (pipex->commands->input_index != 0)
 		input_dup2(pipex->fd_in_orj, pipex);
@@ -46,6 +42,8 @@ void	exec_main(t_mini *mini)
 	pipex.nbr_cmd_builts = commands_size_buildin(mini->commands);
 	if (pipex.nbr_cmd_builts == 1 && pipex.nbr_cmd == 1)
 		return (init_built_in(&pipex, mini));
+	else if (pipex.nbr_cmd == 0)
+		direction_handler(&pipex);
 	get_adresses(&pipex);
 	pipe_all(&pipex);
 	pipe_close(&pipex);
