@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 11:48:28 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:08:58 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_here_doc
 {
-	char		*input;
+	char				*input;
 	struct s_here_doc	*next;
 }	t_here_doc;
 

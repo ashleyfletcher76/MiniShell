@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 12:24:06 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:58:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	prompt_init(t_mini *mini, int exit_code)
 		mini->prompt = prompt;
 		mini->exitcode = exit_code;
 		parse_init(mini);
-		//print_commands(mini);
+		print_commands(mini);
 		exec_init(mini);
 		free(prompt);
 		prompt = NULL;

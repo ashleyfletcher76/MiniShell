@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/26 12:23:21 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:14:26 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 
 	if (*temp)
 	{
+		(*cmd)->cmd_args = ft_realloc_double_char((*cmd)->cmd_args, *j);
 		if (*temp[0] != '\0' && *temp)
 			(*cmd)->cmd_args[*j] = ft_strdup(*temp);
 		else
@@ -25,10 +26,10 @@ void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 		(*j)++;
 		free (*temp);
 		*temp = NULL;
+		(*cmd)->cmd_args[*j] = NULL;
 	}
 	if (indicator == 0)
 	{
-		(*cmd)->cmd_args[*j] = NULL;
 		new_node = lstnew();
 		lstadd_back(cmd, new_node);
 		(*cmd) = (*cmd)->next;
@@ -46,7 +47,6 @@ void	parse_distributor(t_mini *mini)
 	i = 0;
 	j = 0;
 	temp = NULL;
-	//temp = ft_strdup("");
 	command = lstnew();
 	mini->commands = command;
 	while (mini->prompt[i])
@@ -59,7 +59,11 @@ void	parse_distributor(t_mini *mini)
 		else if (mini->prompt[i] == ' ' && mini->prompt[i + 1] != ' ')
 		{
 			if (temp)
+			{
+				command->cmd_args = ft_realloc_double_char(command->cmd_args,j);
 				command->cmd_args[j++] = ft_strdup(temp);
+				command->cmd_args[j] = NULL;
+			}
 			free(temp);
 			temp = NULL;
 		}

@@ -64,6 +64,7 @@ t_commands	*lstlast(t_commands *lst);
 char		*ft_char_join(char *s1, char c);
 void		*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char		*ft_strndup(const char *s1, size_t nbr);
+char		**ft_realloc_double_char(char **ptr, int j);
 
 //builtin
 int			is_built_in(t_pipex *pipex);

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/25 15:17:11 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:13:02 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ char	*handle_dollar(t_mini *mini, int *i)
 			return (exit_code);
 		}
 		(*i)++;
-		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
+		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '=' && mini->prompt[*i] != '$' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
 		{
 			new_temp = ft_char_join(new_temp, mini->prompt[*i]);
 			(*i)++;
 		}
 	}
-	if (mini->prompt[*i] == ' ' || mini->prompt[*i] == '\t' || mini->prompt[*i] == '\0' || mini->prompt[*i] == '\'' || mini->prompt[*i] == '\"' || mini->prompt[*i] == ':' || mini->prompt[*i] == '-')
+	if (mini->prompt[*i] == ' ' || mini->prompt[*i] == '\t' || mini->prompt[*i] == '\0' || mini->prompt[*i] == '\'' || mini->prompt[*i] != '=' || mini->prompt[*i] == '$' || mini->prompt[*i] == '\"' || mini->prompt[*i] == ':' || mini->prompt[*i] == '-')
 		(*i)--;
 	if (!get_env(mini->env, new_temp))
 		return (NULL);
@@ -61,10 +61,10 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 			 quoted_str	 = ft_strdup("");
 			return (ft_char_join(quoted_str, '$'));
 		}
-		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
+		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '=' && mini->prompt[*i] != '$' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
 		{
 			temp_env = ft_char_join(temp_env, mini->prompt[*i]);
-			if (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
+			if (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '=' && mini->prompt[*i] != '$' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
 				(*i)++;
 		}
 	}
