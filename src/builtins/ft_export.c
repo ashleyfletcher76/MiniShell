@@ -3,27 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:42:55 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:31:37 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	export_error_message(char **cmds, int flag)
-{
-	if (flag == 0)
-		ft_put3endl_fd("export", ": not valid in this context: ", cmds[1], 2);
-	else if (flag == 1)
-		ft_put3endl_fd("export", ": not an identifier: ", cmds[1], 2);
-}
-
 void	ft_export(char **commands, char **env, t_pipex *pipex)
 {
-	int i;
-	int	equl_cnt;
+	int	i;
+	int	flag;
 
 	i = 0;
 	if (commands[1] == NULL)
@@ -32,67 +24,96 @@ void	ft_export(char **commands, char **env, t_pipex *pipex)
 		pipex->exitcode = EXIT_SUCCESS;
 		return ;
 	}
-	if (ft_export_error(commands, env) == 1)
-	{
-		pipex->exitcode = EXIT_FAILURE;
+	flag = ft_export_error(pipex, commands);
+	if (flag == FALSE)
 		return ;
-	}
-	equl_cnt = ft_count_equal(commands[1]);
-	while(env[i] != NULL && equl_cnt != 0)
+	else if (flag == 2)
+		append_export(commands, env);
+	else
+		normal_export(commands, env);
+	pipex->exitcode = EXIT_SUCCESS;
+}
+
+void	append_export(char **comds, char **env)
+{
+	char	*var;
+	char	*val;
+	int		equal;
+	int		i;
+
+	i = 0;
+	equal = ft_count_equal(comds[1]) - 2;
+	if (equal == -2)
+		return ;
+	if (ft_strchr(comds[1], '=') != NULL)
+		val = ft_strdup(ft_strchr(comds[1], '=') + 1);
+	var = malloc (sizeof(char) * equal);
+	var = ft_strncpy(var, comds[1], equal);
+	while (env[i])
 	{
-		if (ft_strncmp(env[i], commands[1], equl_cnt) == 0)
+		if (ft_strncmp(env[i], var, equal - 1) == 0)
 		{
-			ft_strcpy(env[i], commands[1]);
+			free(var);
+			env[i] = ft_strjoin_freeself(env[i], val);
 			return ;
 		}
 		i++;
 	}
-	ft_export_helper(commands, env, equl_cnt);
-	pipex->exitcode = EXIT_SUCCESS;
+	ft_export_helper(comds, env, var);
 }
 
-int	ft_export_error(char **commands, char **env)
+void	normal_export(char **comds, char **env)
 {
-	if (ft_export_command_check(commands[1]) == FALSE)
-		return (export_error_message(commands, 0), 1);
-	else if (ft_export_command_check(commands[1]) == 2)
-		return (export_error_message(commands, 1), 1);
-	if (commands[2] != NULL)
-	{
-		if (ft_export_error_helper(commands, env) == 1)
-			return (1);
-	}
-	return (0);
-}
-
-int	ft_export_error_helper(char **commands, char **env)
-{
-	int		equal_cnt;
-	int		equal_cnt2;
+	int		equal;
 	int		i;
-	char	*temp;
 
 	i = 0;
-	equal_cnt = ft_count_equal(commands[1]);
-	equal_cnt2 = ft_count_equal(commands[2]);
-	if (equal_cnt == 0 && equal_cnt2 != 0)
+	equal = ft_count_equal(comds[1]) - 1;
+	if (equal == -1)
+		return ;
+	while (env[i])
 	{
-		temp = ft_strjoin (commands[2],commands[1]);
-		while(env[i] != NULL)
+		if (ft_strncmp(env[i], comds[1], equal) == 0)
 		{
-			if (ft_strncmp(env[i], commands[2], equal_cnt2) == 0)
-			{
-				ft_strcpy(env[i], temp);
-				free(temp);
-				return (1);
-			}
-			i++;
+			free(env[i]);
+			env[i] = ft_strdup(comds[1]);
+			return ;
 		}
-		env[i] = env[i - 1];
-		env[i - 1] = temp;
-		env[i + 1] = NULL;
-		return (1);
+		i++;
 	}
-	return (0);
+	ft_export_helper(comds, env, NULL);
 }
 
+void	ft_export_helper(char **commands, char **env, char *var)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	if (var != NULL && env[i] == NULL)
+	{
+		env[i] = env[i - 1];
+		env[i - 1] = ft_strjoin(var, ft_strchr(commands[1], '='));
+		env[i + 1] = NULL;
+	}
+	if (var == NULL && env[i] == NULL)
+	{
+		env[i] = env[i - 1];
+		env[i - 1] = commands[1];
+		env[i + 1] = NULL;
+	}
+	(void)var;
+}
+
+int	ft_export_error(t_pipex *pipex, char **commands)
+{
+	int	flag;
+
+	flag = check_variable(commands[1]);
+	if (flag == FALSE)
+	{
+		export_error_message(pipex, commands, 0);
+	}
+	return (flag);
+}

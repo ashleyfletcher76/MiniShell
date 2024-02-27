@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:52:29 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:32:09 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static char	*strjoin_helper(char *remains, char *array, int *j)
 
 	i = 0;
 	while (remains[i])
-		array[j++] = remains[i++];
+		array[(*j)++] = remains[i++];
+	return (array);
 }
 
 char	*ft_strjoin_freeself(char *remains, char *buffer)
@@ -59,7 +60,7 @@ char	*ft_strjoin_freeself(char *remains, char *buffer)
 	i = 0;
 	j = 0;
 	if (remains)
-		strjoin_helper(remains, array, j);
+		strjoin_helper(remains, array, &j);
 	while (buffer[i])
 		array[j++] = buffer[i++];
 	array[size] = '\0';

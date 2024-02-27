@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:45:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:55:13 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:37:18 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,15 @@ void	ft_unset(char **commands, char **env, t_pipex *pipex)
 		return ;
 	}
 	count_eql = ft_count_equal2(commands[1]);
-	if (count_eql == -1 )
-	{
-		pipex->exitcode = EXIT_FAILURE;
-		return (ft_put3endl_fd("unset: ", commands[1], ": invalid parameter name", 2));
-	}
-	if (ft_export_command_check(commands[1]) == FALSE || ft_export_command_check(commands[1]) == 2)
-	{
-		pipex->exitcode = EXIT_FAILURE;
-		return (ft_put3endl_fd("unset: ", commands[1], ": invalid parameter name", 2));
-	}
+	if (count_eql == -1)
+		return (export_error_message(pipex, commands, 1));
+	if (check_variable(commands[1]) == FALSE)
+		return (export_error_message(pipex, commands, 1));
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], commands[1], count_eql) == 0)
 		{
+			free(env[i]);
 			while (env[i])
 			{
 				env[i] = env[i + 1];

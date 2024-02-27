@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:18:30 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:33:40 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:37:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	ft_export_print(char **env)
 	while (export[++i])
 	{
 		ft_printf("declare -x ");
-		ft_printf("%s\n", export[i]);
+		write(1, export[i], ft_count_equal(export[i]));
+		ft_printf("\"");
+		ft_printf("%s", ft_strchr(export[i], '=') + 1);
+		ft_printf("\"\n");
 	}
 	free_double_array(export);
 }
@@ -61,21 +64,6 @@ void	bouble_sort_char(char **export)
 	}
 }
 
-void	ft_export_helper(char **commands, char **env, int equl_cnt)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	if (equl_cnt != 0)
-	{
-		env[i] = env[i - 1];
-		env[i - 1] = commands[1];
-		env[i + 1] = NULL;
-	}
-}
-
 int	ft_count_equal(char *s)
 {
 	int	i;
@@ -90,23 +78,31 @@ int	ft_count_equal(char *s)
 	return (0);
 }
 
-int	ft_export_command_check(char *s)
+void	export_error_message(t_pipex *pipex, char **cmds, int flag)
+{
+	if (flag == 0)
+		ft_put3endl_fd("minishell: export: `", cmds[1],
+			"': not a valid identifier", 2);
+	else if (flag == 1)
+		ft_put3endl_fd("minishell: unset: `",
+			cmds[1], "': not a valid identifier", 2);
+	pipex->exitcode = 1;
+}
+
+int	check_variable(char *s)
 {
 	int	i;
-	int	count_eql;
 
-	count_eql = ft_count_equal(s);
 	i = 0;
-	if ((s[i] >= '0' && s[i] <= '9') || s[i] == '=')
-		return (2);
-	while (s[i])
+	if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+		&& s[i] != '_')
+		return (FALSE);
+	while (s[i] != '=' && s[i])
 	{
+		if (s[i] == '+' && s[i + 1] == '=')
+			return (2);
 		if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')
-			|| s[i] == '-' || s[i] == '/' || s[i] == ':'
-			|| (s[i] >= '0' && s[i] <= '9') || s[i] == '_'
-			|| s[i] == '=' || s[i] == '$' || s[i] == ' '))
-			return (FALSE);
-		if ((count_eql == 0 && s[i] == '-') || (i < count_eql && s[i] == '-'))
+				|| (s[i] >= '0' && s[i] <= '9') || s[i] == '_'))
 			return (FALSE);
 		i++;
 	}

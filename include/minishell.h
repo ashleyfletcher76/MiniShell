@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 14:46:20 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:20:41 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,19 @@ void		ft_cd(char **command, char **env, t_pipex *pipex);
 void		ft_exit(char **commands, t_pipex *pipex);
 int			ft_exit_helper(char *code);
 void		ft_export(char **commands, char **env, t_pipex *pipex);
-int			ft_export_error(char **commands, char **env);
-int			ft_export_error_helper(char **commands, char **env);
+int			ft_export_error(t_pipex *pipex, char **commands);
 int			ft_count_equal(char *s);
-void		ft_export_helper(char **commands, char **env, int equl_cnt);
+void		ft_export_helper(char **commands, char **env, char *var);
 void		ft_export_print(char **env);
-int			ft_export_command_check(char *s);
-void		export_error_message(char **commands, int flag);
+void		export_error_message(t_pipex *pipex, char **cmds, int flag);
 void		bouble_sort_char(char **export);
 void		ft_unset(char **commands, char **env, t_pipex *pipex);
 void		ft_pwd(t_pipex *pipex);
 void		ft_env(char **env, t_pipex *pipex);
 void		ft_echo(char **commands, t_pipex *pipex);
+int			check_variable(char *s);
+void		append_export(char **comds, char **env);
+void		normal_export(char **comds, char **env);
 
 //exec
 void		exec_init(t_mini *mini);

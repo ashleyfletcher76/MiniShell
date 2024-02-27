@@ -1,16 +1,13 @@
+
+
 // echo $1234
-// export TEST="ls       -l     - a"
+
 
 
 
 
 // mkdir test_dir ; cd test_dir ; rm -rf ../test_dir
 
-
-
-syntax error
-// | test
-// echo > <
 
 
 // exit -9223372036854775810
