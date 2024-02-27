@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/26 15:56:43 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/27 12:23:27 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,19 @@ NAME = minishell
 LIBFTDIR = libft
 LIBFT = $(LIBFTDIR)/libft.a
 
-$(OBJ_DIR)/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME) : $(OBJ) $(LIBFT)
+$(NAME) : $(OBJ_DIR) $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline
 	echo "$(COLOUR_MAGENTA)Minishell compiled successfully!$(COLOUR_END)"
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)/utils
+	mkdir -p $(OBJ_DIR)/parsing
+	mkdir -p $(OBJ_DIR)/builtins
+	mkdir -p $(OBJ_DIR)/execution
+
+$(OBJ_DIR)/%.o: src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	make -C $(LIBFTDIR) && make clean -C $(LIBFTDIR)
@@ -55,7 +62,7 @@ $(LIBFT):
 all : $(NAME)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) -rf $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
