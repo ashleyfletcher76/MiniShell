@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 11:56:01 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:01:53 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_built_in(t_pipex *pipex, t_mini *mini)
 void	exec_main(t_mini *mini)
 {
 	t_pipex	pipex;
-	
+
 	pipex.nbr_cmd = commands_size_all(mini->commands);
 	pipex.env = mini->env;
 	pipex.commands = mini->commands;

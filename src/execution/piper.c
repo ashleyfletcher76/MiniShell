@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 11:45:29 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:00:55 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	first_son(t_pipex *pipex, int i)
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	execve(path, pipex->commands->cmd_args, pipex->env);
 }
-
 
 void	last_son(t_pipex *pipex, int i)
 {
