@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 11:22:39 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:20:15 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ char	*parse_double_quote(t_mini *mini, int *i)
 	char	*quoted_str;
 
 	quoted_str = NULL;
-	(*i)++;
-	if (mini->prompt[*i] == '\"')
+	if (mini->prompt[++(*i)] == '\"')
 		return (ft_strdup(""));
 	while (mini->prompt[*i] != '\"' && mini->prompt[*i] != '\0')
 	{
@@ -37,7 +36,8 @@ char	*parse_double_quote(t_mini *mini, int *i)
 			quoted_str = ft_strdup("");
 		quoted_str = dquote_helper(quoted_str);
 	}
-	(*i)++;
+	//if(!token_dollor(mini->prompt[*i]))
+		//(*i)++;
 	return (quoted_str);
 }
 

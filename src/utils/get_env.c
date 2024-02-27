@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:07 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/23 15:53:40 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:45:36 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_env(char **env, char *var)
 	i = 0;
 	while (env[i])
 	{
-		if (strncmp(env[i], var, len - 1) == 0)
+		if (ft_strncmp(env[i], var, len) == 0)
 			return (env[i] + len + 1);
 		i++;
 	}
@@ -55,4 +55,22 @@ char	**update_env(char **env, char *var, char *value)
 		return (env);
 	}
 	return (env);
+}
+
+char	**dup_env(char **env)
+{
+	char	**dup;
+	int		size;
+	int		i;
+
+	i = 0;
+	size = array_size(env);
+	dup = malloc(sizeof(char *) * size + 1);
+	while(env[i])
+	{
+		dup[i] = ft_strdup(env[i]);
+		i++;
+	}
+	dup[i] = NULL;
+	return (dup);
 }

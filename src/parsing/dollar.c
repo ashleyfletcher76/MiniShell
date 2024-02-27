@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 11:01:34 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:11:50 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*handle_dollar(t_mini *mini, int *i)
 	new_temp = NULL;
 	if (mini->prompt[*i] == '$')
 	{
+		if (mini->prompt[*i + 1] == '\"')
+			return (NULL);
 		if (skip_whitespace(mini->prompt[*i + 1]))
 			return (ft_strdup("$"));
 		if (mini->prompt[*i + 1] == '?')
