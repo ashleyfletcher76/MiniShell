@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:21:29 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 11:22:19 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:02:28 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	parse_input(t_mini *mini, int *i, t_commands **cmd)
 void	parse_output(t_mini *mini, int *i, t_commands **cmd)
 {
 	char	*temp;
-	int		flag = 0;
+	int		flag;
 
+	flag = 0;
 	temp = NULL;
 	(*i)++;
 	if (mini->prompt[*i] == '>')

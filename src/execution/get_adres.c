@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_adres.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 17:07:36 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:30:31 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "structs.h"
 
 void	get_adresses(t_pipex *pipex)
 {
@@ -87,7 +86,7 @@ char	*giveme_path(char *command, t_pipex *pipex)
 
 void	file_check(char *command, t_pipex *pipex)
 {
-	struct stat path_stat;
+	struct stat	path_stat;
 
 	if (stat(command, &path_stat) == 0)
 	{

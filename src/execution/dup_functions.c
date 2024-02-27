@@ -1,23 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   opener.c                                           :+:      :+:    :+:   */
+/*   dup_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:30:06 by asfletch         ###   ########.fr       */
+/*   Created: 2024/02/27 14:14:47 by asfletch          #+#    #+#             */
+/*   Updated: 2024/02/27 14:31:38 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	dup_saver_input(t_pipex *pipex)
+void	dup2er_input(int input, int output, t_pipex *pipex)
 {
-	pipex->fd_in_orj = dup(STDIN_FILENO);
-	if (pipex->fd_in_orj == -1)
+	if (dup2(input, STDIN_FILENO) == -1)
 	{
-		perror("dup");
+		perror("dup2");
+		free_struct(pipex);
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			|| pipex->nbr_cmd == 0)
+		{
+			if (pipex->commands->input_index != 0)
+				input_dup2(pipex->fd_in_orj, pipex);
+			if (pipex->commands->output_index != 0)
+				output_dup2(pipex->fd_out_orj, pipex);
+			prompt_init(pipex->mini, 9);
+			return ;
+		}
+		exit(9);
+	}
+	dup2er_output(output, pipex);
+}
+
+void	dup2er_output(int output, t_pipex *pipex)
+{
+	if (dup2(output, STDOUT_FILENO) == -1)
+	{
+		perror("dup2");
 		free_struct(pipex);
 		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			|| pipex->nbr_cmd == 0)
@@ -33,12 +53,11 @@ void	dup_saver_input(t_pipex *pipex)
 	}
 }
 
-void	dup_saver_output(t_pipex *pipex)
+void	input_dup2(int input, t_pipex *pipex)
 {
-	pipex->fd_out_orj = dup(STDOUT_FILENO);
-	if (pipex->fd_out_orj == -1)
+	if (dup2(input, STDIN_FILENO) == -1)
 	{
-		perror("dup");
+		perror("dup2");
 		free_struct(pipex);
 		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			|| pipex->nbr_cmd == 0)
@@ -54,75 +73,21 @@ void	dup_saver_output(t_pipex *pipex)
 	}
 }
 
-int	input_opener(t_pipex *pipex, char *s)
+void	output_dup2(int input, t_pipex *pipex)
 {
-	int	fd;
-
-	fd = 0;
-	fd = open(s, O_RDONLY);
-	if (fd < 0)
+	if (dup2(input, STDOUT_FILENO) == -1)
 	{
-		perror("minihell: input");
+		perror("dup2");
 		free_struct(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
+		if (pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);
 			if (pipex->commands->output_index != 0)
 				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 1);
-			return (1);
+			prompt_init(pipex->mini, 9);
+			return ;
 		}
-		exit(EXIT_FAILURE);
+		exit(9);
 	}
-	return (fd);
-}
-
-int	output_opener(t_pipex *pipex, char *s)
-{
-	int	fd;
-
-	fd = open(s, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (fd < 0)
-	{
-		perror("minishell: output");
-		free_struct(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
-		{
-			if (pipex->commands->input_index != 0)
-				input_dup2(pipex->fd_in_orj, pipex);
-			if (pipex->commands->output_index != 0)
-				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 1);
-			return (1);
-		}
-		exit(EXIT_FAILURE);
-	}
-	return (fd);
-}
-
-int	output_append_opener(t_pipex *pipex, char *s)
-{
-	int	fd;
-
-	fd = open(s, O_CREAT | O_APPEND | O_WRONLY, 0644);
-	if (fd < 0)
-	{
-		perror("minishell: output");
-		free_struct(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
-		{
-			if (pipex->commands->input_index != 0)
-				input_dup2(pipex->fd_in_orj, pipex);
-			if (pipex->commands->output_index != 0)
-				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 1);
-			return (1);
-		}
-		exit(EXIT_FAILURE);
-	}
-	return (fd);
 }

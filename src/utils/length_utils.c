@@ -6,11 +6,11 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:27:17 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 12:01:45 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:37:02 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	array_size(char **s)
 {

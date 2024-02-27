@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:07 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/23 15:53:40 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:29:19 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 char	*get_env(char **env, char *var)
 {
@@ -21,7 +21,7 @@ char	*get_env(char **env, char *var)
 	i = 0;
 	while (env[i])
 	{
-		if (strncmp(env[i], var, len - 1) == 0)
+		if (ft_strncmp(env[i], var, len) == 0)
 			return (env[i] + len + 1);
 		i++;
 	}

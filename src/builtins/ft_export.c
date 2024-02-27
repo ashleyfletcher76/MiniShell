@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:55:07 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:42:55 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	export_error_message(char **cmds, int flag)
+{
+	if (flag == 0)
+		ft_put3endl_fd("export", ": not valid in this context: ", cmds[1], 2);
+	else if (flag == 1)
+		ft_put3endl_fd("export", ": not an identifier: ", cmds[1], 2);
+}
 
 void	ft_export(char **commands, char **env, t_pipex *pipex)
 {
@@ -46,9 +54,9 @@ void	ft_export(char **commands, char **env, t_pipex *pipex)
 int	ft_export_error(char **commands, char **env)
 {
 	if (ft_export_command_check(commands[1]) == FALSE)
-		return (ft_put3endl_fd("export", ": not valid in this context: ", commands[1], 2), 1);
+		return (export_error_message(commands, 0), 1);
 	else if (ft_export_command_check(commands[1]) == 2)
-		return (ft_put3endl_fd("export", ": not an identifier: ", commands[1], 2), 1);
+		return (export_error_message(commands, 1), 1);
 	if (commands[2] != NULL)
 	{
 		if (ft_export_error_helper(commands, env) == 1)
@@ -82,7 +90,7 @@ int	ft_export_error_helper(char **commands, char **env)
 		}
 		env[i] = env[i - 1];
 		env[i - 1] = temp;
-		env[i + 1] = NULL; 
+		env[i + 1] = NULL;
 		return (1);
 	}
 	return (0);

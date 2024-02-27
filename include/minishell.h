@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
+/*   Updated: 2024/02/27 14:46:20 by asfletch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL
 #define MINISHELL
 
@@ -14,7 +26,7 @@
 # include <termios.h>
 # include <limits.h>
 
-volatile sig_atomic_t	sigint_received;
+volatile sig_atomic_t	g_sigint_received;
 
 //main nessecaries
 void		prompt_init(t_mini *mini, int exit_code);
@@ -50,9 +62,8 @@ int			no_whitespace_skip(char c);
 //parsing
 void		parse_init(t_mini *mini);
 void		parse_distributor(t_mini *mini, t_commands *command, int i,  int j);
-void		finalize_command(char **temp, int *j, t_commands **cmd, int indicator);
+void		finalize_cmd(char **temp, int *j, t_commands **cmd, int indicator);
 void		print_commands(t_mini *mini);
-void		parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd);
 char		*parse_double_quote(t_mini *mini, int *i);
 char		*dquote_helper(char *quoted_str);
 char		*parse_single_quote(t_mini *mini, int *i);
@@ -65,6 +76,7 @@ void		update_input_arg(t_commands **cmd, char **temp, int flag);
 void		update_output_arg(t_commands **cmd, char **temp, int flag);
 char		*handle_dollar(t_mini *mini, int *i);
 char		*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str);
+char		*dollar_quotes_helper(t_mini *mini, char *temp_env, int *i);
 
 void		add_cmd_args(t_commands *cmd, char **temp,int *j);
 char		*check_other_cmds(t_mini *mini, t_commands *cmd, char *temp, int *i);
@@ -76,8 +88,9 @@ t_commands	*lstlast(t_commands *lst);
 char		*ft_char_join(char *s1, char c);
 void		*ft_realloc(void *ptr, int old_size, int new_size);
 char		*ft_strndup(const char *s1, size_t nbr);
-char		**ft_realloc_double_char(char **ptr, int j);
+char		**ft_realloc_char(char **ptr, int j);
 int			*ft_realloc_int(int *ptr, int j);
+void		error_message(int flag);
 
 //builtin
 int			is_built_in(t_pipex *pipex);
@@ -96,6 +109,7 @@ int			ft_count_equal(char *s);
 void		ft_export_helper(char **commands, char **env, int equl_cnt);
 void		ft_export_print(char **env);
 int			ft_export_command_check(char *s);
+void		export_error_message(char **commands, int flag);
 void		bouble_sort_char(char **export);
 void		ft_unset(char **commands, char **env, t_pipex *pipex);
 void		ft_pwd(t_pipex *pipex);
@@ -124,11 +138,13 @@ void		input_handler(t_pipex *pipex, int input);
 void		output_handler(t_pipex *pipex, int output);
 void		output_dup2(int input,t_pipex *pipex);
 void		input_dup2(int input,t_pipex *pipex);
-void		dup2er(int input, int output, t_pipex *pipex);
+void		dup2er_input(int input, int output, t_pipex *pipex);
+void		dup2er_output(int output, t_pipex *pipex);
 int			output_opener(t_pipex *pipex, char *s);
 int			output_append_opener(t_pipex *pipex, char *s);
 int			input_opener(t_pipex *pipex, char *s);
-void		dup_saver(t_pipex *pipex, int flag);
+void		dup_saver_input(t_pipex *pipex);
+void		dup_saver_output(t_pipex *pipex);
 void		heredoc_found(t_pipex *pipex, int input);
 
 void		configure_terminal(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 17:01:00 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:45:02 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void	waiter(t_pipex *pipex)
 		waitpid(pipex->pids[i++], &status, 0);
 		pipex->exitcode = WEXITSTATUS(status);
 	}
-	sigint_received = 0;
+	g_sigint_received = 0;
 }

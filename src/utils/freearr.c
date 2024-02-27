@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   freearr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:00:46 by asfletch          #+#    #+#             */
-/*   Updated: 2024/01/29 15:31:40 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:36:34 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	freearr(char **arr)
 {

@@ -6,14 +6,14 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 10:22:32 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:52:50 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-volatile sig_atomic_t	sigint_received = 0;
+volatile sig_atomic_t	g_sigint_received = 0;
 
 void	sig_init(void)
 {
@@ -37,7 +37,7 @@ void	prompt_init(t_mini *mini, int exit_code)
 	configure_terminal();
 	while (1)
 	{
-		sigint_received = 0;
+		g_sigint_received = 0;
 		prompt = readline(give_me_prompt(mini));
 		if (!prompt)
 		{
@@ -62,7 +62,7 @@ void	sigint_handler(int sig)
 	(void)sig;
 
 	write (1, "\n", 1);
-	if (!sigint_received && sig == SIGINT)
+	if (!g_sigint_received && sig == SIGINT)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);

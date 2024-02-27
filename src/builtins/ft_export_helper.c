@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:18:30 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 09:55:05 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:33:40 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ int	ft_export_command_check(char *s)
 		return (2);
 	while (s[i])
 	{
-		if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '-' || s[i] == '/' || s[i] == ':' || (s[i] >= '0' && s[i] <= '9') || s[i] == '_' || s[i] == '=' || s[i] == '$' || s[i] == ' '))
+		if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')
+			|| s[i] == '-' || s[i] == '/' || s[i] == ':'
+			|| (s[i] >= '0' && s[i] <= '9') || s[i] == '_'
+			|| s[i] == '=' || s[i] == '$' || s[i] == ' '))
 			return (FALSE);
 		if ((count_eql == 0 && s[i] == '-') || (i < count_eql && s[i] == '-'))
 			return (FALSE);

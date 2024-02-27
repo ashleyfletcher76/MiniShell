@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/21 17:41:08 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:52:29 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
+static char	*strjoin_helper(char *remains, char *array, int *j)
+{
+	int	i;
+
+	i = 0;
+	while (remains[i])
+		array[j++] = remains[i++];
+}
+
 char	*ft_strjoin_freeself(char *remains, char *buffer)
 {
 	char			*array;
@@ -50,11 +59,7 @@ char	*ft_strjoin_freeself(char *remains, char *buffer)
 	i = 0;
 	j = 0;
 	if (remains)
-	{
-		while (remains[i])
-			array[j++] = remains[i++];
-		i = 0;
-	}
+		strjoin_helper(remains, array, j);
 	while (buffer[i])
 		array[j++] = buffer[i++];
 	array[size] = '\0';

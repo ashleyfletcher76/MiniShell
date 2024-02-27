@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:04:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 12:06:56 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:59:03 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 static void	*allocate_and_zero(size_t size)
 {
@@ -70,11 +70,12 @@ int	*ft_realloc_int(int *ptr, int j)
 	return (new_ptr);
 }
 
-char	**ft_realloc_double_char(char **ptr, int j)
+char	**ft_realloc_char(char **ptr, int j)
 {
 	char	**new_ptr;
-	int i = 0;
+	int		i;
 
+	i = 0;
 	if (!ptr)
 	{
 		ptr = ft_calloc(1, sizeof(char *) * 2);

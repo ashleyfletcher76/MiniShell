@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 12:00:39 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:31:53 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	direction_handler(t_pipex *pipex)
 	input = 0;
 	output = 0;
 	i = 1;
-	dup_saver(pipex, STDIN_FILENO);
-	dup_saver(pipex, STDOUT_FILENO);
+	dup_saver_input(pipex);
+	dup_saver_output(pipex);
 	dir_count = pipex->commands->input_index + pipex->commands->output_index;
 	while (i <= dir_count + 1 && dir_count != 0)
 	{
@@ -70,7 +70,6 @@ void	output_handler(t_pipex *pipex, int output)
 		fd = output_opener(pipex, s);
 	else
 		fd = output_append_opener(pipex, s);
-
 	output_dup2(fd, pipex);
 	close(fd);
 }

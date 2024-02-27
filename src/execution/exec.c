@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 12:01:53 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:30:56 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_built_in(t_pipex *pipex, t_mini *mini)
 	if (pipex->commands->output_index != 0)
 		output_dup2(pipex->fd_out_orj, pipex);
 	mini->exitcode = pipex->exitcode;
-	//clean
 	return ;
 }
 

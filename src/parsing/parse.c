@@ -6,20 +6,19 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/27 12:01:06 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:46:41 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
+void	finalize_cmd(char **temp, int *j, t_commands **cmd, int indicator)
 {
 	t_commands	*new_node;
 
 	if (*temp)
 	{
-		(*cmd)->cmd_args = ft_realloc_double_char((*cmd)->cmd_args, *j);
+		(*cmd)->cmd_args = ft_realloc_char((*cmd)->cmd_args, *j);
 		if (*temp[0] != '\0' && *temp)
 			(*cmd)->cmd_args[*j] = ft_strdup(*temp);
 		else
@@ -38,11 +37,11 @@ void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 	}
 }
 
-void	add_cmd_args(t_commands *cmd, char **temp,int *j)
+void	add_cmd_args(t_commands *cmd, char **temp, int *j)
 {
 	if (temp)
 	{
-		cmd->cmd_args = ft_realloc_double_char(cmd->cmd_args, *j);
+		cmd->cmd_args = ft_realloc_char(cmd->cmd_args, *j);
 		cmd->cmd_args[(*j)++] = ft_strdup(*temp);
 		cmd->cmd_args[*j] = NULL;
 	}
@@ -51,9 +50,9 @@ void	add_cmd_args(t_commands *cmd, char **temp,int *j)
 char	*check_other_cmds(t_mini *mini, t_commands *cmd, char *temp, int *i)
 {
 	if (mini->prompt[*i] == '<')
-			parse_input(mini, i, &cmd);
+		parse_input(mini, i, &cmd);
 	else if (mini->prompt[*i] == '>')
-			parse_output(mini, i, &cmd);
+		parse_output(mini, i, &cmd);
 	else if (mini->prompt[*i] == '\'')
 		temp = ft_strjoin_freeself(temp, parse_single_quote(mini, i));
 	else if (mini->prompt[*i] == '\"')
@@ -73,12 +72,11 @@ void	parse_distributor(t_mini *mini, t_commands *command, int i, int j)
 
 	temp = NULL;
 	mini->commands = command;
-
 	while (mini->prompt[i])
 	{
 		if (mini->prompt[i] == '|')
 		{
-			finalize_command(&temp, &j, &command, 0);
+			finalize_cmd(&temp, &j, &command, 0);
 			i++;
 		}
 		else if (mini->prompt[i] == ' ' && mini->prompt[i + 1] != ' ')
@@ -91,7 +89,7 @@ void	parse_distributor(t_mini *mini, t_commands *command, int i, int j)
 		temp = check_other_cmds(mini, command, temp, &i);
 	}
 	if (temp)
-		finalize_command(&temp, &j, &command, 1);
+		finalize_cmd(&temp, &j, &command, 1);
 }
 
 void	parse_init(t_mini *mini)

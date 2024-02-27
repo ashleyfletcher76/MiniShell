@@ -6,12 +6,11 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 12:00:55 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:44:50 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "structs.h"
 
 void	pipe_all(t_pipex *pipex)
 {
@@ -22,7 +21,7 @@ void	pipe_all(t_pipex *pipex)
 	pipex->pids = malloc((pipex->nbr_cmd) * sizeof(pid_t));
 	if (pipex->pids == NULL)
 		return (free_struct(pipex), exit(EXIT_FAILURE));
-	sigint_received = 1;
+	g_sigint_received = 1;
 	while (i < pipex->nbr_cmd)
 	{
 		forker(pipex, i);
@@ -98,17 +97,4 @@ void	daughters(t_pipex *pipex, int i)
 		exit(EXIT_SUCCESS);
 	path = get_a_path(pipex->commands->cmd_args[0], pipex);
 	execve(path, pipex->commands->cmd_args, pipex->env);
-}
-
-void	pipe_close(t_pipex *pipex)
-{
-	int	i;
-
-	i = 0;
-	while (i < pipex->nbr_cmd - 1)
-	{
-		close(pipex->pipel[i][READ_END]);
-		close(pipex->pipel[i][WRITE_END]);
-		i++;
-	}
 }

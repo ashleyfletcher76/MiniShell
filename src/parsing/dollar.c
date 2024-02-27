@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 11:01:34 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:12:08 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,25 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 		if (skip_whitespace(mini->prompt[*i]) || mini->prompt[*i] == '\"')
 		{
 			if (!quoted_str)
-			 quoted_str	 = ft_strdup("");
+				quoted_str = ft_strdup("");
 			return (ft_char_join(quoted_str, '$'));
 		}
-		while (token_dollor(mini->prompt[*i]))
-		{
-			temp_env = ft_char_join(temp_env, mini->prompt[*i]);
-			if (token_dollor(mini->prompt[*i]))
-				(*i)++;
-		}
+		temp_env = dollar_quotes_helper(mini, temp_env, i);
 	}
 	if (!get_env(mini->env, temp_env))
 		return (quoted_str);
 	temp_env = ft_strdup(get_env(mini->env, temp_env));
 	quoted_str = ft_strjoin_freeself(quoted_str, temp_env);
 	return (quoted_str);
+}
+
+char	*dollar_quotes_helper(t_mini *mini, char *temp_env, int *i)
+{
+	while (token_dollor(mini->prompt[*i]))
+	{
+		temp_env = ft_char_join(temp_env, mini->prompt[*i]);
+		if (token_dollor(mini->prompt[*i]))
+			(*i)++;
+	}
+	return (temp_env);
 }
