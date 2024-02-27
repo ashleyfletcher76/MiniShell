@@ -58,6 +58,8 @@ int			check_output_direction(char *s);
 int			skip_quotes(char *s, int i);
 int			skip_whitespace(char c);
 int			no_whitespace_skip(char c);
+int			token_dollor(char c);
+char		**dup_env(char **env);
 
 //parsing
 void		parse_init(t_mini *mini);

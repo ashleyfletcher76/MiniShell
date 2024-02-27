@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:07 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:29:19 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:55:33 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,22 @@ char	**update_env(char **env, char *var, char *value)
 		return (env);
 	}
 	return (env);
+}
+
+char	**dup_env(char **env)
+{
+	char	**dup;
+	int		size;
+	int		i;
+
+	i = 0;
+	size = array_size(env);
+	dup = malloc(sizeof(char *) * size + 1);
+	while(env[i])
+	{
+		dup[i] = ft_strdup(env[i]);
+		i++;
+	}
+	dup[i] = NULL;
+	return (dup);
 }

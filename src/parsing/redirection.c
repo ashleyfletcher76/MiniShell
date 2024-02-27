@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:21:29 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 14:02:28 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:55:18 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*parse_helper(t_mini *mini, int *i, char *temp)
 			if (!temp)
 				temp = ft_strdup("");
 			temp = ft_strjoin_freeself(temp, parse_double_quote(mini, i));
+			(*i)++;
 		}
 		if (no_whitespace_skip(mini->prompt[*i]) && mini->prompt[*i] != '\"'
 			&& mini->prompt[*i] != '|')
