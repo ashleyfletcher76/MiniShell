@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directions_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 19:29:35 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:42:46 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	direction_handler(t_pipex *pipex)
 {
 	int	i;
-	int	direction_count;
+	int	dir_count;
 	int	input;
 	int	output;
 
@@ -24,13 +24,19 @@ void	direction_handler(t_pipex *pipex)
 	i = 1;
 	dup_saver(pipex, STDIN_FILENO);
 	dup_saver(pipex, STDOUT_FILENO);
-	direction_count = pipex->commands->input_index + pipex->commands->output_index;
-	while (i <= direction_count + 1 && direction_count != 0)
+	dir_count = pipex->commands->input_index + pipex->commands->output_index;
+	while (i <= dir_count + 1 && dir_count != 0)
 	{
-		if (i == pipex->commands->order_input[input])
-			input_handler(pipex, input++);
-		if (i == pipex->commands->order_output[output])
-			output_handler(pipex, output++);
+		if (pipex->commands->input != NULL)
+		{
+			if (i == pipex->commands->order_input[input])
+				input_handler(pipex, input++);
+		}
+		if (pipex->commands->output != NULL)
+		{
+			if (i == pipex->commands->order_output[output])
+				output_handler(pipex, output++);
+		}
 		i++;
 	}
 }

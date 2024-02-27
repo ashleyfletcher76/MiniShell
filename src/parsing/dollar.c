@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/26 13:13:02 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:01:34 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	token_dollor(char c)
+{
+	char	*token;
+	int		i;
+
+	i = 0;
+	token = " \t\'\"=$:-\0|/";
+	while (i < 12)
+	{
+		if (token[i] == c)
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
 
 char	*handle_dollar(t_mini *mini, int *i)
 {
@@ -20,7 +36,7 @@ char	*handle_dollar(t_mini *mini, int *i)
 	new_temp = NULL;
 	if (mini->prompt[*i] == '$')
 	{
-		if (mini->prompt[*i + 1] == ' ' || mini->prompt[*i] == '\t' || mini->prompt[*i + 1] == '\0')
+		if (skip_whitespace(mini->prompt[*i + 1]))
 			return (ft_strdup("$"));
 		if (mini->prompt[*i + 1] == '?')
 		{
@@ -29,14 +45,10 @@ char	*handle_dollar(t_mini *mini, int *i)
 			return (exit_code);
 		}
 		(*i)++;
-		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '=' && mini->prompt[*i] != '$' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
-		{
-			new_temp = ft_char_join(new_temp, mini->prompt[*i]);
-			(*i)++;
-		}
+		while (token_dollor(mini->prompt[*i]))
+			new_temp = ft_char_join(new_temp, mini->prompt[(*i)++]);
 	}
-	if (mini->prompt[*i] == ' ' || mini->prompt[*i] == '\t' || mini->prompt[*i] == '\0' || mini->prompt[*i] == '\'' || mini->prompt[*i] != '=' || mini->prompt[*i] == '$' || mini->prompt[*i] == '\"' || mini->prompt[*i] == ':' || mini->prompt[*i] == '-')
-		(*i)--;
+	(*i)--;
 	if (!get_env(mini->env, new_temp))
 		return (NULL);
 	new_temp = ft_strdup(get_env(mini->env, new_temp));
@@ -54,17 +66,17 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 		if (!quoted_str)
 			quoted_str = ft_strdup("");
 		if (mini->prompt[*i] == '?')
-				return ((*i)++, ft_strjoin(quoted_str, ft_itoa(mini->exitcode)));
-		if (mini->prompt[*i] == ' ' || mini->prompt[*i] == '\0' || mini->prompt[*i] == '\"')
+			return ((*i)++, ft_strjoin(quoted_str, ft_itoa(mini->exitcode)));
+		if (skip_whitespace(mini->prompt[*i]) || mini->prompt[*i] == '\"')
 		{
 			if (!quoted_str)
 			 quoted_str	 = ft_strdup("");
 			return (ft_char_join(quoted_str, '$'));
 		}
-		while (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '=' && mini->prompt[*i] != '$' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
+		while (token_dollor(mini->prompt[*i]))
 		{
 			temp_env = ft_char_join(temp_env, mini->prompt[*i]);
-			if (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\0' && mini->prompt[*i] != '\t' && mini->prompt[*i] != '=' && mini->prompt[*i] != '$' && mini->prompt[*i] != '\'' && mini->prompt[*i] != '\"' && mini->prompt[*i] != ':' && mini->prompt[*i] != '-')
+			if (token_dollor(mini->prompt[*i]))
 				(*i)++;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:33 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/25 11:32:31 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:18:43 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ char	*parse_single_quote(t_mini *mini, int *i)
 			quoted_str = ft_strdup("");
 		quoted_str = quote_helper(quoted_str);
 	}
-	if (mini->prompt[*i] == '\'' && mini->prompt[*i] == ' ' && mini->prompt[*i] == '\t' && mini->prompt[*i + 1] != '\0' && mini->prompt[*i + 1] != '\"' && mini->prompt[*i + 1] != '\"')
-		(*i)++;
+	(*i)++;
 	return (quoted_str);
 }
 

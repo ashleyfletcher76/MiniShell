@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opener.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/26 19:22:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:56:32 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	dup_saver(t_pipex *pipex, int flag)
 		{
 			perror("dup");
 			free_struct(pipex);
-			if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
+			if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+				|| pipex->nbr_cmd == 0)
 			{
 				if (pipex->commands->input_index != 0)
 					input_dup2(pipex->fd_in_orj, pipex);
@@ -40,7 +41,8 @@ void	dup_saver(t_pipex *pipex, int flag)
 		{
 			perror("dup");
 			free_struct(pipex);
-			if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
+			if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+				|| pipex->nbr_cmd == 0)
 			{
 				if (pipex->commands->input_index != 0)
 					input_dup2(pipex->fd_in_orj, pipex);
@@ -64,7 +66,8 @@ int	input_opener(t_pipex *pipex, char *s)
 	{
 		perror("minihell: input");
 		free_struct(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1) || pipex->nbr_cmd == 0)
+		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
+			|| pipex->nbr_cmd == 0)
 		{
 			if (pipex->commands->input_index != 0)
 				input_dup2(pipex->fd_in_orj, pipex);

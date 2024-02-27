@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:14:59 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/26 12:53:11 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:24:00 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ t_commands	*lstnew(void)
 	new = (t_commands *)malloc(sizeof(t_commands));
 	if (new == NULL)
 		return (NULL);
-	new->cmd_args = ft_calloc(1, sizeof(char *) * 2);
-	new->input = ft_calloc(1, sizeof(char *) * 50);
-	new->output = ft_calloc(1, sizeof(char *) * 50);
-	new->indicator_input = ft_calloc(1, sizeof(int *) * 50);
-	new->indicator_output = ft_calloc(1, sizeof(int *) * 50);
-	new->order_input = ft_calloc(1, sizeof(int *) * 50);
-	new->order_output = ft_calloc(1, sizeof(int *) * 50);
+	new->cmd_args = NULL;
+	new->input = NULL;
+	new->output = NULL;
+	new->indicator_input = NULL;
+	new->indicator_output = NULL;
+	new->order_input = NULL;
+	new->order_output = NULL;
 	new->input_index = 0;
 	new->output_index = 0;
 	new->next = NULL;
