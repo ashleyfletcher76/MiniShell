@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:04:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 12:01:16 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:06:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,5 @@ char	**ft_realloc_double_char(char **ptr, int j)
 	}
 	new_ptr[i] = NULL;
 	free_double_array(ptr);
-	return (new_ptr);
-}
-
-int	*ft_realloc_int(int *ptr, int j)
-{
-	int	*new_ptr;
-	int	i;
-
-	i = 0;
-	if (!ptr)
-	{
-		ptr = malloc(sizeof(int) * 2);
-		return (ptr);
-	}
-	new_ptr = malloc(sizeof(int) * (j + 2));
-	while (ptr[i])
-	{
-		new_ptr[i] = ptr[i];
-		i++;
-	}
-	new_ptr[i] = 0;
-	free (ptr);
 	return (new_ptr);
 }
