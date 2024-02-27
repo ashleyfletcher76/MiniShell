@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 12:08:04 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/26 14:40:41 by asfletch         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/02/27 10:22:25 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -33,21 +34,45 @@ void	finalize_command(char **temp, int *j, t_commands **cmd, int indicator)
 		new_node = lstnew();
 		lstadd_back(cmd, new_node);
 		(*cmd) = (*cmd)->next;
+		//check_syntax_pipe()
 		*j = 0;
 	}
 }
 
-void	parse_distributor(t_mini *mini)
+void	add_cmd_args(t_commands *cmd, char **temp,int *j)
 {
-	int			i;
-	int			j;
-	t_commands	*command;
+	if (temp)
+	{
+		cmd->cmd_args = ft_realloc_double_char(cmd->cmd_args, *j);
+		cmd->cmd_args[(*j)++] = ft_strdup(*temp);
+		cmd->cmd_args[*j] = NULL;
+	}
+}
+
+char	*check_other_cmds(t_mini *mini, t_commands *cmd, char *temp, int *i)
+{
+	if (mini->prompt[*i] == '<')
+			parse_input(mini, i, &cmd);
+	else if (mini->prompt[*i] == '>')
+			parse_output(mini, i, &cmd);
+	else if (mini->prompt[*i] == '\'')
+		temp = ft_strjoin_freeself(temp, parse_single_quote(mini, i));
+	else if (mini->prompt[*i] == '\"')
+		temp = ft_strjoin_freeself(temp, parse_double_quote(mini, i));
+	else if (mini->prompt[*i] == '$')
+		temp = ft_strjoin_freeself(temp, handle_dollar(mini, i));
+	else if (mini->prompt[*i] != ' ' && mini->prompt[*i] != '\t')
+		temp = ft_char_join(temp, mini->prompt[*i]);
+	if (mini->prompt[*i] != '\0')
+		(*i)++;
+	return (temp);
+}
+
+void	parse_distributor(t_mini *mini, t_commands *command, int i, int j)
+{
 	char		*temp;
 
-	i = 0;
-	j = 0;
 	temp = NULL;
-	command = lstnew();
 	mini->commands = command;
 	while (mini->prompt[i])
 	{
@@ -59,28 +84,11 @@ void	parse_distributor(t_mini *mini)
 		else if (mini->prompt[i] == ' ' && mini->prompt[i + 1] != ' ')
 		{
 			if (temp)
-			{
-				command->cmd_args = ft_realloc_double_char(command->cmd_args, j);
-				command->cmd_args[j++] = ft_strdup(temp);
-				command->cmd_args[j] = NULL;
-			}
-			free(temp);
+				add_cmd_args(command, &temp, &j);
+			free (temp);
 			temp = NULL;
 		}
-		if (mini->prompt[i] == '<')
-			parse_input(mini, &i, &command);
-		else if (mini->prompt[i] == '>')
-			parse_output(mini, &i, &command);
-		else if (mini->prompt[i] == '\'')
-			temp = ft_strjoin_freeself(temp, parse_single_quote(mini, &i));
-		else if (mini->prompt[i] == '\"')
-			temp = ft_strjoin_freeself(temp, parse_double_quote(mini, &i));
-		else if (mini->prompt[i] == '$')
-			temp = ft_strjoin_freeself(temp, handle_dollar(mini, &i));
-		else if (mini->prompt[i] != ' ' && mini->prompt[i] != '\t')
-			temp = ft_char_join(temp, mini->prompt[i]);
-		if (mini->prompt[i] != '\0')
-			i++;
+		temp = check_other_cmds(mini, command, temp, &i);
 	}
 	if (temp)
 		finalize_command(&temp, &j, &command, 1);
@@ -88,7 +96,14 @@ void	parse_distributor(t_mini *mini)
 
 void	parse_init(t_mini *mini)
 {
-	parse_distributor(mini);
+	t_commands	*command;
+
+	if (check_syntax(mini) == FALSE)
+		return ;
+	command = lstnew();
+	parse_distributor(mini, command, 0, 0);
+	//print_commands(mini);
+	exec_init(mini);
 }
 
 void	print_commands(t_mini *mini)

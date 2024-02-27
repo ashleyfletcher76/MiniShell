@@ -1,6 +1,8 @@
 #ifndef MINISHELL
 #define MINISHELL
 
+# define ANSI_COLOR_RESET	"\x1b[0m"
+
 # include "structs.h"
 # include "../libft/libft.h"
 # include <readline/readline.h>
@@ -37,10 +39,15 @@ int			commands_size_buildin(t_commands *lst);
 int			promt_help(t_mini *mini, char *user);
 char		*get_env(char **env, char *var);
 char		**update_env(char **env, char *var, char *value);
+int			check_syntax(t_mini *mini);
+int			check_pipe(char *s);
+int			check_input_direction(char *s);
+int			check_output_direction(char *s);
+int			skip_quotes(char *s, int i);
 
 //parsing
 void		parse_init(t_mini *mini);
-void		parse_distributor(t_mini *mini);
+void		parse_distributor(t_mini *mini, t_commands *command, int i,  int j);
 void		finalize_command(char **temp, int *j, t_commands **cmd, int indicator);
 void		print_commands(t_mini *mini);
 void		parse_space(t_mini *mini, char **temp, int *j, int *i, t_commands **cmd);
@@ -56,6 +63,9 @@ void		update_input_arg(t_commands **cmd, char **temp, int flag);
 void		update_output_arg(t_commands **cmd, char **temp, int flag);
 char		*handle_dollar(t_mini *mini, int *i);
 char		*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str);
+
+void		add_cmd_args(t_commands *cmd, char **temp,int *j);
+char		*check_other_cmds(t_mini *mini, t_commands *cmd, char *temp, int *i);
 
 void		lstadd_back(t_commands **lst, t_commands *new_node);
 t_commands	*lstnew(void);
