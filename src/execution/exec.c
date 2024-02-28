@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:30:56 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:50:32 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_built_in(t_pipex *pipex, t_mini *mini)
 	if (pipex->commands->output_index != 0)
 		output_dup2(pipex->fd_out_orj, pipex);
 	mini->exitcode = pipex->exitcode;
+	cleaner(pipex);
 	return ;
 }
 
@@ -38,6 +39,9 @@ void	exec_main(t_mini *mini)
 	pipex.exitcode = mini->exitcode;
 	pipex.mini = mini;
 	mini->nbrcmds = pipex.nbr_cmd;
+	pipex.all_paths = NULL;
+	pipex.pids = NULL;
+	pipex.pipel = NULL;
 	pipex.nbr_cmd_builts = commands_size_buildin(mini->commands);
 	if (pipex.nbr_cmd_builts == 1 && pipex.nbr_cmd == 1)
 		return (init_built_in(&pipex, mini));
@@ -47,5 +51,6 @@ void	exec_main(t_mini *mini)
 	pipe_all(&pipex);
 	pipe_close(&pipex);
 	waiter(&pipex);
+	cleaner(&pipex);
 	mini->exitcode = pipex.exitcode;
 }

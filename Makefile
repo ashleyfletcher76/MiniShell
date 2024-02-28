@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
+#    By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/27 12:23:27 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/28 14:24:44 by asfletch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,28 @@ COLOUR_END = \033[0m
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -I./include/
+CFLAGS = -Wall -Wextra -Werror -I./include/ -g
 
+# VALGRIND_ENABLED = 1
+
+# # Define the Valgrind command and options
+# VALGRIND_CMD = valgrind
+# VALGRIND_OPTS = --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes
+
+# # Define the target name
+# TARGET = minishell
+
+# # Define the rule for building the target
+# $(TARGET): $(OBJECTS)
+# 	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+
+# # Define the rule for running the program with Valgrind
+# run_valgrind: $(TARGET)
+# 	@echo "Running $(TARGET) with Valgrind..."
+# 	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET)
+
+# CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined
+# LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline
 
 OBJ_DIR = obj
 OBJ = $(OBJ_DIR)/main.o \
@@ -73,3 +93,13 @@ re: fclean all
 
 
 .PHONY: all clean fclean re
+
+valgrind:
+	$(MAKE) run_valgrind
+
+# Define a target to show Valgrind error messages
+.PHONY: show_errors
+show_errors:
+	$(VALGRIND_CMD) $(VALGRIND_OPTS) --log-file=valgrind_errors.txt ./$(TARGET)
+	cat valgrind_errors.txt
+	rm -f valgrind_errors.txt

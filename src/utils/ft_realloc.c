@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:04:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 13:59:03 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:20:31 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,11 @@ int	*ft_realloc_int(int *ptr, int j)
 		return (ptr);
 	}
 	new_ptr = malloc(sizeof(int) * (j + 2));
-	while (ptr[i])
+	while (i < j)
 	{
 		new_ptr[i] = ptr[i];
 		i++;
 	}
-	new_ptr[i] = 0;
 	free (ptr);
 	return (new_ptr);
 }
@@ -82,6 +81,8 @@ char	**ft_realloc_char(char **ptr, int j)
 		return (ptr);
 	}
 	new_ptr = malloc(sizeof(char *) * (j + 2));
+	if (!new_ptr)
+		return (NULL);
 	while (ptr[i])
 	{
 		new_ptr[i] = ft_strdup(ptr[i]);

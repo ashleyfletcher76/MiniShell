@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:51:48 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 10:09:53 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:24:24 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	update_pwd_env(t_pipex *pipex)
 		{
 			while (pipex->env[i])
 				i++;
+			pipex->env = ft_realloc_char(pipex->env, i);
 			pipex->env[i] = ft_strdup(ft_strjoin("PWD=", cwd));
 			pipex->env[i + 1] = NULL;
 		}
@@ -46,8 +47,8 @@ void	update_pwd_envhelp(t_pipex *pipex, char *cwd)
 	{
 		if (ft_strncmp(pipex->env[i], "PWD=", 4) == 0)
 		{
-			ft_strncpy(pipex->env[i], ft_strjoin("PWD=", cwd),
-				ft_strlen(cwd) + 5);
+			free(pipex->env[i]);
+			pipex->env[i] = ft_strjoin_freeself(ft_strdup("PWD="), ft_strdup(cwd));
 			break ;
 		}
 		i++;
@@ -65,7 +66,8 @@ void	update_oldpwd_env(t_pipex *pipex, char *temp)
 		{
 			if (ft_strncmp(pipex->env[i], "OLDPWD=", 7) == 0)
 			{
-				ft_strncpy(pipex->env[i] + 7, temp, ft_strlen(temp) + 1);
+				free(pipex->env[i]);
+				pipex->env[i] = ft_strjoin_freeself(ft_strdup("PWD="), ft_strdup(temp));
 				break ;
 			}
 			i++;
@@ -73,6 +75,7 @@ void	update_oldpwd_env(t_pipex *pipex, char *temp)
 	}
 	else
 	{
+		pipex->env = ft_realloc_char(pipex->env, i);
 		while (pipex->env[i])
 			i++;
 		pipex->env[i] = ft_strdup(ft_strjoin("OLDPWD=", temp));

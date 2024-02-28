@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/28 10:08:37 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:02:00 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			main(int ac, char **av, char **env);
 
 //free stuff
 void		free_struct(t_pipex *pipex);
-void		free_double_int(int **array);
+void		free_double_int(int **array, int num_cmds);
 void		free_double_array(char **array);
 void		free_tripple_array(char ***array);
 void		waiter(t_pipex *pipex);
@@ -159,5 +159,8 @@ void		heredoc_found(t_pipex *pipex, int input);
 void		configure_terminal(void);
 void		sigint_handler(int sig);
 void		sig_init(void);
+
+void		commands_cleaner(t_commands *commds);
+void		cleaner(t_pipex *pipex);
 
 #endif

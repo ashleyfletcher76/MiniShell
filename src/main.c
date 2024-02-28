@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:55:26 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:53:43 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ void	prompt_init(t_mini *mini, int exit_code)
 			printf("exit\n");
 			exit(EXIT_SUCCESS) ;
 		}
-		free(mini->prompt_msg);
 		add_history(prompt);
 		mini->prompt = prompt;
 		mini->exitcode = exit_code;
 		parse_init(mini);
-		free(prompt);
 		prompt = NULL;
 		exit_code = mini->exitcode;
 	}

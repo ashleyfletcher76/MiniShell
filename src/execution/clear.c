@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:45:02 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:08:45 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	free_struct(t_pipex *pipex)
 {
-	//free_double_array(pipex->all_paths);
-	//free_double_array(pipex->commands->cmd_args);
-	//free_double_int(pipex->pipel);
-	//free(pipex->pids);
-	(void)pipex;
+	free_double_array(pipex->all_paths);
+	if (pipex->pipel != NULL)
+		free_double_int(pipex->pipel, pipex->nbr_cmd);
+	if (pipex->pids != NULL)
+		free(pipex->pids);
 }
 
 void	free_double_array(char **array)
@@ -26,33 +26,23 @@ void	free_double_array(char **array)
 	int	i;
 
 	i = 0;
-	while (array[i] != 0)
+	if (array != NULL)
 	{
-		free(array[i]);
-		i++;
+		while (array[i] != 0)
+		{
+			free(array[i]);
+			i++;
+		}
+		free(array);
 	}
-	free(array);
 }
 
-void	free_tripple_array(char ***array)
+void	free_double_int(int **array, int num_cmds)
 {
 	int	i;
 
 	i = 0;
-	while (array[i] != 0)
-	{
-		free_double_array(array[i]);
-		i++;
-	}
-	free(array);
-}
-
-void	free_double_int(int **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] != 0)
+	while (i < num_cmds)
 	{
 		free(array[i]);
 		i++;

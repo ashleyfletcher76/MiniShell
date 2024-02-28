@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 10:10:32 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:22:05 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,24 @@ long long	ft_long_long_atoi(const char *str)
 
 void	ft_exit(char **commands, t_pipex *pipex)
 {
-	long long	num;
+	// long long	num;
 
+	cleaner (pipex);
+	rl_clear_history();
+	free_double_array(pipex->env);
 	ft_printf("exit\n");
 	if (commands[1] == NULL)
 		exit(EXIT_SUCCESS);
-	num = ft_exit_helper(commands[1]);
-	if (num == FALSE)
-		exit(255);
-	if (commands[2] != NULL)
-	{
-		ft_putendl_fd("minishell: exit: too many arguments", 2);
-		pipex->exitcode = 1;
-		return ;
-	}
-	exit(num);
+	// if (commands[2] != NULL)
+	// {
+	// 	ft_putendl_fd("minishell: exit: too many arguments", 2);
+	// 	pipex->exitcode = 1;
+	// 	return ;
+	// }
+	// num = ft_exit_helper(commands[1]);
+	// if (num == FALSE)
+	// 	exit(255);
+	exit(25);
 }
 
 int	ft_exit_helper(char *code)
@@ -62,7 +65,7 @@ int	ft_exit_helper(char *code)
 
 	num = ft_long_long_atoi(code);
 	i = 0;
-	if (LONG_LONG_MAX <= num || num <= LONG_LONG_MIN)
+	if (LLONG_MAX <= num || num <= LLONG_MIN)
 	{
 		ft_putendl_fd("minishell: exit: numeric argument required", 2);
 		return (FALSE);

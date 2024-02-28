@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:13:08 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:38:38 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	piper(t_pipex *pipex)
 {
 	int	i;
 
-	pipex->pipel = (int **)malloc ((pipex->nbr_cmd) * sizeof(int *));
+	pipex->pipel = (int **)malloc ((pipex->nbr_cmd + 1) * sizeof(int *));
 	if (pipex->pipel == NULL)
 		return (free_struct(pipex), exit(EXIT_FAILURE));
 	i = 0;

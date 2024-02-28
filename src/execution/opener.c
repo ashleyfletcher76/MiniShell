@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 14:30:06 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:52:39 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	dup_saver_input(t_pipex *pipex)
 	if (pipex->fd_in_orj == -1)
 	{
 		perror("dup");
-		free_struct(pipex);
+		cleaner(pipex);
 		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			|| pipex->nbr_cmd == 0)
 		{
@@ -39,7 +39,7 @@ void	dup_saver_output(t_pipex *pipex)
 	if (pipex->fd_out_orj == -1)
 	{
 		perror("dup");
-		free_struct(pipex);
+		cleaner(pipex);
 		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			|| pipex->nbr_cmd == 0)
 		{
@@ -63,7 +63,7 @@ int	input_opener(t_pipex *pipex, char *s)
 	if (fd < 0)
 	{
 		perror("minihell: input");
-		free_struct(pipex);
+		cleaner(pipex);
 		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			|| pipex->nbr_cmd == 0)
 		{
@@ -87,7 +87,7 @@ int	output_opener(t_pipex *pipex, char *s)
 	if (fd < 0)
 	{
 		perror("minishell: output");
-		free_struct(pipex);
+		cleaner(pipex);
 		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			|| pipex->nbr_cmd == 0)
 		{
@@ -111,7 +111,7 @@ int	output_append_opener(t_pipex *pipex, char *s)
 	if (fd < 0)
 	{
 		perror("minishell: output");
-		free_struct(pipex);
+		cleaner(pipex);
 		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
 			|| pipex->nbr_cmd == 0)
 		{

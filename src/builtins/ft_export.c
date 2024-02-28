@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 09:39:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:18:59 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ void	ft_export(char **commands, char **env, t_pipex *pipex)
 
 int	ft_export_loop(char *commands, char **env, t_pipex *pipex)
 {
-	int	i;
 	int	flag;
 
-	i = 0;
 	flag = ft_export_error(pipex, commands);
 	if (flag == FALSE)
 		return (EXIT_FAILURE);
