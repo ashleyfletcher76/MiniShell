@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 11:18:59 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:44:41 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,14 @@ void	ft_export_helper(char *commands, char **env, char *var)
 		i++;
 	if (var != NULL && env[i] == NULL)
 	{
+		env = ft_realloc_char(env, i);
 		env[i] = env[i - 1];
 		env[i - 1] = ft_strjoin(var, ft_strchr(commands, '='));
 		env[i + 1] = NULL;
 	}
 	if (var == NULL && env[i] == NULL)
 	{
+		env = ft_realloc_char(env, i);
 		env[i] = env[i - 1];
 		env[i - 1] = commands;
 		env[i + 1] = NULL;

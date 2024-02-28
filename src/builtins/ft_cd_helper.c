@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:51:48 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 14:24:24 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:41:51 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	update_oldpwd_env(t_pipex *pipex, char *temp)
 	}
 	else
 	{
-		pipex->env = ft_realloc_char(pipex->env, i);
 		while (pipex->env[i])
 			i++;
+		pipex->env = ft_realloc_char(pipex->env, i);
 		pipex->env[i] = ft_strdup(ft_strjoin("OLDPWD=", temp));
 		pipex->env[i + 1] = NULL;
 	}

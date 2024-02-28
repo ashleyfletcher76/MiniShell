@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 13:22:05 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:35:44 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,29 @@ long long	ft_long_long_atoi(const char *str)
 
 void	ft_exit(char **commands, t_pipex *pipex)
 {
-	// long long	num;
+	long long	num;
+	int			flag;
 
-	cleaner (pipex);
+	if (commands[1] != NULL)
+	{
+		flag = 1;
+		num = ft_exit_helper(commands[1]);
+	}
+	if (array_size(commands) >= 3)
+	{
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		pipex->exitcode = 1;
+		return ;
+	}
+	cleaner(pipex);
 	rl_clear_history();
 	free_double_array(pipex->env);
 	ft_printf("exit\n");
-	if (commands[1] == NULL)
+	if (flag != 1)
 		exit(EXIT_SUCCESS);
-	// if (commands[2] != NULL)
-	// {
-	// 	ft_putendl_fd("minishell: exit: too many arguments", 2);
-	// 	pipex->exitcode = 1;
-	// 	return ;
-	// }
-	// num = ft_exit_helper(commands[1]);
-	// if (num == FALSE)
-	// 	exit(255);
-	exit(25);
+	if (num == FALSE)
+		exit(255);
+	exit(num);
 }
 
 int	ft_exit_helper(char *code)
