@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 19:31:37 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:39:26 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,43 @@
 void	ft_export(char **commands, char **env, t_pipex *pipex)
 {
 	int	i;
-	int	flag;
+	int	exit_code;
 
-	i = 0;
+	i = 1;
 	if (commands[1] == NULL)
 	{
 		ft_export_print(env);
 		pipex->exitcode = EXIT_SUCCESS;
 		return ;
 	}
+	while (commands[i])
+	{
+		exit_code = ft_export_loop(commands[i], env, pipex);
+		if (exit_code == 1)
+			pipex->exitcode = exit_code;
+		i++;
+	}
+	if (pipex->exitcode != 1)
+		pipex->exitcode = exit_code;
+}
+
+int	ft_export_loop(char *commands, char **env, t_pipex *pipex)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
 	flag = ft_export_error(pipex, commands);
 	if (flag == FALSE)
-		return ;
+		return (EXIT_FAILURE);
 	else if (flag == 2)
 		append_export(commands, env);
 	else
 		normal_export(commands, env);
-	pipex->exitcode = EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }
 
-void	append_export(char **comds, char **env)
+void	append_export(char *comds, char **env)
 {
 	char	*var;
 	char	*val;
@@ -42,13 +59,13 @@ void	append_export(char **comds, char **env)
 	int		i;
 
 	i = 0;
-	equal = ft_count_equal(comds[1]) - 2;
+	equal = ft_count_equal(comds) - 2;
 	if (equal == -2)
 		return ;
-	if (ft_strchr(comds[1], '=') != NULL)
-		val = ft_strdup(ft_strchr(comds[1], '=') + 1);
+	if (ft_strchr(comds, '=') != NULL)
+		val = ft_strdup(ft_strchr(comds, '=') + 1);
 	var = malloc (sizeof(char) * equal);
-	var = ft_strncpy(var, comds[1], equal);
+	var = ft_strncpy(var, comds, equal);
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], var, equal - 1) == 0)
@@ -62,21 +79,21 @@ void	append_export(char **comds, char **env)
 	ft_export_helper(comds, env, var);
 }
 
-void	normal_export(char **comds, char **env)
+void	normal_export(char *comds, char **env)
 {
 	int		equal;
 	int		i;
 
 	i = 0;
-	equal = ft_count_equal(comds[1]) - 1;
+	equal = ft_count_equal(comds) - 1;
 	if (equal == -1)
 		return ;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], comds[1], equal) == 0)
+		if (ft_strncmp(env[i], comds, equal) == 0)
 		{
 			free(env[i]);
-			env[i] = ft_strdup(comds[1]);
+			env[i] = ft_strdup(comds);
 			return ;
 		}
 		i++;
@@ -84,7 +101,7 @@ void	normal_export(char **comds, char **env)
 	ft_export_helper(comds, env, NULL);
 }
 
-void	ft_export_helper(char **commands, char **env, char *var)
+void	ft_export_helper(char *commands, char **env, char *var)
 {
 	int	i;
 
@@ -94,26 +111,14 @@ void	ft_export_helper(char **commands, char **env, char *var)
 	if (var != NULL && env[i] == NULL)
 	{
 		env[i] = env[i - 1];
-		env[i - 1] = ft_strjoin(var, ft_strchr(commands[1], '='));
+		env[i - 1] = ft_strjoin(var, ft_strchr(commands, '='));
 		env[i + 1] = NULL;
 	}
 	if (var == NULL && env[i] == NULL)
 	{
 		env[i] = env[i - 1];
-		env[i - 1] = commands[1];
+		env[i - 1] = commands;
 		env[i + 1] = NULL;
 	}
 	(void)var;
-}
-
-int	ft_export_error(t_pipex *pipex, char **commands)
-{
-	int	flag;
-
-	flag = check_variable(commands[1]);
-	if (flag == FALSE)
-	{
-		export_error_message(pipex, commands, 0);
-	}
-	return (flag);
 }

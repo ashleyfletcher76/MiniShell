@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:18:30 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 19:37:56 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:10:39 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,16 @@ int	ft_count_equal(char *s)
 	return (0);
 }
 
-void	export_error_message(t_pipex *pipex, char **cmds, int flag)
+int	ft_export_error(t_pipex *pipex, char *commands)
 {
-	if (flag == 0)
-		ft_put3endl_fd("minishell: export: `", cmds[1],
-			"': not a valid identifier", 2);
-	else if (flag == 1)
-		ft_put3endl_fd("minishell: unset: `",
-			cmds[1], "': not a valid identifier", 2);
-	pipex->exitcode = 1;
+	int	flag;
+
+	flag = check_variable(commands);
+	if (flag == FALSE)
+	{
+		export_error_message(pipex, commands, 0);
+	}
+	return (flag);
 }
 
 int	check_variable(char *s)

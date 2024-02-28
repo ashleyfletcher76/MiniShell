@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/25 15:06:13 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:10:32 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 long long	ft_long_long_atoi(const char *str)
 {
-	int	i;
-	int	sign;
+	int			i;
+	int			sign;
 	long long	num;
 
 	num = 0;
@@ -71,7 +71,7 @@ int	ft_exit_helper(char *code)
 		i++;
 	if (code[i] == '-' || code[i] == '+')
 		i++;
-	while(code[i])
+	while (code[i])
 	{
 		if (!(code[i] >= '0' && code[i] <= '9'))
 		{
@@ -82,4 +82,3 @@ int	ft_exit_helper(char *code)
 	}
 	return (num);
 }
-

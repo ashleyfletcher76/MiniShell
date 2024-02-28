@@ -1,14 +1,13 @@
 
+exit 0 0
+// exit -9223372036854775810
 
 // echo $1234
 
 
 
 
+// input error file name //
+
 
 // mkdir test_dir ; cd test_dir ; rm -rf ../test_dir
-
-
-
-// exit -9223372036854775810
-

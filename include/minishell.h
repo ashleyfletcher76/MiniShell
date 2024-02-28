@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 19:20:41 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:08:37 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,26 +98,32 @@ void		error_message(int flag);
 int			is_built_in(t_pipex *pipex);
 int			which_build(char **commands, char **env, t_pipex *pipex);
 int			exist_build(char **commands);
-int			checkPathExistence(const char *path);
+int			checkpathexistence(const char *path);
 void		update_pwd_env(t_pipex *pipex);
+void		update_pwd_envhelp(t_pipex *pipex, char *cwd);
 void		update_oldpwd_env(t_pipex *pipex, char *temp);
 void		ft_cd(char **command, char **env, t_pipex *pipex);
+void 		ft_cd_oldpwd(t_pipex *pipex, char **env);
+void		ft_cd_error(t_pipex *pipex, char *command);
+void		ft_cd_use_home(char *home, char *command);
 void		ft_exit(char **commands, t_pipex *pipex);
 int			ft_exit_helper(char *code);
 void		ft_export(char **commands, char **env, t_pipex *pipex);
-int			ft_export_error(t_pipex *pipex, char **commands);
+int			ft_export_loop(char *commands, char **env, t_pipex *pipex);
+int			ft_export_error(t_pipex *pipex, char *commands);
 int			ft_count_equal(char *s);
-void		ft_export_helper(char **commands, char **env, char *var);
+void		ft_export_helper(char *commands, char **env, char *var);
 void		ft_export_print(char **env);
-void		export_error_message(t_pipex *pipex, char **cmds, int flag);
+void		export_error_message(t_pipex *pipex, char *cmds, int flag);
 void		bouble_sort_char(char **export);
+int			ft_unset_loop(char *commands, char **env, t_pipex *pipex);
 void		ft_unset(char **commands, char **env, t_pipex *pipex);
 void		ft_pwd(t_pipex *pipex);
 void		ft_env(char **env, t_pipex *pipex);
 void		ft_echo(char **commands, t_pipex *pipex);
 int			check_variable(char *s);
-void		append_export(char **comds, char **env);
-void		normal_export(char **comds, char **env);
+void		append_export(char *comds, char **env);
+void		normal_export(char *comds, char **env);
 
 //exec
 void		exec_init(t_mini *mini);
