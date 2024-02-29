@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 15:02:22 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:40:49 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 
 int	token_dollor(char c)
 {
-	char	*token;
-	int		i;
-
-	i = 0;
-	token = " \t\'\"=$:-\0|/";
-	while (i < 12)
-	{
-		if (token[i] == c)
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_')
+		return (TRUE);
+	return (FALSE);
 }
 
 char	*handle_dollar(t_mini *mini, int *i)
@@ -47,19 +38,22 @@ char	*handle_dollar(t_mini *mini, int *i)
 			exit_code = ft_itoa(mini->exitcode);
 			return (exit_code);
 		}
-		(*i)++;
-		while (token_dollor(mini->prompt[*i]))
-			new_temp = ft_char_join(new_temp, mini->prompt[(*i)++]);
+		new_temp = dollar_helper(mini, i, new_temp);
 	}
 	(*i)--;
 	if (!get_env(mini->env, new_temp))
-	{
-		free(new_temp);
-		return (NULL);
-	}
+		return (free(new_temp), NULL);
 	give_back = ft_strdup(get_env(mini->env, new_temp));
 	free(new_temp);
 	return (give_back);
+}
+
+char	*dollar_helper(t_mini *mini, int *i, char *new_temp)
+{
+	(*i)++;
+	while (token_dollor(mini->prompt[*i]))
+		new_temp = ft_char_join(new_temp, mini->prompt[(*i)++]);
+	return (new_temp);
 }
 
 char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
@@ -71,7 +65,8 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 	{
 		(*i)++;
 		if (mini->prompt[*i] == '?')
-			return ((*i)++, ft_strjoin_freeself(quoted_str, ft_itoa(mini->exitcode)));
+			return ((*i)++, ft_strjoin_freeself(quoted_str,
+					ft_itoa(mini->exitcode)));
 		if (skip_whitespace(mini->prompt[*i]) || mini->prompt[*i] == '\"')
 		{
 			if (!quoted_str)
@@ -81,12 +76,9 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 		temp_env = dollar_quotes_helper(mini, temp_env, i);
 	}
 	if (!get_env(mini->env, temp_env))
-	{
-		free (temp_env);
-		return (quoted_str);
-	}
+		return (free (temp_env), quoted_str);
 	quoted_str = ft_strjoin_freeself(quoted_str,
-		 ft_strdup(get_env(mini->env, temp_env)));
+			ft_strdup(get_env(mini->env, temp_env)));
 	free (temp_env);
 	return (quoted_str);
 }

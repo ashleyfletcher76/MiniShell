@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:54:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/24 13:18:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:27:10 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,5 @@ int					basamak_sayar_base16(unsigned int n);
 int					ft_pointerprint(unsigned long long n);
 int					hexatransformlowerpointer(unsigned long long n);
 char				*get_next_line(int fd);
-
 
 #endif

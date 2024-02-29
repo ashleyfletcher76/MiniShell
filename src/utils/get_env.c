@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:07 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 10:35:53 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:41:15 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	**dup_env(char **env)
 	i = 0;
 	size = array_size(env);
 	dup = malloc(sizeof(char *) * (size + 1));
-	while(env[i])
+	while (env[i])
 	{
 		dup[i] = ft_strdup(env[i]);
 		i++;
