@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 14:36:29 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:02:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,8 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 	if (mini->prompt[*i] == '$')
 	{
 		(*i)++;
-		if (!quoted_str)
-			quoted_str = ft_strdup("");
 		if (mini->prompt[*i] == '?')
-			return ((*i)++, ft_strjoin(quoted_str, ft_itoa(mini->exitcode)));
+			return ((*i)++, ft_strjoin_freeself(quoted_str, ft_itoa(mini->exitcode)));
 		if (skip_whitespace(mini->prompt[*i]) || mini->prompt[*i] == '\"')
 		{
 			if (!quoted_str)
