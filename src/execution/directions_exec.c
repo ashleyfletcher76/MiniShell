@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directions_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:26:50 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:25:49 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
