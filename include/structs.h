@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 18:33:57 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:49:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,16 @@ typedef struct s_mini
 	char		*cwd;
 	char		**argv;
 	char		**env;
-	int			exitcode;
-	int			nbrcmds;
-	t_commands	*commands;
-}	t_mini;
-
-typedef struct s_pipex
-{
-	pid_t		*pids;
-	int			**pipel;
+	char		**all_paths;
 	int			nbr_cmd;
 	int			nbr_cmd_builts;
-	char		**all_paths;
-	char		**env;
-	char		*prompt;
 	int			fd_in_orj;
 	int			fd_out_orj;
+	int			**pipel;
 	int			exitcode;
-	t_mini		*mini;
+	pid_t		*pids;
 	t_commands	*commands;
-}	t_pipex;
+	t_commands	*temp_cmds;
+}	t_mini;
 
 #endif

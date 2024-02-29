@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:30:42 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 13:58:26 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:45:48 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int	check_syntax(t_mini *mini)
 {
 	if (check_pipe(mini->prompt) == FALSE)
 	{
+		free(mini->cwd);
+		free(mini->prompt);
+		free(mini->prompt_msg);
 		error_message(0);
 		mini->exitcode = 258;
 		return (FALSE);
@@ -39,6 +42,9 @@ int	check_syntax(t_mini *mini)
 	if (check_input_direction(mini->prompt) == FALSE
 		|| check_output_direction(mini->prompt) == FALSE)
 	{
+		free(mini->prompt);
+		free(mini->prompt_msg);
+		free(mini->cwd);
 		mini->exitcode = 258;
 		return (FALSE);
 	}

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:18:30 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 10:10:39 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:28:40 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ int	ft_count_equal(char *s)
 	return (0);
 }
 
-int	ft_export_error(t_pipex *pipex, char *commands)
+int	ft_export_error(t_mini *mini, char *commands)
 {
 	int	flag;
 
 	flag = check_variable(commands);
 	if (flag == FALSE)
 	{
-		export_error_message(pipex, commands, 0);
+		export_error_message(mini, commands, 0);
 	}
 	return (flag);
 }

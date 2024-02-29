@@ -6,13 +6,13 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 14:44:41 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:36:41 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_export(char **commands, char **env, t_pipex *pipex)
+void	ft_export(char **commands, t_mini *mini)
 {
 	int	i;
 	int	exit_code;
@@ -20,36 +20,36 @@ void	ft_export(char **commands, char **env, t_pipex *pipex)
 	i = 1;
 	if (commands[1] == NULL)
 	{
-		ft_export_print(env);
-		pipex->exitcode = EXIT_SUCCESS;
+		ft_export_print(mini->env);
+		mini->exitcode = EXIT_SUCCESS;
 		return ;
 	}
 	while (commands[i])
 	{
-		exit_code = ft_export_loop(commands[i], env, pipex);
+		exit_code = ft_export_loop(commands[i], mini);
 		if (exit_code == 1)
-			pipex->exitcode = exit_code;
+			mini->exitcode = exit_code;
 		i++;
 	}
-	if (pipex->exitcode != 1)
-		pipex->exitcode = exit_code;
+	if (mini->exitcode != 1)
+		mini->exitcode = exit_code;
 }
 
-int	ft_export_loop(char *commands, char **env, t_pipex *pipex)
+int	ft_export_loop(char *commands, t_mini *mini)
 {
 	int	flag;
 
-	flag = ft_export_error(pipex, commands);
+	flag = ft_export_error(mini, commands);
 	if (flag == FALSE)
 		return (EXIT_FAILURE);
 	else if (flag == 2)
-		append_export(commands, env);
+		append_export(commands, mini);
 	else
-		normal_export(commands, env);
+		normal_export(commands, mini);
 	return (EXIT_SUCCESS);
 }
 
-void	append_export(char *comds, char **env)
+void	append_export(char *comds, t_mini *mini)
 {
 	char	*var;
 	char	*val;
@@ -64,20 +64,20 @@ void	append_export(char *comds, char **env)
 		val = ft_strdup(ft_strchr(comds, '=') + 1);
 	var = malloc (sizeof(char) * equal);
 	var = ft_strncpy(var, comds, equal);
-	while (env[i])
+	while (mini->env[i])
 	{
-		if (ft_strncmp(env[i], var, equal - 1) == 0)
+		if (ft_strncmp(mini->env[i], var, equal - 1) == 0)
 		{
 			free(var);
-			env[i] = ft_strjoin_freeself(env[i], val);
+			mini->env[i] = ft_strjoin_freeself(mini->env[i], val);
 			return ;
 		}
 		i++;
 	}
-	ft_export_helper(comds, env, var);
+	ft_export_helper(comds, mini, var);
 }
 
-void	normal_export(char *comds, char **env)
+void	normal_export(char *comds, t_mini *mini)
 {
 	int		equal;
 	int		i;
@@ -86,39 +86,41 @@ void	normal_export(char *comds, char **env)
 	equal = ft_count_equal(comds) - 1;
 	if (equal == -1)
 		return ;
-	while (env[i])
+	while (mini->env[i])
 	{
-		if (ft_strncmp(env[i], comds, equal) == 0)
+		if (ft_strncmp(mini->env[i], comds, equal) == 0)
 		{
-			free(env[i]);
-			env[i] = ft_strdup(comds);
+			free(mini->env[i]);
+			mini->env[i] = ft_strdup(comds);
 			return ;
 		}
 		i++;
 	}
-	ft_export_helper(comds, env, NULL);
+	ft_export_helper(comds, mini, NULL);
 }
 
-void	ft_export_helper(char *commands, char **env, char *var)
+void	ft_export_helper(char *commands, t_mini *mini, char *var)
 {
 	int	i;
 
 	i = 0;
-	while (env[i])
+	while (mini->env[i])
 		i++;
-	if (var != NULL && env[i] == NULL)
+	if (var != NULL && mini->env[i] == NULL)
 	{
-		env = ft_realloc_char(env, i);
-		env[i] = env[i - 1];
-		env[i - 1] = ft_strjoin(var, ft_strchr(commands, '='));
-		env[i + 1] = NULL;
+		mini->env = ft_realloc_char(mini->env, i);
+		free(mini->env[i]);
+		mini->env[i] = mini->env[i - 1];
+		mini->env[i - 1] = ft_strjoin(var, ft_strchr(commands, '='));
+		mini->env[i + 1] = NULL;
+		free(var);
 	}
-	if (var == NULL && env[i] == NULL)
+	if (var == NULL && mini->env[i] == NULL)
 	{
-		env = ft_realloc_char(env, i);
-		env[i] = env[i - 1];
-		env[i - 1] = commands;
-		env[i + 1] = NULL;
+		mini->env = ft_realloc_char(mini->env, i);
+		free(mini->env[i]);
+		mini->env[i] = mini->env[i - 1];
+		mini->env[i - 1] = ft_strdup(commands);
+		mini->env[i + 1] = NULL;
 	}
-	(void)var;
 }

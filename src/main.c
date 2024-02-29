@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 11:53:43 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:31:01 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	sig_init(void)
 	sigemptyset(&sa_int.sa_mask);
 	sa_int.sa_flags = 0;
 	sigaction(SIGINT, &sa_int, NULL);
-
 	sa_quit.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
@@ -78,21 +77,33 @@ void	configure_terminal(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-void	leaks()
-{
-	system("minishell");
-}
-
 int	main(int ac, char **av, char **env)
 {
 	t_mini	mini;
 	int		exit_code;
 
 	exit_code = 0;
-	mini.env = dup_env(env);
+	struct_init(&mini, env);
 	prompt_init(&mini, exit_code);
-	atexit(leaks);
 	(void)ac;
 	(void)av;
 	return (EXIT_SUCCESS);
+}
+
+void	struct_init(t_mini *mini, char **env)
+{
+	mini->prompt_msg = NULL;
+	mini->prompt = NULL;
+	mini->cwd = NULL;
+	mini->argv = NULL;
+	mini->env = dup_env(env);
+	mini->all_paths = NULL;
+	mini->exitcode = 0;
+	mini->fd_in_orj = 0;
+	mini->fd_out_orj = 0;
+	mini->nbr_cmd_builts = 0;
+	mini->pipel = 0;
+	mini->nbr_cmd = 0;
+	mini->pids = NULL;
+	mini->commands = NULL;
 }

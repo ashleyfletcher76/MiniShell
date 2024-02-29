@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/28 09:17:53 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:28:00 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*handle_dollar(t_mini *mini, int *i)
 {
 	char	*new_temp;
 	char	*exit_code;
+	char	*give_back;
 
 	new_temp = NULL;
 	if (mini->prompt[*i] == '$')
@@ -52,9 +53,13 @@ char	*handle_dollar(t_mini *mini, int *i)
 	}
 	(*i)--;
 	if (!get_env(mini->env, new_temp))
+	{
+		free(new_temp);
 		return (NULL);
-	new_temp = ft_strdup(get_env(mini->env, new_temp));
-	return (new_temp);
+	}
+	give_back = ft_strdup(get_env(mini->env, new_temp));
+	free(new_temp);
+	return (give_back);
 }
 
 char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)

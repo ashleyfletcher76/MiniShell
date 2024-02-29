@@ -3,58 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   opener.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 13:52:39 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:32:45 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	dup_saver_input(t_pipex *pipex)
+void	dup_saver_input(t_mini *mini)
 {
-	pipex->fd_in_orj = dup(STDIN_FILENO);
-	if (pipex->fd_in_orj == -1)
+	mini->fd_in_orj = dup(STDIN_FILENO);
+	if (mini->fd_in_orj == -1)
 	{
 		perror("dup");
-		cleaner(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
+		if ((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
+			|| mini->nbr_cmd == 0)
 		{
-			if (pipex->commands->input_index != 0)
-				input_dup2(pipex->fd_in_orj, pipex);
-			if (pipex->commands->output_index != 0)
-				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 9);
+			if (mini->commands->input_index != 0)
+				input_dup2(mini->fd_in_orj, mini);
+			if (mini->commands->output_index != 0)
+				output_dup2(mini->fd_out_orj, mini);
+			prompt_init(mini, 9);
 			return ;
 		}
+		free_double_array(mini->env);
+		cleaner(mini);
 		exit(9);
 	}
 }
 
-void	dup_saver_output(t_pipex *pipex)
+void	dup_saver_output(t_mini *mini)
 {
-	pipex->fd_out_orj = dup(STDOUT_FILENO);
-	if (pipex->fd_out_orj == -1)
+	mini->fd_out_orj = dup(STDOUT_FILENO);
+	if (mini->fd_out_orj == -1)
 	{
 		perror("dup");
-		cleaner(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
+		if ((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
+			|| mini->nbr_cmd == 0)
 		{
-			if (pipex->commands->input_index != 0)
-				input_dup2(pipex->fd_in_orj, pipex);
-			if (pipex->commands->output_index != 0)
-				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 9);
+			if (mini->commands->input_index != 0)
+				input_dup2(mini->fd_in_orj, mini);
+			if (mini->commands->output_index != 0)
+				output_dup2(mini->fd_out_orj, mini);
+			prompt_init(mini, 9);
 			return ;
 		}
+		free_double_array(mini->env);
+		cleaner(mini);
 		exit(9);
 	}
 }
 
-int	input_opener(t_pipex *pipex, char *s)
+int	input_opener(t_mini *mini, char *s)
 {
 	int	fd;
 
@@ -63,23 +65,24 @@ int	input_opener(t_pipex *pipex, char *s)
 	if (fd < 0)
 	{
 		perror("minihell: input");
-		cleaner(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
+		if ((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
+			|| mini->nbr_cmd == 0)
 		{
-			if (pipex->commands->input_index != 0)
-				input_dup2(pipex->fd_in_orj, pipex);
-			if (pipex->commands->output_index != 0)
-				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 1);
+			if (mini->commands->input_index != 0)
+				input_dup2(mini->fd_in_orj, mini);
+			if (mini->commands->output_index != 0)
+				output_dup2(mini->fd_out_orj, mini);
+			prompt_init(mini, 1);
 			return (1);
 		}
+		free_double_array(mini->env);
+		cleaner(mini);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
 }
 
-int	output_opener(t_pipex *pipex, char *s)
+int	output_opener(t_mini *mini, char *s)
 {
 	int	fd;
 
@@ -87,23 +90,24 @@ int	output_opener(t_pipex *pipex, char *s)
 	if (fd < 0)
 	{
 		perror("minishell: output");
-		cleaner(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
+		if ((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
+			|| mini->nbr_cmd == 0)
 		{
-			if (pipex->commands->input_index != 0)
-				input_dup2(pipex->fd_in_orj, pipex);
-			if (pipex->commands->output_index != 0)
-				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 1);
+			if (mini->commands->input_index != 0)
+				input_dup2(mini->fd_in_orj, mini);
+			if (mini->commands->output_index != 0)
+				output_dup2(mini->fd_out_orj, mini);
+			prompt_init(mini, 1);
 			return (1);
 		}
+		free_double_array(mini->env);
+		cleaner(mini);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
 }
 
-int	output_append_opener(t_pipex *pipex, char *s)
+int	output_append_opener(t_mini *mini, char *s)
 {
 	int	fd;
 
@@ -111,17 +115,18 @@ int	output_append_opener(t_pipex *pipex, char *s)
 	if (fd < 0)
 	{
 		perror("minishell: output");
-		cleaner(pipex);
-		if ((pipex->nbr_cmd == 1 && pipex->nbr_cmd_builts == 1)
-			|| pipex->nbr_cmd == 0)
+		if ((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
+			|| mini->nbr_cmd == 0)
 		{
-			if (pipex->commands->input_index != 0)
-				input_dup2(pipex->fd_in_orj, pipex);
-			if (pipex->commands->output_index != 0)
-				output_dup2(pipex->fd_out_orj, pipex);
-			prompt_init(pipex->mini, 1);
+			if (mini->commands->input_index != 0)
+				input_dup2(mini->fd_in_orj, mini);
+			if (mini->commands->output_index != 0)
+				output_dup2(mini->fd_out_orj, mini);
+			prompt_init(mini, 1);
 			return (1);
 		}
+		free_double_array(mini->env);
+		cleaner(mini);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

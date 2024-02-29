@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:45:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 09:32:54 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:27:10 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_count_equal2(char *s)
 	return (i);
 }
 
-void	ft_unset(char **commands, char **env, t_pipex *pipex)
+void	ft_unset(char **commands, char **env, t_mini *mini)
 {
 	int	i;
 	int	exit_code;
@@ -34,21 +34,21 @@ void	ft_unset(char **commands, char **env, t_pipex *pipex)
 	i = 1;
 	if (commands[1] == NULL)
 	{
-		pipex->exitcode = EXIT_SUCCESS;
+		mini->exitcode = EXIT_SUCCESS;
 		return ;
 	}
 	while (commands[i])
 	{
-		exit_code = ft_unset_loop(commands[i], env, pipex);
+		exit_code = ft_unset_loop(commands[i], env, mini);
 		if (exit_code == 1)
-			pipex->exitcode = exit_code;
+			mini->exitcode = exit_code;
 		i++;
 	}
-	if (pipex->exitcode != 1)
-		pipex->exitcode = exit_code;
+	if (mini->exitcode != 1)
+		mini->exitcode = exit_code;
 }
 
-int	ft_unset_loop(char *commands, char **env, t_pipex *pipex)
+int	ft_unset_loop(char *commands, char **env, t_mini *mini)
 {
 	int		i;
 	int		count_eql;
@@ -56,9 +56,9 @@ int	ft_unset_loop(char *commands, char **env, t_pipex *pipex)
 	i = 0;
 	count_eql = ft_count_equal2(commands);
 	if (count_eql == -1)
-		return (export_error_message(pipex, commands, 1), 1);
+		return (export_error_message(mini, commands, 1), 1);
 	if (check_variable(commands) == FALSE)
-		return (export_error_message(pipex, commands, 1), 1);
+		return (export_error_message(mini, commands, 1), 1);
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], commands, count_eql) == 0)

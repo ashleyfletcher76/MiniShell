@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 13:08:45 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:23:17 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_struct(t_pipex *pipex)
+void	free_struct(t_mini *mini)
 {
-	free_double_array(pipex->all_paths);
-	if (pipex->pipel != NULL)
-		free_double_int(pipex->pipel, pipex->nbr_cmd);
-	if (pipex->pids != NULL)
-		free(pipex->pids);
+	free_double_array(mini->all_paths);
+	if (mini->pipel != NULL)
+		free_double_int(mini->pipel, mini->nbr_cmd);
+	if (mini->pids != NULL)
+		free(mini->pids);
 }
 
 void	free_double_array(char **array)
@@ -50,16 +50,16 @@ void	free_double_int(int **array, int num_cmds)
 	free(array);
 }
 
-void	waiter(t_pipex *pipex)
+void	waiter(t_mini *mini)
 {
 	int	i;
 	int	status;
 
 	i = 0;
-	while (i < pipex->nbr_cmd)
+	while (i < mini->nbr_cmd)
 	{
-		waitpid(pipex->pids[i++], &status, 0);
-		pipex->exitcode = WEXITSTATUS(status);
+		waitpid(mini->pids[i++], &status, 0);
+		mini->exitcode = WEXITSTATUS(status);
 	}
 	g_sigint_received = 0;
 }

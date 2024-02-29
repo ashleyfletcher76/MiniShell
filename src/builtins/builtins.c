@@ -6,42 +6,42 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 10:10:07 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:20:19 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_built_in(t_pipex *pipex)
+int	is_built_in(t_mini *mini)
 {
-	if (pipex->commands->cmd_args[0])
+	if (mini->commands->cmd_args[0])
 	{
-		if (exist_build(pipex->commands->cmd_args))
+		if (exist_build(mini->commands->cmd_args))
 		{
-			direction_handler(pipex);
-			which_build(pipex->commands->cmd_args, pipex->env, pipex);
+			direction_handler(mini);
+			which_build(mini->commands->cmd_args, mini->env, mini);
 			return (TRUE);
 		}
 	}
 	return (FALSE);
 }
 
-int	which_build(char **commands, char **env, t_pipex *pipex)
+int	which_build(char **commands, char **env, t_mini *mini)
 {
 	if (ft_strncmp(commands[0], "cd", 3) == 0)
-		return (ft_cd(commands, env, pipex), TRUE);
+		return (ft_cd(commands, env, mini), TRUE);
 	if (ft_strncmp(commands[0], "exit", 6) == 0)
-		return (ft_exit(commands, pipex), TRUE);
+		return (ft_exit(commands, mini), TRUE);
 	if (ft_strncmp(commands[0], "export", 7) == 0)
-		return (ft_export(commands, env, pipex), TRUE);
+		return (ft_export(commands, mini), TRUE);
 	if (ft_strncmp(commands[0], "unset", 6) == 0)
-		return (ft_unset(commands, env, pipex), TRUE);
+		return (ft_unset(commands, env, mini), TRUE);
 	if (ft_strncmp(commands[0], "pwd", 4) == 0)
-		return (ft_pwd(pipex), TRUE);
+		return (ft_pwd(mini), TRUE);
 	if (ft_strncmp(commands[0], "env", 4) == 0)
-		return (ft_env(env, pipex), TRUE);
+		return (ft_env(env, mini), TRUE);
 	if (ft_strncmp(commands[0], "echo", 5) == 0)
-		return (ft_echo(commands, pipex), TRUE);
+		return (ft_echo(commands, mini), TRUE);
 	return (FALSE);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/28 12:02:00 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:06:08 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ volatile sig_atomic_t	g_sigint_received;
 //main nessecaries
 void		prompt_init(t_mini *mini, int exit_code);
 int			main(int ac, char **av, char **env);
+void		struct_init(t_mini *mini, char **env);
 
 //free stuff
-void		free_struct(t_pipex *pipex);
+void		free_struct(t_mini *mini);
 void		free_double_int(int **array, int num_cmds);
 void		free_double_array(char **array);
 void		free_tripple_array(char ***array);
-void		waiter(t_pipex *pipex);
+void		waiter(t_mini *mini);
 
 //error
-void		error_handler(char *msg, t_pipex *pipex, int exitcode);
+void		error_handler(char *msg, t_mini *mini, int exitcode);
 
 //utils
 void		freearr(char **arr);
@@ -95,72 +96,72 @@ int			*ft_realloc_int(int *ptr, int j);
 void		error_message(int flag);
 
 //builtin
-int			is_built_in(t_pipex *pipex);
-int			which_build(char **commands, char **env, t_pipex *pipex);
+int			is_built_in(t_mini *mini);
+int			which_build(char **commands, char **env, t_mini *mini);
 int			exist_build(char **commands);
 int			checkpathexistence(const char *path);
-void		update_pwd_env(t_pipex *pipex);
-void		update_pwd_envhelp(t_pipex *pipex, char *cwd);
-void		update_oldpwd_env(t_pipex *pipex, char *temp);
-void		ft_cd(char **command, char **env, t_pipex *pipex);
-void 		ft_cd_oldpwd(t_pipex *pipex, char **env);
-void		ft_cd_error(t_pipex *pipex, char *command);
+void		update_pwd_env(t_mini *mini);
+void		update_pwd_envhelp(t_mini *mini, char *cwd);
+void		update_oldpwd_env(t_mini *mini, char *temp);
+void		ft_cd(char **command, char **env, t_mini *mini);
+void 		ft_cd_oldpwd(t_mini *mini, char **env);
+void		ft_cd_error(t_mini *mini, char *command);
 void		ft_cd_use_home(char *home, char *command);
-void		ft_exit(char **commands, t_pipex *pipex);
+void		ft_exit(char **commands, t_mini *mini);
 int			ft_exit_helper(char *code);
-void		ft_export(char **commands, char **env, t_pipex *pipex);
-int			ft_export_loop(char *commands, char **env, t_pipex *pipex);
-int			ft_export_error(t_pipex *pipex, char *commands);
+void		ft_export(char **commands, t_mini *mini);
+int			ft_export_loop(char *commands, t_mini *mini);
+int			ft_export_error(t_mini *mini, char *commands);
 int			ft_count_equal(char *s);
-void		ft_export_helper(char *commands, char **env, char *var);
+void		ft_export_helper(char *commands, t_mini *mini, char *var);
 void		ft_export_print(char **env);
-void		export_error_message(t_pipex *pipex, char *cmds, int flag);
+void		export_error_message(t_mini *mini, char *cmds, int flag);
 void		bouble_sort_char(char **export);
-int			ft_unset_loop(char *commands, char **env, t_pipex *pipex);
-void		ft_unset(char **commands, char **env, t_pipex *pipex);
-void		ft_pwd(t_pipex *pipex);
-void		ft_env(char **env, t_pipex *pipex);
-void		ft_echo(char **commands, t_pipex *pipex);
+int			ft_unset_loop(char *commands, char **env, t_mini *mini);
+void		ft_unset(char **commands, char **env, t_mini *mini);
+void		ft_pwd(t_mini *mini);
+void		ft_env(char **env, t_mini *mini);
+void		ft_echo(char **commands, t_mini *mini);
 int			check_variable(char *s);
-void		append_export(char *comds, char **env);
-void		normal_export(char *comds, char **env);
+void		append_export(char *comds, t_mini *mini);
+void		normal_export(char *comds, t_mini *mini);
 
 //exec
 void		exec_init(t_mini *mini);
 void		exec_main(t_mini *mini);
-void		pipe_all(t_pipex *pipex);
-void		pipe_close(t_pipex *pipex);
-void		only_child(t_pipex *pipex, int i);
-void		first_son(t_pipex *pipex, int i);
-void		last_son(t_pipex *pipex, int i);
-void		daughters(t_pipex *pipex, int i);
-void		piper(t_pipex *pipex);
-void		forker(t_pipex *pipex, int i);
-void		get_adresses(t_pipex *pipex);
-char		*giveme_path(char *command, t_pipex *pipex);
-char		*get_a_path(char *command, t_pipex *pipex);
-void		file_check(char *command, t_pipex *pipex);
+void		pipe_all(t_mini *mini);
+void		pipe_close(t_mini *mini);
+void		only_child(t_mini *mini, int i);
+void		first_son(t_mini *mini, int i);
+void		last_son(t_mini *mini, int i);
+void		daughters(t_mini *mini, int i);
+void		piper(t_mini *mini);
+void		forker(t_mini *mini, int i);
+void		get_adresses(t_mini *mini);
+char		*giveme_path(char *command, t_mini *mini);
+char		*get_a_path(char *command, t_mini *mini);
+void		file_check(char *command, t_mini *mini);
 
 //direction
-void		direction_handler(t_pipex *pipex);
-void		input_handler(t_pipex *pipex, int input);
-void		output_handler(t_pipex *pipex, int output);
-void		output_dup2(int input,t_pipex *pipex);
-void		input_dup2(int input,t_pipex *pipex);
-void		dup2er_input(int input, int output, t_pipex *pipex);
-void		dup2er_output(int output, t_pipex *pipex);
-int			output_opener(t_pipex *pipex, char *s);
-int			output_append_opener(t_pipex *pipex, char *s);
-int			input_opener(t_pipex *pipex, char *s);
-void		dup_saver_input(t_pipex *pipex);
-void		dup_saver_output(t_pipex *pipex);
-void		heredoc_found(t_pipex *pipex, int input);
+void		direction_handler(t_mini *mini);
+void		input_handler(t_mini *mini, int input);
+void		output_handler(t_mini *mini, int output);
+void		output_dup2(int input,t_mini *mini);
+void		input_dup2(int input,t_mini *mini);
+void		dup2er_input(int input, int output, t_mini *mini);
+void		dup2er_output(int output, t_mini *mini);
+int			output_opener(t_mini *mini, char *s);
+int			output_append_opener(t_mini *mini, char *s);
+int			input_opener(t_mini *mini, char *s);
+void		dup_saver_input(t_mini *mini);
+void		dup_saver_output(t_mini *mini);
+void		heredoc_found(t_mini *mini, int input);
 
 void		configure_terminal(void);
 void		sigint_handler(int sig);
 void		sig_init(void);
 
 void		commands_cleaner(t_commands *commds);
-void		cleaner(t_pipex *pipex);
+void		cleaner(t_mini *mini);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 14:35:44 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:00:43 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ long long	ft_long_long_atoi(const char *str)
 	return (num);
 }
 
-void	ft_exit(char **commands, t_pipex *pipex)
+void	ft_exit(char **commands, t_mini *mini)
 {
 	long long	num;
 	int			flag;
 
+	flag = 0;
 	if (commands[1] != NULL)
 	{
 		flag = 1;
@@ -49,12 +50,12 @@ void	ft_exit(char **commands, t_pipex *pipex)
 	if (array_size(commands) >= 3)
 	{
 		ft_putendl_fd("minishell: exit: too many arguments", 2);
-		pipex->exitcode = 1;
+		mini->exitcode = 1;
 		return ;
 	}
-	cleaner(pipex);
+	cleaner(mini);
 	rl_clear_history();
-	free_double_array(pipex->env);
+	free_double_array(mini->env);
 	ft_printf("exit\n");
 	if (flag != 1)
 		exit(EXIT_SUCCESS);

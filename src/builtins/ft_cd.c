@@ -6,37 +6,37 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:44:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 10:22:27 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:25:43 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(char **command, char **env, t_pipex *pipex)
+void	ft_cd(char **command, char **env, t_mini *mini)
 {
 	char	*home;
 
-	pipex->exitcode = 0;
+	mini->exitcode = 0;
 	home = get_env(env, "HOME");
 	if (command[1] == NULL || ft_strncmp(command[1], "~", 2) == 0)
 	{
 		if (!home)
 		{
-			pipex->exitcode = EXIT_FAILURE;
+			mini->exitcode = EXIT_FAILURE;
 			return (ft_putendl_fd("minishell: cd: HOME not set", 2));
 		}
 		chdir(home);
 	}
 	else if (ft_strncmp(command[1], "-", 1) == 0)
-		return (ft_cd_oldpwd(pipex, env));
+		return (ft_cd_oldpwd(mini, env));
 	else if (ft_strncmp(command[1], "~/", 2) == 0)
 		return (ft_cd_use_home(home, command[1]));
 	else if (checkpathexistence(command[1]) || ft_strncmp(command[1],
 			"..", 3) == 0 || ft_strncmp(command[1], ".", 2) == 0)
 		chdir(command[1]);
 	else
-		return (ft_cd_error(pipex, command[1]));
-	update_pwd_env(pipex);
+		return (ft_cd_error(mini, command[1]));
+	update_pwd_env(mini);
 }
 
 void	ft_cd_use_home(char *home, char *command)
@@ -49,24 +49,24 @@ void	ft_cd_use_home(char *home, char *command)
 	free(temp);
 }
 
-void	ft_cd_error(t_pipex *pipex, char *command)
+void	ft_cd_error(t_mini *mini, char *command)
 {
 	write(2, "minishell: cd: ", 16);
 	write(2, command, ft_strlen(command));
 	write(2, ": No such file or directory\n", 29);
-	pipex->exitcode = 1;
+	mini->exitcode = 1;
 }
 
-void	ft_cd_oldpwd(t_pipex *pipex, char **env)
+void	ft_cd_oldpwd(t_mini *mini, char **env)
 {
 	char	*temp;
 
 	temp = get_env(env, "OLDPWD");
 	if (checkpathexistence(temp))
-		ft_cd_error(pipex, temp);
+		ft_cd_error(mini, temp);
 	if (!temp)
 	{
-		pipex->exitcode = EXIT_FAILURE;
+		mini->exitcode = EXIT_FAILURE;
 		return (ft_putendl_fd("minishell: cd: OLDPWD not set", 2));
 	}
 	ft_printf("%s\n", temp);

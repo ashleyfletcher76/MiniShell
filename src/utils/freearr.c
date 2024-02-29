@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freearr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:00:46 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/28 14:05:41 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:13:26 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	freearr(char **arr)
 	free (arr);
 }
 
-void	cleaner(t_pipex *pipex)
+void	cleaner(t_mini *mini)
 {
-	commands_cleaner(pipex->mini->commands);
-	free_struct(pipex);
-	free (pipex->mini->cwd);
-	free (pipex->mini->prompt);
-	free (pipex->mini->prompt_msg);
+	//commands_cleaner(mini->temp_cmds);
+	free_struct(mini);
+	free (mini->cwd);
+	free (mini->prompt);
+	free (mini->prompt_msg);
 }
 
 void	commands_cleaner(t_commands *commds)
@@ -54,7 +54,7 @@ void	commands_cleaner(t_commands *commds)
 		if (head->order_output != NULL)
 			free(head->order_output);
 		next = head->next;
-		//free (head);
+		free (head);
 		head = next;
 	}
 }

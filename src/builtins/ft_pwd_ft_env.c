@@ -6,22 +6,22 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:01:53 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 19:24:33 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:27:24 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(t_pipex *pipex)
+void	ft_pwd(t_mini *mini)
 {
 	char	cwd[1024];
 
 	getcwd(cwd, sizeof(cwd));
 	ft_putendl_fd(cwd, 1);
-	pipex->exitcode = 0;
+	mini->exitcode = 0;
 }
 
-void	ft_env(char **env, t_pipex *pipex)
+void	ft_env(char **env, t_mini *mini)
 {
 	int	i;
 
@@ -30,10 +30,10 @@ void	ft_env(char **env, t_pipex *pipex)
 	{
 		ft_printf("%s\n", env[i++]);
 	}
-	pipex->exitcode = 0;
+	mini->exitcode = 0;
 }
 
-void	ft_echo(char **commands, t_pipex *pipex)
+void	ft_echo(char **commands, t_mini *mini)
 {
 	int	i;
 	int	n;
@@ -51,5 +51,5 @@ void	ft_echo(char **commands, t_pipex *pipex)
 		ft_printf("%s", commands[i]);
 	if (n == 0)
 		ft_printf("\n");
-	pipex->exitcode = 0;
+	mini->exitcode = 0;
 }

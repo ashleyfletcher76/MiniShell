@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 13:50:32 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:08:31 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,30 @@ void	exec_init(t_mini *mini)
 	exec_main(mini);
 }
 
-void	init_built_in(t_pipex *pipex, t_mini *mini)
+void	init_built_in(t_mini *mini)
 {
-	is_built_in(pipex);
-	if (pipex->commands->input_index != 0)
-		input_dup2(pipex->fd_in_orj, pipex);
-	if (pipex->commands->output_index != 0)
-		output_dup2(pipex->fd_out_orj, pipex);
-	mini->exitcode = pipex->exitcode;
-	cleaner(pipex);
+	is_built_in(mini);
+	if (mini->commands->input_index != 0)
+		input_dup2(mini->fd_in_orj, mini);
+	if (mini->commands->output_index != 0)
+		output_dup2(mini->fd_out_orj, mini);
+	cleaner(mini);
 	return ;
 }
 
 void	exec_main(t_mini *mini)
 {
-	t_pipex	pipex;
 
-	pipex.nbr_cmd = commands_size_all(mini->commands);
-	pipex.env = mini->env;
-	pipex.commands = mini->commands;
-	pipex.exitcode = mini->exitcode;
-	pipex.mini = mini;
-	mini->nbrcmds = pipex.nbr_cmd;
-	pipex.all_paths = NULL;
-	pipex.pids = NULL;
-	pipex.pipel = NULL;
-	pipex.nbr_cmd_builts = commands_size_buildin(mini->commands);
-	if (pipex.nbr_cmd_builts == 1 && pipex.nbr_cmd == 1)
-		return (init_built_in(&pipex, mini));
-	else if (pipex.nbr_cmd == 0)
-		direction_handler(&pipex);
-	get_adresses(&pipex);
-	pipe_all(&pipex);
-	pipe_close(&pipex);
-	waiter(&pipex);
-	cleaner(&pipex);
-	mini->exitcode = pipex.exitcode;
+	mini->nbr_cmd = commands_size_all(mini->commands);
+	mini->nbr_cmd_builts = commands_size_buildin(mini->commands);
+	if (mini->nbr_cmd_builts == 1 && mini->nbr_cmd == 1)
+		return (init_built_in(mini));
+	else if (mini->nbr_cmd == 0)
+		direction_handler(mini);
+	get_adresses(mini);
+	mini->temp_cmds = mini->commands;
+	pipe_all(mini);
+	pipe_close(mini);
+	waiter(mini);
+	cleaner(mini);
 }
