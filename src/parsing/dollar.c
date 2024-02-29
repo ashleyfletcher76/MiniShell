@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/28 15:28:00 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:36:29 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,13 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 		temp_env = dollar_quotes_helper(mini, temp_env, i);
 	}
 	if (!get_env(mini->env, temp_env))
+	{
+		free (temp_env);
 		return (quoted_str);
-	temp_env = ft_strdup(get_env(mini->env, temp_env));
-	quoted_str = ft_strjoin_freeself(quoted_str, temp_env);
+	}
+	quoted_str = ft_strjoin_freeself(quoted_str,
+		 ft_strdup(get_env(mini->env, temp_env)));
+	free (temp_env);
 	return (quoted_str);
 }
 
