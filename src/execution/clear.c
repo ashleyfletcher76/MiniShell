@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:23:17 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:39:15 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	free_double_array(char **array)
 	{
 		while (array[i] != 0)
 		{
-			free(array[i]);
+			if (array[i] != NULL)
+				free(array[i]);
 			i++;
 		}
 		free(array);

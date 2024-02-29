@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:00:46 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 12:13:26 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:24:48 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	freearr(char **arr)
 
 void	cleaner(t_mini *mini)
 {
-	//commands_cleaner(mini->temp_cmds);
+	commands_cleaner(mini->commands);
 	free_struct(mini);
 	free (mini->cwd);
 	free (mini->prompt);

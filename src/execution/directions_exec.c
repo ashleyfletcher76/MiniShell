@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:06:50 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:20:47 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:26:50 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	direction_handler(t_mini *mini)
 	i = 1;
 	dup_saver_input(mini);
 	dup_saver_output(mini);
-	dir_count = mini->commands->input_index + mini->commands->output_index;
+	dir_count = mini->temp_cmds->input_index + mini->temp_cmds->output_index;
 	while (i <= dir_count + 1 && dir_count != 0)
 	{
-		if (mini->commands->input != NULL)
+		if (mini->temp_cmds->input != NULL)
 		{
-			if (i == mini->commands->order_input[input])
+			if (i == mini->temp_cmds->order_input[input])
 				input_handler(mini, input++);
 		}
-		if (mini->commands->output != NULL)
+		if (mini->temp_cmds->output != NULL)
 		{
-			if (i == mini->commands->order_output[output])
+			if (i == mini->temp_cmds->order_output[output])
 				output_handler(mini, output++);
 		}
 		i++;
@@ -47,8 +47,8 @@ void	input_handler(t_mini *mini, int input)
 	char	*s;
 	int		flag;
 
-	flag = mini->commands->indicator_input[input];
-	s = mini->commands->input[input];
+	flag = mini->temp_cmds->indicator_input[input];
+	s = mini->temp_cmds->input[input];
 	fd = 0;
 	if (mini->nbr_cmd == 0 && flag == TRUE)
 		return ;
@@ -64,9 +64,9 @@ void	output_handler(t_mini *mini, int output)
 	int		fd;
 	char	*s;
 
-	s = mini->commands->output[output];
+	s = mini->temp_cmds->output[output];
 	fd = 0;
-	if (mini->commands->indicator_output[output] == FALSE)
+	if (mini->temp_cmds->indicator_output[output] == FALSE)
 		fd = output_opener(mini, s);
 	else
 		fd = output_append_opener(mini, s);
@@ -81,7 +81,7 @@ void	heredoc_found(t_mini *mini, int input)
 	fd = 0;
 	fd = output_opener(mini, ".heredoc_found");
 	output_dup2(fd, mini);
-	ft_printf("%s", mini->commands->input[input]);
+	ft_printf("%s", mini->temp_cmds->input[input]);
 	close(fd);
 	output_dup2(mini->fd_out_orj, mini);
 	fd = input_opener(mini, ".heredoc_found");

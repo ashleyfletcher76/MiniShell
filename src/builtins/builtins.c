@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:44:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:20:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:34:18 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	is_built_in(t_mini *mini)
 {
-	if (mini->commands->cmd_args[0])
+	if (mini->temp_cmds->cmd_args[0])
 	{
-		if (exist_build(mini->commands->cmd_args))
+		if (exist_build(mini->temp_cmds->cmd_args))
 		{
 			direction_handler(mini);
-			which_build(mini->commands->cmd_args, mini->env, mini);
+			which_build(mini->temp_cmds->cmd_args, mini->env, mini);
 			return (TRUE);
 		}
 	}

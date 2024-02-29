@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:07:27 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:26:19 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	pipe_all(t_mini *mini)
 				daughters(mini, i);
 		}
 		i++;
-		mini->commands = mini->commands->next;
+		mini->temp_cmds = mini->temp_cmds->next;
 	}
 }
 
@@ -50,8 +50,8 @@ void	only_child(t_mini *mini, int i)
 	direction_handler(mini);
 	if (is_built_in(mini))
 		exit(EXIT_SUCCESS);
-	path = get_a_path(mini->commands->cmd_args[0], mini);
-	execve(path, mini->commands->cmd_args, mini->env);
+	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
+	execve(path, mini->temp_cmds->cmd_args, mini->env);
 	exit(EXIT_SUCCESS);
 }
 
@@ -60,13 +60,13 @@ void	first_son(t_mini *mini, int i)
 	char	*path;
 
 	direction_handler(mini);
-	if (mini->commands->output_index == 0)
+	if (mini->temp_cmds->output_index == 0)
 		dup2(mini->pipel[i][WRITE_END], STDOUT_FILENO);
 	pipe_close(mini);
 	if (is_built_in(mini))
 		exit(EXIT_SUCCESS);
-	path = get_a_path(mini->commands->cmd_args[0], mini);
-	execve(path, mini->commands->cmd_args, mini->env);
+	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
+	execve(path, mini->temp_cmds->cmd_args, mini->env);
 }
 
 void	last_son(t_mini *mini, int i)
@@ -74,13 +74,13 @@ void	last_son(t_mini *mini, int i)
 	char	*path;
 
 	direction_handler(mini);
-	if (mini->commands->input_index == 0)
+	if (mini->temp_cmds->input_index == 0)
 		dup2(mini->pipel[i - 1][READ_END], STDIN_FILENO);
 	pipe_close(mini);
 	if (is_built_in(mini))
 		exit(EXIT_SUCCESS);
-	path = get_a_path(mini->commands->cmd_args[0], mini);
-	execve(path, mini->commands->cmd_args, mini->env);
+	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
+	execve(path, mini->temp_cmds->cmd_args, mini->env);
 }
 
 void	daughters(t_mini *mini, int i)
@@ -88,13 +88,13 @@ void	daughters(t_mini *mini, int i)
 	char	*path;
 
 	direction_handler(mini);
-	if (mini->commands->input_index == 0)
+	if (mini->temp_cmds->input_index == 0)
 		dup2(mini->pipel[i - 1][READ_END], STDIN_FILENO);
-	if (mini->commands->output_index == 0)
+	if (mini->temp_cmds->output_index == 0)
 		dup2(mini->pipel[i][WRITE_END], STDOUT_FILENO);
 	pipe_close(mini);
 	if (is_built_in(mini))
 		exit(EXIT_SUCCESS);
-	path = get_a_path(mini->commands->cmd_args[0], mini);
-	execve(path, mini->commands->cmd_args, mini->env);
+	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
+	execve(path, mini->temp_cmds->cmd_args, mini->env);
 }

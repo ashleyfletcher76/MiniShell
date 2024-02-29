@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:08:53 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:26:33 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_handler(char *msg, t_mini *mini, int exitcode)
 {
-	ft_put3endl_fd("minishell: ", mini->commands->cmd_args[0], msg, 2);
+	ft_put3endl_fd("minishell: ", mini->temp_cmds->cmd_args[0], msg, 2);
 	cleaner(mini);
 	exit (exitcode);
 }
