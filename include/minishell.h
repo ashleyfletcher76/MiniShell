@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 12:06:08 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:34:05 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		update_pwd_env(t_mini *mini);
 void		update_pwd_envhelp(t_mini *mini, char *cwd);
 void		update_oldpwd_env(t_mini *mini, char *temp);
 void		ft_cd(char **command, char **env, t_mini *mini);
-void 		ft_cd_oldpwd(t_mini *mini, char **env);
+void 		ft_cd_oldpwd(t_mini *mini);
 void		ft_cd_error(t_mini *mini, char *command);
 void		ft_cd_use_home(char *home, char *command);
 void		ft_exit(char **commands, t_mini *mini);
@@ -156,6 +156,10 @@ int			input_opener(t_mini *mini, char *s);
 void		dup_saver_input(t_mini *mini);
 void		dup_saver_output(t_mini *mini);
 void		heredoc_found(t_mini *mini, int input);
+
+//cleaning
+void		all_cleaner(t_mini *mini);
+
 
 void		configure_terminal(void);
 void		sigint_handler(int sig);

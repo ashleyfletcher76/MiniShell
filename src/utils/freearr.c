@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:00:46 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 12:24:48 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:42:54 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,21 @@ void	freearr(char **arr)
 	free (arr);
 }
 
+void	all_cleaner(t_mini *mini)
+{
+	free_double_array(mini->env);
+	cleaner(mini);
+	rl_clear_history();
+}
+
 void	cleaner(t_mini *mini)
 {
 	commands_cleaner(mini->commands);
 	free_struct(mini);
-	free (mini->cwd);
-	free (mini->prompt);
-	free (mini->prompt_msg);
+	if (mini->prompt != NULL)
+		free (mini->prompt);
+	if (mini->prompt_msg != NULL)
+		free (mini->prompt_msg);
 }
 
 void	commands_cleaner(t_commands *commds)
@@ -54,7 +62,8 @@ void	commands_cleaner(t_commands *commds)
 		if (head->order_output != NULL)
 			free(head->order_output);
 		next = head->next;
-		free (head);
+		if (head != NULL)
+			free (head);
 		head = next;
 	}
 }

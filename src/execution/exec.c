@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:35:39 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:45:11 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_built_in(t_mini *mini)
 void	exec_main(t_mini *mini)
 {
 
+	get_adresses(mini);
 	mini->temp_cmds = mini->commands;
 	mini->nbr_cmd = commands_size_all(mini->commands);
 	mini->nbr_cmd_builts = commands_size_buildin(mini->commands);
@@ -38,7 +39,6 @@ void	exec_main(t_mini *mini)
 		return (init_built_in(mini));
 	else if (mini->nbr_cmd == 0)
 		direction_handler(mini);
-	get_adresses(mini);
 	pipe_all(mini);
 	pipe_close(mini);
 	waiter(mini);

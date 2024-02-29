@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:00:43 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:32:30 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	ft_exit(char **commands, t_mini *mini)
 		mini->exitcode = 1;
 		return ;
 	}
-	cleaner(mini);
-	rl_clear_history();
-	free_double_array(mini->env);
+	all_cleaner(mini);
 	ft_printf("exit\n");
 	if (flag != 1)
 		exit(EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/29 12:36:17 by muhakose         ###   ########.fr        #
+#    Updated: 2024/02/29 12:53:45 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,23 +29,23 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I./include/ -g
 
-#VALGRIND_ENABLED = 1
+VALGRIND_ENABLED = 1
 
-#VALGRIND_CMD = valgrind
-#VALGRIND_OPTS = --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes
+VALGRIND_CMD = valgrind
+VALGRIND_OPTS = --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes
 
-#TARGET = minishell
+TARGET = minishell
 
-#$(TARGET): $(OBJECTS)
-#	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
 
 
-#run_valgrind: $(TARGET)
-#	@echo "Running $(TARGET) with Valgrind..."
-#	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET)
+run_valgrind: $(TARGET)
+	@echo "Running $(TARGET) with Valgrind..."
+	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET)
 
-CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined
-LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline
+#CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined
+#LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline
 
 OBJ_DIR = obj
 OBJ = $(OBJ_DIR)/main.o \

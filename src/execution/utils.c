@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:23:04 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:26:33 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:27:44 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	error_handler(char *msg, t_mini *mini, int exitcode)
 {
 	ft_put3endl_fd("minishell: ", mini->temp_cmds->cmd_args[0], msg, 2);
 	cleaner(mini);
+	free_double_array(mini->env);
+	rl_clear_history();
 	exit (exitcode);
 }
 
@@ -31,7 +33,7 @@ void	piper(t_mini *mini)
 	{
 		mini->pipel[i] = malloc(2 * sizeof(int));
 		if (mini->pipel[i] == NULL)
-			return (free_struct(mini), exit(EXIT_FAILURE));
+			return (cleaner(mini), exit(EXIT_FAILURE));
 		if (pipe(mini->pipel[i]) == -1)
 		{
 			perror("pipe");

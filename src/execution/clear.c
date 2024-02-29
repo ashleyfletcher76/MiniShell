@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:39:15 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:46:19 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	free_struct(t_mini *mini)
 {
 	free_double_array(mini->all_paths);
-	if (mini->pipel != NULL)
-		free_double_int(mini->pipel, mini->nbr_cmd);
-	if (mini->pids != NULL)
-		free(mini->pids);
+	if (!((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
+			|| mini->nbr_cmd == 0))
+	{
+		if (mini->pipel != NULL)
+			free_double_int(mini->pipel, mini->nbr_cmd);
+		if (mini->pids != NULL)
+			free(mini->pids);
+	}
 }
 
 void	free_double_array(char **array)

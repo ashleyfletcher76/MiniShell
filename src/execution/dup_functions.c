@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:14:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 12:27:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:28:55 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	dup2er_input(int input, int output, t_mini *mini)
 			prompt_init(mini, 9);
 			return ;
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(9);
 	}
 	dup2er_output(output, mini);
@@ -49,8 +48,7 @@ void	dup2er_output(int output, t_mini *mini)
 			prompt_init(mini, 9);
 			return ;
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(9);
 	}
 }
@@ -70,8 +68,7 @@ void	input_dup2(int input, t_mini *mini)
 			prompt_init(mini, 9);
 			return ;
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(9);
 	}
 }
@@ -90,8 +87,7 @@ void	output_dup2(int input, t_mini *mini)
 			prompt_init(mini, 9);
 			return ;
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(9);
 	}
 }

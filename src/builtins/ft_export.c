@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:36:41 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:05:57 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	append_export(char *comds, t_mini *mini)
 		i++;
 	}
 	ft_export_helper(comds, mini, var);
+	return (free(val), free(var));
 }
 
 void	normal_export(char *comds, t_mini *mini)
@@ -113,7 +114,6 @@ void	ft_export_helper(char *commands, t_mini *mini, char *var)
 		mini->env[i] = mini->env[i - 1];
 		mini->env[i - 1] = ft_strjoin(var, ft_strchr(commands, '='));
 		mini->env[i + 1] = NULL;
-		free(var);
 	}
 	if (var == NULL && mini->env[i] == NULL)
 	{

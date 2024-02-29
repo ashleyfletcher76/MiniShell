@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:26:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:25:57 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	only_child(t_mini *mini, int i)
 		exit(EXIT_SUCCESS);
 	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
 	execve(path, mini->temp_cmds->cmd_args, mini->env);
-	exit(EXIT_SUCCESS);
 }
 
 void	first_son(t_mini *mini, int i)

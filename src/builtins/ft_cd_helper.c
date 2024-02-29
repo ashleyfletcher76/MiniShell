@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:51:48 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:25:14 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:01:34 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	update_pwd_env(t_mini *mini)
 		{
 			while (mini->env[i])
 				i++;
-			mini->env = ft_realloc_char(mini->env, i);
-			mini->env[i] = ft_strdup(ft_strjoin("PWD=", cwd));
+			mini->env = ft_realloc_char(mini->env, i - 1);
+			free(mini->env[i]);
+			mini->env[i] = ft_strjoin("PWD=", cwd);
 			mini->env[i + 1] = NULL;
 		}
 	}
@@ -48,7 +49,7 @@ void	update_pwd_envhelp(t_mini *mini, char *cwd)
 		if (ft_strncmp(mini->env[i], "PWD=", 4) == 0)
 		{
 			free(mini->env[i]);
-			mini->env[i] = ft_strjoin_freeself(ft_strdup("PWD="), ft_strdup(cwd));
+			mini->env[i] = ft_strjoin("PWD=", cwd);
 			break ;
 		}
 		i++;
@@ -67,7 +68,7 @@ void	update_oldpwd_env(t_mini *mini, char *temp)
 			if (ft_strncmp(mini->env[i], "OLDPWD=", 7) == 0)
 			{
 				free(mini->env[i]);
-				mini->env[i] = ft_strjoin_freeself(ft_strdup("PWD="), ft_strdup(temp));
+				mini->env[i] = ft_strjoin("OLDPWD=", temp);
 				break ;
 			}
 			i++;
@@ -78,7 +79,8 @@ void	update_oldpwd_env(t_mini *mini, char *temp)
 		while (mini->env[i])
 			i++;
 		mini->env = ft_realloc_char(mini->env, i);
-		mini->env[i] = ft_strdup(ft_strjoin("OLDPWD=", temp));
+		free(mini->env[i]);
+		mini->env[i] = ft_strjoin("OLDPWD=", temp);
 		mini->env[i + 1] = NULL;
 	}
 	free(temp);

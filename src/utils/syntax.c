@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:30:42 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/28 15:45:48 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:15:24 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	check_syntax(t_mini *mini)
 {
 	if (check_pipe(mini->prompt) == FALSE)
 	{
-		free(mini->cwd);
 		free(mini->prompt);
 		free(mini->prompt_msg);
 		error_message(0);

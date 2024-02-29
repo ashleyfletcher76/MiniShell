@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 12:27:07 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:07:08 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	dup_saver_output(t_mini *mini)
 				input_dup2(mini->fd_in_orj, mini);
 			if (mini->temp_cmds->output_index != 0)
 				output_dup2(mini->fd_out_orj, mini);
+			cleaner(mini);
 			prompt_init(mini, 9);
 			return ;
 		}
@@ -72,11 +73,11 @@ int	input_opener(t_mini *mini, char *s)
 				input_dup2(mini->fd_in_orj, mini);
 			if (mini->temp_cmds->output_index != 0)
 				output_dup2(mini->fd_out_orj, mini);
+			cleaner(mini);
 			prompt_init(mini, 1);
 			return (1);
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
@@ -97,11 +98,11 @@ int	output_opener(t_mini *mini, char *s)
 				input_dup2(mini->fd_in_orj, mini);
 			if (mini->temp_cmds->output_index != 0)
 				output_dup2(mini->fd_out_orj, mini);
+			cleaner(mini);
 			prompt_init(mini, 1);
 			return (1);
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
@@ -122,11 +123,11 @@ int	output_append_opener(t_mini *mini, char *s)
 				input_dup2(mini->fd_in_orj, mini);
 			if (mini->temp_cmds->output_index != 0)
 				output_dup2(mini->fd_out_orj, mini);
+			cleaner(mini);
 			prompt_init(mini, 1);
 			return (1);
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

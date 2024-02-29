@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:44:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:25:43 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:52:22 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_cd(char **command, char **env, t_mini *mini)
 		chdir(home);
 	}
 	else if (ft_strncmp(command[1], "-", 1) == 0)
-		return (ft_cd_oldpwd(mini, env));
+		return (ft_cd_oldpwd(mini));
 	else if (ft_strncmp(command[1], "~/", 2) == 0)
 		return (ft_cd_use_home(home, command[1]));
 	else if (checkpathexistence(command[1]) || ft_strncmp(command[1],
@@ -57,17 +57,20 @@ void	ft_cd_error(t_mini *mini, char *command)
 	mini->exitcode = 1;
 }
 
-void	ft_cd_oldpwd(t_mini *mini, char **env)
+void	ft_cd_oldpwd(t_mini *mini)
 {
 	char	*temp;
 
-	temp = get_env(env, "OLDPWD");
-	if (checkpathexistence(temp))
-		ft_cd_error(mini, temp);
+	temp = get_env(mini->env, "OLDPWD");
 	if (!temp)
 	{
 		mini->exitcode = EXIT_FAILURE;
 		return (ft_putendl_fd("minishell: cd: OLDPWD not set", 2));
+	}
+	if (!checkpathexistence(temp))
+	{
+		ft_cd_error(mini, temp);
+		return ;
 	}
 	ft_printf("%s\n", temp);
 	chdir(temp);

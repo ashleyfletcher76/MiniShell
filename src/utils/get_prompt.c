@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:33:41 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 13:36:55 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:23:55 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	promt_help(t_mini *mini, char *user)
 
 	home = getenv("HOME");
 	getcwd(cwd, sizeof(cwd));
-	mini->cwd = ft_strdup(cwd);
+	mini->cwd = cwd;
 	if (strcmp(cwd, "/") == 0)
 	{
 		mini->prompt_msg = ft_strjoin(user, "@minishell / % ");
