@@ -13,6 +13,54 @@ exit 0 0
 // mkdir test_dir ; cd test_dir ; rm -rf ../test_dir
 
 
-memorey 
+memorey
 // echo "exit_code ->$? user ->$USER home -> $HOME"
 // env | sort | grep -v SHLVL | grep -v ^_  "all grep is leaking"
+
+==1335== Invalid read of size 1
+==1335==    at 0x1109A3: ft_strlen (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x110455: split2 (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x1104EB: ft_split (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x10A962: give_me_prompt (get_prompt.c:25)
+==1335==    by 0x109618: prompt_init (main.c:40)
+==1335==    by 0x1097A4: main (main.c:87)
+==1335==  Address 0x1ffefff330 is on thread 1's stack
+==1335==  3968 bytes below stack pointer
+==1335==
+==1335== Invalid read of size 1
+==1335==    at 0x110394: split2 (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x1104EB: ft_split (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x10A962: give_me_prompt (get_prompt.c:25)
+==1335==    by 0x109618: prompt_init (main.c:40)
+==1335==    by 0x1097A4: main (main.c:87)
+==1335==  Address 0x1ffefff330 is on thread 1's stack
+==1335==  3984 bytes below stack pointer
+==1335==
+==1335== Invalid read of size 1
+==1335==    at 0x1103B9: split2 (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x1104EB: ft_split (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x10A962: give_me_prompt (get_prompt.c:25)
+==1335==    by 0x109618: prompt_init (main.c:40)
+==1335==    by 0x1097A4: main (main.c:87)
+==1335==  Address 0x1ffefff330 is on thread 1's stack
+==1335==  3984 bytes below stack pointer
+==1335==
+==1335== Invalid read of size 1
+==1335==    at 0x1109A3: ft_strlen (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x1103CC: split2 (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x1104EB: ft_split (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x10A962: give_me_prompt (get_prompt.c:25)
+==1335==    by 0x109618: prompt_init (main.c:40)
+==1335==    by 0x1097A4: main (main.c:87)
+==1335==  Address 0x1ffefff330 is on thread 1's stack
+==1335==  3968 bytes below stack pointer
+==1335==
+==1335== Invalid read of size 1
+==1335==    at 0x1102DD: wordup (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x110405: split2 (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x1104EB: ft_split (in /host/Desktop/working_on/minishell/minishell)
+==1335==    by 0x10A962: give_me_prompt (get_prompt.c:25)
+==1335==    by 0x109618: prompt_init (main.c:40)
+==1335==    by 0x1097A4: main (main.c:87)
+
+---------------
