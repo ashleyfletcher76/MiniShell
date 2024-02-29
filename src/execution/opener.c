@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opener.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:56:59 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 14:26:36 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:40:29 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	dup_saver_input(t_mini *mini)
 				input_dup2(mini->fd_in_orj, mini);
 			if (mini->temp_cmds->output_index != 0)
 				output_dup2(mini->fd_out_orj, mini);
+			cleaner(mini);
 			prompt_init(mini, 9);
 			return ;
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(9);
 	}
 }
@@ -51,8 +51,7 @@ void	dup_saver_output(t_mini *mini)
 			prompt_init(mini, 9);
 			return ;
 		}
-		free_double_array(mini->env);
-		cleaner(mini);
+		all_cleaner(mini);
 		exit(9);
 	}
 }

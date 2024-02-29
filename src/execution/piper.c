@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 13:25:57 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:55:30 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	only_child(t_mini *mini, int i)
 	pipe_close(mini);
 	direction_handler(mini);
 	if (is_built_in(mini))
+	{
+		all_cleaner(mini);
 		exit(EXIT_SUCCESS);
+	}
 	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
 	execve(path, mini->temp_cmds->cmd_args, mini->env);
 }
@@ -63,7 +66,10 @@ void	first_son(t_mini *mini, int i)
 		dup2(mini->pipel[i][WRITE_END], STDOUT_FILENO);
 	pipe_close(mini);
 	if (is_built_in(mini))
+	{
+		all_cleaner(mini);
 		exit(EXIT_SUCCESS);
+	}
 	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
 	execve(path, mini->temp_cmds->cmd_args, mini->env);
 }
@@ -77,7 +83,10 @@ void	last_son(t_mini *mini, int i)
 		dup2(mini->pipel[i - 1][READ_END], STDIN_FILENO);
 	pipe_close(mini);
 	if (is_built_in(mini))
+	{
+		all_cleaner(mini);
 		exit(EXIT_SUCCESS);
+	}
 	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
 	execve(path, mini->temp_cmds->cmd_args, mini->env);
 }
@@ -93,7 +102,10 @@ void	daughters(t_mini *mini, int i)
 		dup2(mini->pipel[i][WRITE_END], STDOUT_FILENO);
 	pipe_close(mini);
 	if (is_built_in(mini))
+	{
+		all_cleaner(mini);
 		exit(EXIT_SUCCESS);
+	}
 	path = get_a_path(mini->temp_cmds->cmd_args[0], mini);
 	execve(path, mini->temp_cmds->cmd_args, mini->env);
 }

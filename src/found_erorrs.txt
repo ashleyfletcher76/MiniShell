@@ -11,3 +11,8 @@ exit 0 0
 
 
 // mkdir test_dir ; cd test_dir ; rm -rf ../test_dir
+
+
+memorey 
+// echo "exit_code ->$? user ->$USER home -> $HOME"
+// env | sort | grep -v SHLVL | grep -v ^_  "all grep is leaking"
