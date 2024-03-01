@@ -6,63 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:18:30 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:28:40 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:53:04 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_export_print(char **env)
-{
-	char	**export;
-	int		i;
-
-	i = 0;
-	export = malloc (sizeof(char *) * (40));
-	while (env[i] != NULL)
-	{
-		export[i] = ft_strdup(env[i]);
-		i++;
-	}
-	export[i] = NULL;
-	bouble_sort_char(export);
-	i = -1;
-	while (export[++i])
-	{
-		ft_printf("declare -x ");
-		write(1, export[i], ft_count_equal(export[i]));
-		ft_printf("\"");
-		ft_printf("%s", ft_strchr(export[i], '=') + 1);
-		ft_printf("\"\n");
-	}
-	free_double_array(export);
-}
-
-void	bouble_sort_char(char **export)
-{
-	int		i;
-	int		sorted;
-	char	*temp;
-
-	temp = NULL;
-	sorted = 0;
-	while (!sorted)
-	{
-		i = 0;
-		sorted = 1;
-		while (export[i + 1] != NULL)
-		{
-			if (ft_strcmp(export[i], export[i + 1]) > 0)
-			{
-				temp = export[i];
-				export[i] = export[i + 1];
-				export[i + 1] = temp;
-				sorted = 0;
-			}
-			i++;
-		}
-	}
-}
 
 int	ft_count_equal(char *s)
 {
@@ -108,4 +57,29 @@ int	check_variable(char *s)
 		i++;
 	}
 	return (TRUE);
+}
+
+void	add_export_helper(char *commands, t_mini *mini, char *var)
+{
+	int	i;
+
+	i = 0;
+	while (mini->export[i])
+		i++;
+	if (var != NULL && mini->export[i] == NULL)
+	{
+		mini->export = ft_realloc_char(mini->export, i);
+		free(mini->export[i]);
+		mini->export[i] = mini->export[i - 1];
+		mini->export[i - 1] = export_style_append(ft_strjoin(var, ft_strchr(commands, '=')));
+		mini->export[i + 1] = NULL;
+	}
+	if (var == NULL && mini->export[i] == NULL)
+	{
+		mini->export = ft_realloc_char(mini->export, i);
+		free(mini->export[i]);
+		mini->export[i] = mini->export[i - 1];
+		mini->export[i - 1] = export_style(ft_strdup(commands));
+		mini->export[i + 1] = NULL;
+	}
 }

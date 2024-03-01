@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 15:42:02 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:08:47 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ void	struct_init(t_mini *mini, char **env)
 {
 	mini->prompt_msg = NULL;
 	mini->prompt = NULL;
-	mini->cwd = NULL;
-	mini->argv = NULL;
 	mini->env = dup_env(env);
+	mini->export = dup_export(env);
 	mini->all_paths = NULL;
 	mini->exitcode = 0;
 	mini->fd_in_orj = 0;

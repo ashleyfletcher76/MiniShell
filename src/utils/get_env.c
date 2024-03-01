@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:07 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 16:41:15 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:10:09 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,53 @@ char	**dup_env(char **env)
 	}
 	dup[i] = NULL;
 	return (dup);
+}
+
+char	**dup_export(char **env)
+{
+	char	**export;
+	int		i;
+	char	*temp;
+
+	i = -1;
+	export = malloc (sizeof(char *) * (array_size(env) + 1));
+	while (env[++i] != NULL)
+		export[i] = ft_strdup(env[i]);
+	export[i] = NULL;
+	bouble_sort_char(export);
+	export[i] = NULL;
+	i = -1;
+	while (export[++i])
+	{
+		temp = export_style(export[i]);
+		export[i] = temp;
+	}
+	export[i] = NULL;
+	return(export);
+}
+
+void	bouble_sort_char(char **export)
+{
+	int		i;
+	int		sorted;
+	char	*temp;
+
+	temp = NULL;
+	sorted = 0;
+	while (!sorted)
+	{
+		i = 0;
+		sorted = 1;
+		while (export[i + 1] != NULL)
+		{
+			if (ft_strcmp(export[i], export[i + 1]) > 0)
+			{
+				temp = export[i];
+				export[i] = export[i + 1];
+				export[i + 1] = temp;
+				sorted = 0;
+			}
+			i++;
+		}
+	}
 }

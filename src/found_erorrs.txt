@@ -4,13 +4,8 @@ exit 0 0
 
 // echo $1234
 
-
-
-
 // input error file name //
 
-
-// mkdir test_dir ; cd test_dir ; rm -rf ../test_dir
 
 
 memorey
@@ -64,3 +59,26 @@ memorey
 ==1335==    by 0x1097A4: main (main.c:87)
 
 ---------------
+
+
+if there is no quote in somewhere at delimiter expand.
+if there is any quote in anywhere of delimiter no expand.
+heredoc> $USER
+heredoc> 
+$USER
+<< end cat
+> $USER
+> muhakose
+
+syntax error free not allocated!
+muhakose@minishell minishell_git % ls >| cat
+minishell: syntax error near unexpected token `<'
+minishell(44688,0x110fa1dc0) malloc: *** error for object 0x7ffee9bccb00: pointer being freed was not allocated
+minishell(44688,0x110fa1dc0) malloc: *** set a breakpoint in malloc_error_break to debug
+zsh: abort      ./minishell
+<>
+
+
+// export problem //
+
+$$ or $$$ segfault

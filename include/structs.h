@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 15:00:09 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:07:54 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_mini
 	char		*prompt_msg;
 	char		*prompt;
 	char		*cwd;
-	char		**argv;
 	char		**env;
+	char		**export;
 	char		**all_paths;
 	int			nbr_cmd;
 	int			nbr_cmd_builts;
