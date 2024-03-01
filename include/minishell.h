@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 12:25:01 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:09:19 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void		waiter(t_mini *mini);
 int			check_syntax(t_mini *mini);
 int			check_pipe(char *s);
 int			my_len(char *str, int i);
+int			if_check(char *s, char *p);
 //prompt
 char		*give_me_prompt(t_mini *mini);
 int			promt_help(t_mini *mini, char *user);

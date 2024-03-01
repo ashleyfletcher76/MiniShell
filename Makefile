@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/03/01 17:53:20 by muhakose         ###   ########.fr        #
+#    Updated: 2024/03/01 18:30:14 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ CFLAGS = -Wall -Wextra -Werror -I./include/ -g
 #	@echo "Running $(TARGET) with Valgrind..."
 #	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET)
 
-#CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined
-#LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline
+CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined
+LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline
 
 OBJ_DIR = obj
 OBJ = $(OBJ_DIR)/main.o \

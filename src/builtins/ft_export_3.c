@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:08:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 12:24:42 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:42:39 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,10 @@ void	add_append_export(char *comds, t_mini *mini)
 		return ;
 	if (ft_strchr(comds, '=') != NULL)
 		val = ft_strdup(ft_strchr(comds, '=') + 1);
-	var = malloc (sizeof(char) * equal);
-	var = ft_strncpy(var, comds, equal);
+	var = ft_strndup(comds, equal);
 	while (mini->export[++i])
 	{
-		if (ft_strncmp(mini->export[i] + 11, var, equal - 1) == 0)
+		if (if_check(mini->export[i] + 11, var))
 		{
 			free(var);
 			mini->export[i] = export_style_append_2(mini->export[i], val);
@@ -96,7 +95,7 @@ void	add_export(char *comds, t_mini *mini)
 		equal = ft_strlen(comds);
 	while (mini->export[i])
 	{
-		if (ft_strncmp(mini->export[i] + 11, comds, equal - 2) == 0)
+		if (if_check(mini->export[i] + 11, comds))
 		{
 			if (equal == ft_strlen(comds))
 				return ;

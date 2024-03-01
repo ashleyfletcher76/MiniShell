@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 18:00:20 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:02:25 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	prompt_init(t_mini *mini, int exit_code)
 	while (1)
 	{
 		g_sigint_received = 0;
-		prompt = readline("Minishell %  ");
+		prompt = readline("Minishell$ ");
 		if (!prompt)
 		{
 			printf("exit\n");

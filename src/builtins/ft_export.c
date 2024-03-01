@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 18:00:47 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:42:21 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,10 @@ void	append_export(char *comds, t_mini *mini)
 		return ;
 	if (ft_strchr(comds, '=') != NULL)
 		val = ft_strdup(ft_strchr(comds, '=') + 1);
-	var = malloc (sizeof(char) * equal + 2);
-	var = ft_strncpy(var, comds, equal + 1);
-	printf("var= %s\n", var);
+	var = ft_strndup(comds, equal);
 	while (mini->env[i])
 	{
-		if (ft_strncmp(mini->env[i], var, equal - 1) == 0)
+		if (if_check(mini->env[i], var))
 		{
 			free(var);
 			mini->env[i] = ft_strjoin_freeself(mini->env[i], val);
@@ -132,16 +130,19 @@ void	ft_export_helper(char *commands, t_mini *mini, char *var)
 int	if_check(char *s, char *p)
 {
 	int	i;
-	int	m;
 
-	m = 0;
 	i = 0;
 	while (s[i] && p[i])
 	{
-		if (s[i] == '=' && p[i] == '+')
-			m = 1;
-		if (s[i] != p[i + m])
+		if (s[i] == '=' || p[i] == '=' || (p[i + 1] == '=' && p[i] == '+'))
+			break ;
+		if (s[i] != p[i])
 			return (FALSE);
+		i++;
 	}
+	if (p[i] == '\0' && (s[i] == '=' || s[i] == '\0'))
+		return (TRUE);
+	if (s[i] != '=' || p[i] != '=')
+		return (FALSE);
 	return (TRUE);
 }

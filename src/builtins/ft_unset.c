@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:45:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 12:25:21 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:15:32 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_unset_loop(char *commands, char **env, t_mini *mini)
 		return (export_error_message(mini, commands, 1), 1);
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], commands, ft_count_equal(env[i]) - 1) == 0)
+		if (if_check(mini->env[i], commands))
 		{
 			free(env[i]);
 			while (env[i])
@@ -85,8 +85,7 @@ int	ft_export_unset_loop(char *commands, t_mini *mini)
 	i = 0;
 	while (mini->export[i])
 	{
-		if (ft_strncmp(mini->export[i] + 11, commands,
-				ft_count_equal(mini->export[i]) - 12) == 0)
+		if (if_check(mini->export[i] + 11, commands))
 		{
 			free(mini->export[i]);
 			while (mini->export[i])
