@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:07:48 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 12:18:58 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:35:56 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*append_heredoc(t_mini *mini, char *temp)
 	if (!new_str)
 		return (NULL);
 	original_temp = ft_strdup(temp);
+	free (temp);
 	if (!original_temp)
 	{
 		free (new_str);

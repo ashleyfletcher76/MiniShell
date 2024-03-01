@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piper.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 14:55:30 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:24:53 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	pipe_all(t_mini *mini)
 	piper(mini);
 	mini->pids = malloc((mini->nbr_cmd) * sizeof(pid_t));
 	if (mini->pids == NULL)
-		return (free_struct(mini), exit(EXIT_FAILURE));
+		return (all_cleaner(mini), exit(EXIT_FAILURE));
 	g_sigint_received = 1;
 	while (i < mini->nbr_cmd)
 	{

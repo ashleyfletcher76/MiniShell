@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_adres.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:42:52 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:19:44 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:25:51 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	get_adresses(t_mini *mini)
 	{
 		mini->all_paths = ft_split(mini->env[i] + 5, ':');
 		if (mini->all_paths == NULL)
-			return (free_struct(mini), exit(EXIT_FAILURE));
+			return (all_cleaner(mini), exit(EXIT_FAILURE));
 	}
 	else
 	{
 		mini->all_paths = ft_split("no path found.", ' ');
 		if (mini->all_paths == NULL)
-			return (free_struct(mini), exit(EXIT_FAILURE));
+			return (all_cleaner(mini), exit(EXIT_FAILURE));
 	}
 }
 

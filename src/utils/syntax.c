@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:30:42 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 13:15:24 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:40:00 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	check_syntax(t_mini *mini)
 	{
 		free(mini->prompt);
 		free(mini->prompt_msg);
-		free(mini->cwd);
 		mini->exitcode = 258;
 		return (FALSE);
 	}
