@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 17:11:31 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:15:28 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_mini
 	char		*prompt_msg;
 	char		*prompt;
 	char		*cwd;
-	char		**argv;
 	char		**env;
+	char		**export;
 	char		**all_paths;
 	int			nbr_cmd;
 	int			nbr_cmd_builts;

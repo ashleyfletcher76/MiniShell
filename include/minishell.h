@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 12:11:22 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:15:20 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,25 @@ int			ft_export_loop(char *commands, t_mini *mini);
 int			ft_export_error(t_mini *mini, char *commands);
 int			ft_count_equal(char *s);
 void		ft_export_helper(char *commands, t_mini *mini, char *var);
-void		ft_export_print(char **env);
 void		append_export(char *comds, t_mini *mini);
 void		normal_export(char *comds, t_mini *mini);
 void		export_error_message(t_mini *mini, char *cmds, int flag);
 void		bouble_sort_char(char **export);
+char		**dup_export(char **env);
+char		*export_style(char	*s);
+void		add_append_export(char *comds, t_mini *mini);
+void		add_export(char *comds, t_mini *mini);
+void		add_export_helper(char *commands, t_mini *mini, char *var);
+char		*export_style_append(char	*s);
 //unset
 int			ft_unset_loop(char *commands, char **env, t_mini *mini);
+int			ft_export_unset_loop(char *commands, t_mini *mini);
 void		ft_unset(char **commands, char **env, t_mini *mini);
+int			check_variable(char *s);
+//echo_env
 void		ft_env(char **env, t_mini *mini);
 void		ft_echo(char **commands, t_mini *mini);
-int			check_variable(char *s);
+int			echo_n(char *s);
 
 //exec full
 void		exec_init(t_mini *mini);

@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 17:12:16 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:15:36 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ void	struct_init(t_mini *mini, char **env)
 {
 	mini->prompt_msg = NULL;
 	mini->prompt = NULL;
-	mini->cwd = NULL;
-	mini->argv = NULL;
 	mini->env = dup_env(env);
+	mini->export = dup_export(env);
 	mini->all_paths = NULL;
 	mini->exitcode = 0;
 	mini->fd_in_orj = 0;

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 14:05:57 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:30:39 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ void	ft_export(char **commands, t_mini *mini)
 
 	i = 1;
 	if (commands[1] == NULL)
-	{
-		ft_export_print(mini->env);
-		mini->exitcode = EXIT_SUCCESS;
-		return ;
-	}
+		return (ft_env(mini->export, mini));
 	while (commands[i])
 	{
 		exit_code = ft_export_loop(commands[i], mini);
@@ -43,9 +39,15 @@ int	ft_export_loop(char *commands, t_mini *mini)
 	if (flag == FALSE)
 		return (EXIT_FAILURE);
 	else if (flag == 2)
+	{
 		append_export(commands, mini);
+		add_append_export(commands, mini);
+	}
 	else
+	{
 		normal_export(commands, mini);
+		add_export(commands, mini);
+	}
 	return (EXIT_SUCCESS);
 }
 

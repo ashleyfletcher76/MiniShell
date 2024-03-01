@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:01:53 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 11:27:24 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:04:19 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_echo(char **commands, t_mini *mini)
 
 	n = 0;
 	i = 1;
-	while (ft_strncmp(commands[i], "-n", 3) == 0 && commands[i])
+	while (commands[i] && echo_n(commands[i]))
 	{
 		i++;
 		n = 1;
@@ -52,4 +52,18 @@ void	ft_echo(char **commands, t_mini *mini)
 	if (n == 0)
 		ft_printf("\n");
 	mini->exitcode = 0;
+}
+
+int	echo_n(char *s)
+{
+	int	i;
+
+	i = 1;
+	if (s[0] != '-')
+		return (FALSE);
+	while (s[i] == 'n' && s[i])
+		i++;
+	if (s[i] == '\0')
+		return (TRUE);
+	return (FALSE);
 }

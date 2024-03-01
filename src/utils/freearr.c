@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:00:46 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 13:42:54 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:10:45 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	freearr(char **arr)
 void	all_cleaner(t_mini *mini)
 {
 	free_double_array(mini->env);
+	free_double_array(mini->export);
 	cleaner(mini);
 	rl_clear_history();
 }
