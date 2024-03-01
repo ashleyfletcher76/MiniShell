@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:07 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 11:10:09 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:18:33 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**dup_export(char **env)
 		export[i] = temp;
 	}
 	export[i] = NULL;
-	return(export);
+	return (export);
 }
 
 void	bouble_sort_char(char **export)

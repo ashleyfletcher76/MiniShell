@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 11:28:26 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:48:06 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ char	*handle_dollar(t_mini *mini, int *i)
 char	*dollar_helper(t_mini *mini, int *i, char *new_temp)
 {
 	(*i)++;
+	if (mini->prompt[*i] == '$')
+		return (ft_strdup("$"));
 	while (token_dollor(mini->prompt[*i]))
+	{
 		new_temp = ft_char_join(new_temp, mini->prompt[(*i)++]);
+	}
 	return (new_temp);
 }
 
@@ -85,6 +89,8 @@ char	*dollar_inside_quotes(t_mini *mini, int *i, char *quoted_str)
 
 char	*dollar_quotes_helper(t_mini *mini, char *temp_env, int *i)
 {
+	if (mini->prompt[*i] == '$')
+		return (ft_strdup("$"));
 	while (token_dollor(mini->prompt[*i]))
 	{
 		temp_env = ft_char_join(temp_env, mini->prompt[*i]);

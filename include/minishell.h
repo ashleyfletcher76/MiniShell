@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 12:15:20 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:25:01 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char		*parse_single_quote(t_mini *mini, int *i);
 char		*quote_helper(char *quoted_str);
 char		*append_heredoc(t_mini *mini, char *temp);
 char		*full_heredoc(t_mini *mini, char *orig_str, char *new_str,
-			int first_line);
+				int first_line);
 char		*handle_dollar_heredoc(t_mini *mini, char *prompt, int *i);
 char		*dollar_helper_here(int *i, char *new_temp, char *prompt);;
 char		*check_expand_heredoc(t_mini *mini, char *temp);

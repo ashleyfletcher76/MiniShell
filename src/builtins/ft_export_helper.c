@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:18:30 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 18:53:04 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:25:31 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	ft_count_equal(char *s)
 {
@@ -71,7 +70,8 @@ void	add_export_helper(char *commands, t_mini *mini, char *var)
 		mini->export = ft_realloc_char(mini->export, i);
 		free(mini->export[i]);
 		mini->export[i] = mini->export[i - 1];
-		mini->export[i - 1] = export_style_append(ft_strjoin(var, ft_strchr(commands, '=')));
+		mini->export[i - 1] = export_style_append(ft_strjoin(var,
+					ft_strchr(commands, '=')));
 		mini->export[i + 1] = NULL;
 	}
 	if (var == NULL && mini->export[i] == NULL)

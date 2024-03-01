@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:08:16 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 19:27:38 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:24:42 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	*export_style(char	*s)
 {
@@ -20,7 +19,7 @@ char	*export_style(char	*s)
 
 	equal = ft_count_equal(s);
 	if (equal == 0)
-		equal = ft_strlen(s);	
+		equal = ft_strlen(s);
 	temp = ft_strjoin_freeself(ft_strdup("declare -x "), ft_strndup(s, equal));
 	equal = ft_count_equal(s);
 	if (equal != 0)
@@ -38,7 +37,8 @@ char	*export_style_append(char	*s)
 {
 	char	*temp;
 
-	temp = ft_strjoin_freeself(ft_strdup("declare -x "), ft_strndup(s, ft_count_equal(s)));
+	temp = ft_strjoin_freeself(ft_strdup("declare -x "),
+			ft_strndup(s, ft_count_equal(s)));
 	temp = ft_char_join(temp, '\"');
 	temp = ft_strjoin_freeself(temp, ft_strdup(ft_strchr(s, '=') + 1));
 	temp = ft_char_join(temp, '\"');
@@ -66,7 +66,7 @@ void	add_append_export(char *comds, t_mini *mini)
 
 	i = -1;
 	equal = ft_count_equal(comds) - 2;
-	if (equal == - 2)
+	if (equal == -2)
 		return ;
 	if (ft_strchr(comds, '=') != NULL)
 		val = ft_strdup(ft_strchr(comds, '=') + 1);
@@ -91,7 +91,7 @@ void	add_export(char *comds, t_mini *mini)
 	int			i;
 
 	i = 0;
-	equal = ft_count_equal(comds) ;
+	equal = ft_count_equal(comds);
 	if (equal == 0)
 		equal = ft_strlen(comds);
 	while (mini->export[i])
@@ -108,4 +108,3 @@ void	add_export(char *comds, t_mini *mini)
 	}
 	add_export_helper(comds, mini, NULL);
 }
-

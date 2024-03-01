@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:03:30 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 12:05:01 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:26:17 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ char	*check_expand_heredoc(t_mini *mini, char *temp)
 		{
 			if (temp[i] == '$')
 			{
-				new_temp = ft_strjoin_freeself(new_temp, handle_dollar_heredoc(mini, temp, &i));
+				new_temp = ft_strjoin_freeself(new_temp,
+						handle_dollar_heredoc(mini, temp, &i));
 				if (temp[i] != '\0')
 					i++;
 			}
 			if (temp[i] != '\0')
-				new_temp = ft_char_join(new_temp,temp[i++]);
+				new_temp = ft_char_join(new_temp, temp[i++]);
 		}
-		free(temp);
-		return(new_temp);
+		free (temp);
+		return (new_temp);
 	}
 	return (temp);
 }

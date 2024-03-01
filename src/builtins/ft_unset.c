@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:45:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 11:13:24 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:25:21 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	ft_export_unset_loop(char *commands, t_mini *mini)
 	i = 0;
 	while (mini->export[i])
 	{
-		if (ft_strncmp(mini->export[i] + 11, commands, ft_count_equal(mini->export[i]) - 12) == 0)
+		if (ft_strncmp(mini->export[i] + 11, commands,
+				ft_count_equal(mini->export[i]) - 12) == 0)
 		{
 			free(mini->export[i]);
 			while (mini->export[i])
