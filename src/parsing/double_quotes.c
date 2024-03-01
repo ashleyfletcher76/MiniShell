@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 10:42:40 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/28 09:11:51 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:21:06 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,22 @@ char	*dquote_helper(char *quoted_str)
 {
 	char	*temp1;
 	char	*temp2;
-	char	*new_str;
-	char	*new_quoted;
 
-	temp2 = ft_strdup("");
-	new_str = quoted_str;
 	while (1)
 	{
 		temp1 = readline("dquote> ");
 		if (!temp1)
+		{
+			free(temp1);
 			break ;
-		temp1 = ft_strjoin("\n", temp1);
+		}
+		temp1 = ft_strjoin_freeself(ft_strdup("\n"), temp1);
 		temp2 = ft_strchr(temp1, '\"');
 		if (temp2)
 			*temp2 = '\0';
-		new_quoted = ft_strjoin(new_str, temp1);
-		free (new_str);
-		new_str = new_quoted;
-		free(temp1);
+		quoted_str = ft_strjoin_freeself(quoted_str, temp1);
 		if (temp2)
 			break ;
 	}
-	return (new_str);
+	return (quoted_str);
 }

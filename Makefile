@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/03/01 12:15:49 by asfletch         ###   ########.fr        #
+#    Updated: 2024/03/01 17:53:20 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,20 +29,20 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I./include/ -g
 
-VALGRIND_ENABLED = 1
+#VALGRIND_ENABLED = 1
 
-VALGRIND_CMD = valgrind
-VALGRIND_OPTS = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes
+#VALGRIND_CMD = valgrind
+#VALGRIND_OPTS = valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes
 
-TARGET = minishell
+#TARGET = minishell
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+#$(TARGET): $(OBJECTS)
+#	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
 
 
-run_valgrind: $(TARGET)
-	@echo "Running $(TARGET) with Valgrind..."
-	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET)
+#run_valgrind: $(TARGET)
+#	@echo "Running $(TARGET) with Valgrind..."
+#	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET)
 
 #CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined
 #LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline

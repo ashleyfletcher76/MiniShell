@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:51:48 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 15:38:07 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:01:31 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_pwd_env(t_mini *mini)
 		{
 			while (mini->env[i])
 				i++;
-			mini->env = ft_realloc_char(mini->env, i - 1);
+			mini->env = ft_realloc_char(mini->env, i);
 			free(mini->env[i]);
 			mini->env[i] = ft_strjoin("PWD=", cwd);
 			mini->env[i + 1] = NULL;
@@ -76,7 +76,7 @@ void	update_oldpwd_env(t_mini *mini, char *temp)
 	}
 	else
 		update_oldpwd_env_part_2(mini, temp, i);
-	free(temp);
+	//free(temp);
 }
 
 void	update_oldpwd_env_part_2(t_mini *mini, char *temp, int i)

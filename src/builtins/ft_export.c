@@ -6,11 +6,12 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 18:30:39 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:00:47 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+int	if_check(char *s, char *p);
 
 void	ft_export(char **commands, t_mini *mini)
 {
@@ -64,8 +65,9 @@ void	append_export(char *comds, t_mini *mini)
 		return ;
 	if (ft_strchr(comds, '=') != NULL)
 		val = ft_strdup(ft_strchr(comds, '=') + 1);
-	var = malloc (sizeof(char) * equal);
-	var = ft_strncpy(var, comds, equal);
+	var = malloc (sizeof(char) * equal + 2);
+	var = ft_strncpy(var, comds, equal + 1);
+	printf("var= %s\n", var);
 	while (mini->env[i])
 	{
 		if (ft_strncmp(mini->env[i], var, equal - 1) == 0)
@@ -91,7 +93,7 @@ void	normal_export(char *comds, t_mini *mini)
 		return ;
 	while (mini->env[i])
 	{
-		if (ft_strncmp(mini->env[i], comds, equal) == 0)
+		if (if_check(mini->env[i], comds))
 		{
 			free(mini->env[i]);
 			mini->env[i] = ft_strdup(comds);
@@ -125,4 +127,21 @@ void	ft_export_helper(char *commands, t_mini *mini, char *var)
 		mini->env[i - 1] = ft_strdup(commands);
 		mini->env[i + 1] = NULL;
 	}
+}
+
+int	if_check(char *s, char *p)
+{
+	int	i;
+	int	m;
+
+	m = 0;
+	i = 0;
+	while (s[i] && p[i])
+	{
+		if (s[i] == '=' && p[i] == '+')
+			m = 1;
+		if (s[i] != p[i + m])
+			return (FALSE);
+	}
+	return (TRUE);
 }
