@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:01:34 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 15:00:09 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:11:31 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_mini
 	int			fd_out_orj;
 	int			**pipel;
 	int			exitcode;
+	int			expand_heredoc;
 	pid_t		*pids;
 	t_commands	*commands;
 	t_commands	*temp_cmds;

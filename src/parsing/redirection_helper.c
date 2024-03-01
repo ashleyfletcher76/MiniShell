@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:07:48 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 14:01:57 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:08:58 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ void	update_output_arg(t_commands **cmd, char **temp, int flag)
 	(*cmd)->output[(*cmd)->output_index] = NULL;
 }
 
-char	*append_heredoc(char *temp)
+char	*append_heredoc(t_mini *mini, char *temp)
 {
 	char	*new_str;
 	char	*original_temp;
-	char	*new_line;
 	int		first_line;
 
 	new_str = ft_strdup("");
@@ -74,17 +73,15 @@ char	*append_heredoc(char *temp)
 		free (new_str);
 		return (NULL);
 	}
-	new_line = "\n";
 	first_line = 1;
-	new_str = full_heredoc(original_temp, new_str, new_line, first_line);
+	new_str = full_heredoc(mini, original_temp, new_str, first_line);
 	free (original_temp);
 	return (new_str);
 }
 
-char	*full_heredoc(char *orig_str, char *new_str, char *new_line, int first)
+char	*full_heredoc(t_mini *mini, char *orig_str, char *new_str, int first)
 {
 	char	*read_line;
-	char	*temp_str;
 
 	while (1)
 	{
@@ -95,17 +92,13 @@ char	*full_heredoc(char *orig_str, char *new_str, char *new_line, int first)
 			break ;
 		}
 		if (!first)
-		{
-			temp_str = ft_strjoin(new_str, new_line);
-			free (new_str);
-			new_str = temp_str;
-		}
+			new_str = ft_char_join(new_str, '\n');
 		else
 			first = 0;
-		temp_str = ft_strjoin(new_str, read_line);
-		free (new_str);
-		new_str = temp_str;
-		free (read_line);
+		new_str = ft_strjoin_freeself(new_str, read_line);
+		new_str = check_expand_heredoc(mini, new_str);
+		//free (new_str);
 	}
+	mini->expand_heredoc = 0;
 	return (ft_char_join(new_str, '\n'));
 }

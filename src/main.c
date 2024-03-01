@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 15:42:02 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:12:16 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	struct_init(t_mini *mini, char **env)
 	mini->nbr_cmd_builts = 0;
 	mini->pipel = 0;
 	mini->nbr_cmd = 0;
+	mini->expand_heredoc = 0;
 	mini->pids = NULL;
 	mini->commands = NULL;
 }

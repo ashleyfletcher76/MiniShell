@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:21:29 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/27 14:55:18 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:10:56 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@ char	*parse_helper(t_mini *mini, int *i, char *temp)
 		{
 			if (!temp)
 				temp = ft_strdup("");
-			temp = ft_strjoin_freeself(temp, parse_double_quote(mini, i));
+			temp = ft_strjoin_freeself(temp, parse_double_heredoc(mini, i));
+			mini->expand_heredoc = 1;
+			(*i)++;
+		}
+		else if (mini->prompt[*i] == '\'')
+		{
+			if (!temp)
+				temp = ft_strdup("");
+			temp = ft_strjoin_freeself(temp, parse_single_quote(mini, i));
+			mini->expand_heredoc = 1;
 			(*i)++;
 		}
 		if (no_whitespace_skip(mini->prompt[*i]) && mini->prompt[*i] != '\"'
-			&& mini->prompt[*i] != '|')
+			&& mini->prompt[*i] != '|' && mini->prompt[*i] != '\'')
 			temp = ft_char_join(temp, mini->prompt[(*i)++]);
 	}
 	return (temp);
@@ -47,7 +56,7 @@ void	parse_input(t_mini *mini, int *i, t_commands **cmd)
 		(*i)++;
 	temp = (parse_helper(mini, i, temp));
 	if (flag)
-		temp = append_heredoc(temp);
+		temp = append_heredoc(mini, temp);
 	if (mini->prompt[*i] == '\0' || mini->prompt[*i] == '|')
 		(*i)--;
 	update_input_arg(cmd, &temp, flag);

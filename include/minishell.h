@@ -6,7 +6,7 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 16:11:55 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:11:22 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,13 @@ char		*parse_double_quote(t_mini *mini, int *i);
 char		*dquote_helper(char *quoted_str);
 char		*parse_single_quote(t_mini *mini, int *i);
 char		*quote_helper(char *quoted_str);
-char		*append_heredoc(char *temp);
-char		*full_heredoc(char *orig_str, char *new_str,
-				char *new_line, int first_line);
+char		*append_heredoc(t_mini *mini, char *temp);
+char		*full_heredoc(t_mini *mini, char *orig_str, char *new_str,
+			int first_line);
+char		*handle_dollar_heredoc(t_mini *mini, char *prompt, int *i);
+char		*dollar_helper_here(int *i, char *new_temp, char *prompt);;
+char		*check_expand_heredoc(t_mini *mini, char *temp);
+char		*parse_double_heredoc(t_mini *mini, int *i);
 //input and output
 void		parse_input(t_mini *mini, int *i, t_commands **cmd);
 void		parse_output(t_mini *mini, int *i, t_commands **cmd);
@@ -151,6 +155,7 @@ int			token_dollor(char c);
 void		waiter(t_mini *mini);
 int			check_syntax(t_mini *mini);
 int			check_pipe(char *s);
+int			my_len(char *str, int i);
 //prompt
 char		*give_me_prompt(t_mini *mini);
 int			promt_help(t_mini *mini, char *user);
@@ -179,5 +184,7 @@ void		free_struct(t_mini *mini);
 void		free_double_int(int **array, int num_cmds);
 void		free_double_array(char **array);
 void		freearr(char **arr);
+
+void		print_commands(t_mini *mini);
 
 #endif

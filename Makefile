@@ -6,7 +6,7 @@
 #    By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/02/29 16:19:34 by asfletch         ###   ########.fr        #
+#    Updated: 2024/03/01 10:25:30 by asfletch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ CFLAGS = -Wall -Wextra -Werror -I./include/ -g
 VALGRIND_ENABLED = 1
 
 VALGRIND_CMD = valgrind
-VALGRIND_OPTS = --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes
+VALGRIND_OPTS = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes
 
 TARGET = minishell
 
