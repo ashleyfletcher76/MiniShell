@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_and_config.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:25:30 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 15:28:57 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/03 08:53:25 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sigint_handler(int sig)
 {
 	(void)sig;
 	write (1, "\n", 1);
-	if (!g_sigint_received && sig == SIGINT)
+	if (!g_signal_flag && sig == SIGINT)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);

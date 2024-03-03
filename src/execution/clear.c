@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:04:18 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 13:46:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/03 08:54:49 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	waiter(t_mini *mini)
 		waitpid(mini->pids[i++], &status, 0);
 		mini->exitcode = WEXITSTATUS(status);
 	}
-	g_sigint_received = 0;
+	g_signal_flag = 0;
 }

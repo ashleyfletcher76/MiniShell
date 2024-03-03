@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 18:09:19 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/03 09:47:42 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <termios.h>
 # include <limits.h>
 
-volatile sig_atomic_t	g_sigint_received;
+int	g_signal_flag;
 
 //main nessecaries
 void		prompt_init(t_mini *mini, int exit_code);

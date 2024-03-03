@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:11:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 18:02:25 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/03 08:54:02 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	prompt_init(t_mini *mini, int exit_code)
 
 	while (1)
 	{
-		g_sigint_received = 0;
+		g_signal_flag = 0;
 		prompt = readline("Minishell$ ");
 		if (!prompt)
 		{

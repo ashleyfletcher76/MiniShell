@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:51:48 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 17:01:31 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/03 10:00:22 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	update_oldpwd_env(t_mini *mini, char *temp)
 	}
 	else
 		update_oldpwd_env_part_2(mini, temp, i);
-	//free(temp);
+	free(temp);
 }
 
 void	update_oldpwd_env_part_2(t_mini *mini, char *temp, int i)
