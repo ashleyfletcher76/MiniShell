@@ -6,7 +6,7 @@
 #    By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 13:16:16 by muhakose          #+#    #+#              #
-#    Updated: 2024/03/03 10:07:35 by asfletch         ###   ########.fr        #
+#    Updated: 2024/03/03 10:10:14 by asfletch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ run_valgrind: $(TARGET)
 	@echo "Running $(TARGET) with Valgrind..."
 	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET)
 
-CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined -I/usr/local/opt/readline/include
-LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline -L/usr/local/opt/readline/lib
+CFLAGS += -Wall -Wextra -Werror -I./include/ -g3 -fsanitize=address -fsanitize=undefined
+LDFLAGS += -fsanitize=address -fsanitize=undefined -lreadline
 
 OBJ_DIR = obj
 OBJ = $(OBJ_DIR)/main.o \
