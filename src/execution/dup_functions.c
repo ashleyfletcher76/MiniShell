@@ -6,52 +6,11 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:14:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 13:28:55 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:35:18 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	dup2er_input(int input, int output, t_mini *mini)
-{
-	if (dup2(input, STDIN_FILENO) == -1)
-	{
-		perror("dup2");
-		if ((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
-			|| mini->nbr_cmd == 0)
-		{
-			if (mini->temp_cmds->input_index != 0)
-				input_dup2(mini->fd_in_orj, mini);
-			if (mini->temp_cmds->output_index != 0)
-				output_dup2(mini->fd_out_orj, mini);
-			prompt_init(mini, 9);
-			return ;
-		}
-		all_cleaner(mini);
-		exit(9);
-	}
-	dup2er_output(output, mini);
-}
-
-void	dup2er_output(int output, t_mini *mini)
-{
-	if (dup2(output, STDOUT_FILENO) == -1)
-	{
-		perror("dup2");
-		if ((mini->nbr_cmd == 1 && mini->nbr_cmd_builts == 1)
-			|| mini->nbr_cmd == 0)
-		{
-			if (mini->temp_cmds->input_index != 0)
-				input_dup2(mini->fd_in_orj, mini);
-			if (mini->temp_cmds->output_index != 0)
-				output_dup2(mini->fd_out_orj, mini);
-			prompt_init(mini, 9);
-			return ;
-		}
-		all_cleaner(mini);
-		exit(9);
-	}
-}
 
 void	input_dup2(int input, t_mini *mini)
 {

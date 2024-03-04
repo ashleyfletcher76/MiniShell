@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piper.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:26:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/03 08:55:02 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:37:20 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	first_son(t_mini *mini, int i)
 
 	direction_handler(mini);
 	if (mini->temp_cmds->output_index == 0)
-		dup2(mini->pipel[i][WRITE_END], STDOUT_FILENO);
+		output_dup2(mini->pipel[i][WRITE_END], mini);
 	pipe_close(mini);
 	if (is_built_in(mini))
 	{
@@ -80,7 +80,7 @@ void	last_son(t_mini *mini, int i)
 
 	direction_handler(mini);
 	if (mini->temp_cmds->input_index == 0)
-		dup2(mini->pipel[i - 1][READ_END], STDIN_FILENO);
+		input_dup2(mini->pipel[i - 1][READ_END], mini);
 	pipe_close(mini);
 	if (is_built_in(mini))
 	{
@@ -97,9 +97,9 @@ void	daughters(t_mini *mini, int i)
 
 	direction_handler(mini);
 	if (mini->temp_cmds->input_index == 0)
-		dup2(mini->pipel[i - 1][READ_END], STDIN_FILENO);
+		input_dup2(mini->pipel[i - 1][READ_END], mini);
 	if (mini->temp_cmds->output_index == 0)
-		dup2(mini->pipel[i][WRITE_END], STDOUT_FILENO);
+		output_dup2(mini->pipel[i][WRITE_END], mini);
 	pipe_close(mini);
 	if (is_built_in(mini))
 	{

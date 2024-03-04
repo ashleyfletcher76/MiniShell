@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/04 07:46:37 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:46:54 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,14 +137,12 @@ void		direction_handler(t_mini *mini);
 void		input_handler(t_mini *mini, int input);
 void		output_dup2(int input, t_mini *mini);
 void		input_dup2(int input, t_mini *mini);
-void		dup2er_input(int input, int output, t_mini *mini);
 int			input_opener(t_mini *mini, char *s);
 void		dup_saver_input(t_mini *mini);
 void		heredoc_found(t_mini *mini, int input);
 int			check_input_direction(char *s);
 //output
 void		output_handler(t_mini *mini, int output);
-void		dup2er_output(int output, t_mini *mini);
 int			output_opener(t_mini *mini, char *s);
 int			output_append_opener(t_mini *mini, char *s);
 void		dup_saver_output(t_mini *mini);
