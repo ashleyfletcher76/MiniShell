@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_and_config.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:25:30 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/03 08:53:25 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:31:24 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	sig_init(void)
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;
 
+	ft_memset(&sa_int, 0, sizeof(struct sigaction));
+	ft_memset(&sa_quit, 0, sizeof(struct sigaction));
 	sa_int.sa_handler = sigint_handler;
 	sigemptyset(&sa_int.sa_mask);
 	sa_int.sa_flags = 0;
