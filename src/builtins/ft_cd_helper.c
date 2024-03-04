@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:51:48 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/03 10:00:22 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:22:58 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ void	update_pwd_env(t_mini *mini)
 	char	*temp;
 	int		i;
 
+	temp = NULL;
 	i = 0;
-	temp = ft_strdup(get_env(mini->env, "PWD"));
-	if (!temp)
-		temp = ft_strdup("");
+	if (get_env(mini->env, "PWD"))
+	{
+		temp = ft_strdup(get_env(mini->env, "PWD"));
+		update_oldpwd_env(mini, temp);
+	}
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		if (get_env(mini->env, "PWD") != NULL)
@@ -36,7 +39,6 @@ void	update_pwd_env(t_mini *mini)
 			mini->env[i + 1] = NULL;
 		}
 	}
-	update_oldpwd_env(mini, temp);
 }
 
 void	update_pwd_envhelp(t_mini *mini, char *cwd)
@@ -76,7 +78,8 @@ void	update_oldpwd_env(t_mini *mini, char *temp)
 	}
 	else
 		update_oldpwd_env_part_2(mini, temp, i);
-	free(temp);
+	if (temp != NULL)
+		free(temp);
 }
 
 void	update_oldpwd_env_part_2(t_mini *mini, char *temp, int i)

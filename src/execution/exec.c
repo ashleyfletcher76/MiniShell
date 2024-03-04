@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:56 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 13:49:47 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:26:55 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	exec_main(t_mini *mini)
 		return (init_built_in(mini));
 	else if (mini->nbr_cmd == 0)
 		direction_handler(mini);
-	pipe_all(mini);
-	pipe_close(mini);
-	waiter(mini);
+	if (mini->nbr_cmd != 0)
+	{
+		pipe_all(mini);
+		pipe_close(mini);
+		waiter(mini);
+	}
 	cleaner(mini);
 }
