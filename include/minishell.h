@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:43:47 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/03 09:47:42 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/04 07:46:37 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <termios.h>
 # include <limits.h>
 
-int	g_signal_flag;
+extern int	g_signal_flag;
 
 //main nessecaries
 void		prompt_init(t_mini *mini, int exit_code);
@@ -101,7 +101,8 @@ char		*export_style(char	*s);
 void		add_append_export(char *comds, t_mini *mini);
 void		add_export(char *comds, t_mini *mini);
 void		add_export_helper(char *commands, t_mini *mini, char *var);
-char		*export_style_append(char	*s);
+char		*export_style_append(char *s);
+int			if_check(char *s, char *p);
 //unset
 int			ft_unset_loop(char *commands, char **env, t_mini *mini);
 int			ft_export_unset_loop(char *commands, t_mini *mini);
@@ -160,14 +161,11 @@ int			array_size(char **s);
 int			commands_size_all(t_commands *lst);
 int			commands_size_buildin(t_commands *lst);
 int			token_dollor(char c);
+int			token_dollor_first(char c);
 void		waiter(t_mini *mini);
 int			check_syntax(t_mini *mini);
 int			check_pipe(char *s);
-int			my_len(char *str, int i);
 int			if_check(char *s, char *p);
-//prompt
-char		*give_me_prompt(t_mini *mini);
-int			promt_help(t_mini *mini, char *user);
 //env
 char		*get_env(char **env, char *var);
 char		**update_env(char **env, char *var, char *value);

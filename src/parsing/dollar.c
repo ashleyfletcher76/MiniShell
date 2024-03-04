@@ -6,27 +6,11 @@
 /*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 10:20:15 by asfletch          #+#    #+#             */
-/*   Updated: 2024/03/01 13:10:36 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/04 07:42:25 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	token_dollor(char c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
-		|| (c >= '0' && c <= '9') || c == '_')
-		return (TRUE);
-	return (FALSE);
-}
-
-int	token_dollor_first(char c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_')
-		return (TRUE);
-	return (FALSE);
-}
-
 
 char	*handle_dollar(t_mini *mini, int *i)
 {

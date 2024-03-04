@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:57:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 18:42:21 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/04 07:44:44 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-int	if_check(char *s, char *p);
 
 void	ft_export(char **commands, t_mini *mini)
 {
@@ -125,24 +124,4 @@ void	ft_export_helper(char *commands, t_mini *mini, char *var)
 		mini->env[i - 1] = ft_strdup(commands);
 		mini->env[i + 1] = NULL;
 	}
-}
-
-int	if_check(char *s, char *p)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && p[i])
-	{
-		if (s[i] == '=' || p[i] == '=' || (p[i + 1] == '=' && p[i] == '+'))
-			break ;
-		if (s[i] != p[i])
-			return (FALSE);
-		i++;
-	}
-	if (p[i] == '\0' && (s[i] == '=' || s[i] == '\0'))
-		return (TRUE);
-	if (s[i] != '=' || p[i] != '=')
-		return (FALSE);
-	return (TRUE);
 }
