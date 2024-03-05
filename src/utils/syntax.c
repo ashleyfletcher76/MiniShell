@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:30:42 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 13:40:00 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:25:22 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,19 @@ int	check_input_direction(char *s)
 			i++;
 			if (s[i] == '<')
 				i++;
-			while ((s[i] == '\t' || s[i] == ' ') && (s[i] != '\0'))
+			while ((s[i] == '\t' || s[i] == ' ') && s[i] != '\0')
 				i++;
 			if (s[i] == '\0')
 				return (error_message(1), FALSE);
 			if (s[i] == '<' || s[i] == '>' || s[i] == '|')
 				return (error_message(2), FALSE);
 		}
-		i = skip_quotes(s, i);
-		i++;
+		else
+		{
+			i = skip_quotes(s, i);
+			if (s[i])
+				i++;
+		}
 	}
 	return (TRUE);
 }
@@ -97,8 +101,12 @@ int	check_output_direction(char *s)
 			if (s[i] == '<' || s[i] == '>' || s[i] == '|')
 				return (error_message(4), FALSE);
 		}
-		i = skip_quotes(s, i);
-		i++;
+		else
+		{
+			i = skip_quotes(s, i);
+			if (s[i])
+				i++;
+		}
 	}
 	return (TRUE);
 }
@@ -117,14 +125,17 @@ int	check_pipe(char *s)
 		if (s[i] == '|')
 		{
 			i++;
-			while ((s[i] == '\t' || s[i] == ' ') && (s[i] != '\0'
-					|| s[i] != '|'))
+			while (s[i] && (s[i] == '\t' || s[i] == ' ') && s[i] != '|')
 				i++;
 			if (s[i] == '|')
 				return (FALSE);
 		}
-		i = skip_quotes(s, i);
-		i++;
+		else
+		{
+			i = skip_quotes(s, i);
+			if (s[i])
+				i++;
+		}
 	}
 	return (TRUE);
 }

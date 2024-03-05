@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skip_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: asfletch <asfletch@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:56:02 by asfletch          #+#    #+#             */
-/*   Updated: 2024/02/29 16:26:31 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:15:13 by asfletch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@ int	skip_quotes(char *s, int i)
 	if (s[i] == '\"')
 	{
 		i++;
-		while (s[i] != '\"' && s[i + 1] != '\0')
+		while (s[i] != '\"' && s[i] != '\0')
+			i++;
+		if (s[i] == '\"')
 			i++;
 	}
 	if (s[i] == '\'')
 	{
 		i++;
-		while (s[i] != '\'' && s[i + 1] != '\0')
+		while (s[i] != '\'' && s[i] != '\0')
+			i++;
+		if (s[i] == '\'')
 			i++;
 	}
 	return (i);
