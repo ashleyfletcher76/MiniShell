@@ -7,6 +7,7 @@ Minishell is a simplified version of a Unix shell built in **C** as part of the 
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Authors](#authors)
 
 ## Project Description
 
@@ -32,3 +33,8 @@ make
 
 ## Usage
 ./minishell
+
+## Authors
+
+- **Ashley Fletcher** - *Developer* - [GitHub Profile](https://github.com/ashleyfletcher76)
+- **Muhammet Köse** - *Developer* - [GitHub Profile](https://github.com/masummmm54)
