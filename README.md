@@ -25,7 +25,7 @@ Minishell allows users to run basic Unix commands, handle input/output redirecti
 Clone the repository and compile the project:
 
 ```bash
-git clone https://github.com/username/minishell.git
+git clone https://github.com/ashleyfletcher76/MiniShell.git
 cd minishell
 make
 ```
