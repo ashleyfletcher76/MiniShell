@@ -28,6 +28,7 @@ Clone the repository and compile the project:
 git clone https://github.com/username/minishell.git
 cd minishell
 make
+```
 
 ## Usage
 ./minishell
